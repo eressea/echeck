@@ -14,8 +14,8 @@
 
 0PERSONSLEARN, Einheit %s hat 0 Personen und wird von Einheit 
 0PERSONSTEACH, Einheit %s hat 0 Personen und lehrt Einheit 
-1ATTACKPERUNIT, Pro Einheit muß ein ATTACKIERE-Befehl gegeben werden
-1CARRYPERUNIT, Pro Einheit muß ein TRANSPORTIERE-Befehl gegeben werden
+1ATTACKPERUNIT, Pro Einheit muss ein ATTACKIERE-Befehl gegeben werden
+1CARRYPERUNIT, Pro Einheit muss ein TRANSPORTIERE-Befehl gegeben werden
 1PERSONPERMAGEUNIT, Magiereinheiten dürfen nur eine Person haben
 ACTIVATED, ~aktiviert.
 ALREADYUSEDINLINE, "TEMP %s" wurde in Zeile %d schon gebraucht
@@ -36,7 +36,7 @@ CANTMAINTAINBUILDING, Einheit %s kann ein Gebäude nicht erhalten, es fehlen noc
 CANTMAKETHAT, Sowas kann man nicht machen
 CANTREADFILE, Kann Datei '%s' nicht lesen\n
 CANTRENAMEOBJECT, Objekt kann nicht umbenannt werden
-CHECKYOURORDERS, \nBitte überprüfe, ob Du die Befehle korrekt eingesandt hast.\nBeachte dabei besonders, daß die Befehle nicht als HTML, Word-Dokument\noder als Attachment (Anlage) eingeschickt werden dürfen.\n
+CHECKYOURORDERS, \nBitte überprüfe, ob du die Befehle korrekt eingesandt hast.\nBeachte dabei besonders, dass die Befehle nicht als HTML, Word-Dokument\noder als Attachment (Anlage) eingeschickt werden dürfen.\n
 COMBATSPELLSET, Kampfzauber gesetzt
 DELIVERYTO, ; Zustellung an 
 DIRECTION, <richtung>
@@ -50,11 +50,11 @@ ERRORHELP, Helfe-Status falsch
 ERRORINLINE, Fehler in Zeile
 ERRORLEVELPARAMETERS, Fehler bei STUFE-Parameter
 ERRORNAMEFOREIGN, BENENNE FREMD nicht mit %s
-ERROROPINION, Nummer der Meinung muß größer 0 sein
+ERROROPINION, Nummer der Meinung muss größer 0 sein
 ERRORREGION, REGION fehlerhaft
 ERRORREGIONPARAMETER, Fehler bei REGION-Parameter
 ERRORSPELLSYNTAX, [ ] und  < >  dürfen nicht mit eingegeben werden!
-ERRORSURVEY, Nummer der Umfrage muß größer 0 sein
+ERRORSURVEY, Nummer der Umfrage muss größer 0 sein
 FACTION0USED, Partei 0 verwendet
 FACTIONINVALID, Partei "%s" ungültig
 FACTIONMISSING, Partei fehlt
@@ -160,7 +160,7 @@ UNITMISSPERSON, Einheit %s hat evtl. zu wenig Personen
 UNITMISSSILVER, Einheit %s hat evtl. zu wenig Silber
 UNITMOVESSHIP, Einheit %s will Schiff %s bewegen und hat evtl. kein Kommando
 UNITMOVESTOOFAR, Einheit %s bewegt sich evtl. zu weit
-UNITMUSTBEONSHIP, Einheit muß in einer Burg, in einem Gebäude oder auf einem Schiff sein
+UNITMUSTBEONSHIP, Einheit muss in einer Burg, in einem Gebäude oder auf einem Schiff sein
 UNITNEEDSTEACHERS, Einheit %s kann noch %d Lehrer gebrauchen.
 UNITNOTONSHIPBUTONSHIP, Einheit %s ist evtl. nicht auf Schiff %s sondern auf Schiff %s
 UNITNOTPOSSIBLEHERE, Einheit '%s' geht hier nicht

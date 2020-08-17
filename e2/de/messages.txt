@@ -14,8 +14,8 @@
 
 0PERSONSLEARN, Einheit %s hat 0 Personen und wird von Einheit 
 0PERSONSTEACH, Einheit %s hat 0 Personen und lehrt Einheit 
-1ATTACKPERUNIT, Pro Einheit muß ein ATTACKIERE-Befehl gegeben werden
-1CARRYPERUNIT, Pro Einheit muß ein TRANSPORTIERE-Befehl gegeben werden
+1ATTACKPERUNIT, Pro Einheit muss ein ATTACKIERE-Befehl gegeben werden
+1CARRYPERUNIT, Pro Einheit muss ein TRANSPORTIERE-Befehl gegeben werden
 1PERSONPERMAGEUNIT, Magiereinheiten dürfen nur eine Person haben
 ACTIVATED, ~aktiviert.
 ALREADYUSEDINLINE, "TEMP %s" wurde in Zeile %d schon gebraucht
