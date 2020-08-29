@@ -23,7 +23,7 @@ AND, ~and
 ASSUMING200STUDYCOSTS, Assuming learnng costs of 200 silver
 AWARNING, ~a warning
 BEFOREINCOME, before income 
-BREEDHORSESORHERBS, BREED HORSES or BREED HERBS
+BREEDHORSESORHERBS, GROW HORSES or GROW HERBS
 BUILDINGNEEDSSILVER, Unit %s needs %d more silver to maintain a building
 BUTDOESNTLEARN, ~but doesn't learn
 BUYALLNOTPOSSIBLE, BUY and ALL cannot be combined
@@ -40,6 +40,7 @@ CANTRENAMEOBJECT, This object cannot be renamed
 CHECKYOURORDERS, \nPlease check if you have sent in your orders properly.\nKeep in mind that orders must not be sent as HTML, word-documents\nor attachments.\n
 COMBATSPELLSET, combat magic set
 DELIVERYTO, ; Delivery to
+DESTROYNOSTREET, only DESTROY or DESTROY ROAD are allowed
 DIRECTION, <direction>
 DISCOVERED, ~\n
 DOESNTCARRY, Unit %s rides with unit %s, but the latter doesn't carry the former
@@ -73,6 +74,7 @@ ISUSEDIN2REGIONS, "TEMPORARY %s" is used in region %d,%d and region %d,%d (line 
 ISNOTCOMBATSPELL, ~no
 ITEM, item
 LINETOOLONG, Line too long
+LOCALEMISMATCH, Locales '%s' of ECheck and '%s' of the orders do not match
 LONGCOMBATNOLONGORDER, Longer combats exclude long orders
 LONGORDERMISSING, Unit %s hasn't got a long order
 MAGIC, Magic
@@ -92,6 +94,7 @@ MISSINGNUMRECRUITS, Number of recruits missing
 MISSINGOFFER, Missing offer
 MISSINGPARAMETERS, LEVEL or REGION missing
 MISSINGPASSWORD, Missing password
+MISSINGSTART, ERESSEA faction-no "Password" not found or accidental NEXT!
 MISSINGUNITNUMBER, Missing unit number
 MOVENOTPOSSIBLEWITHPAUSE, MOVE and PAUSE cannot be combined
 MSGTO, MESSAGE TO FACTION, MESSAGE TO UNIT or MESSAGE TO REGION
@@ -102,13 +105,14 @@ NOFIND, FIND has been replaced by OPTION ADDRESSES
 NOLUXURY, No luxury
 NORMALUNITSONLY, %s is possible with normal units only
 NOSEND, SEND has been renamed into OPTION
-NOSPACEHERE, No space allowed here
+NOSPACEHERE, Space not allowed here
 NOTEMPNUMBER, No TEMPORARY number
 NOTEXECUTED, Isn't carried out by any unit
 NOTEXT, No text
 NOTFOUND, not found
 NTOOBIG, figure too big
 NUMBER0SENSELESS, Number 0 doesn't make sense
+NUMBEREXPECTED, Number expected
 NUMBERNOTPOSSIBLE, Number is not possible here
 NUMCASTLEMISSING, Number of castle missing
 NUMLUXURIESMISSING, Number of luxuries missing
@@ -149,6 +153,7 @@ TEMPUNITSCANTRESERVE, TEMPORARY units can't use RESERVE! Use GIVE instead!
 TEMPUNITSCANTGIVE, TEMPORARY units can't use GIVE, it happens before MAKE!
 TEXTTOOLONG, Text too long (max. %d)
 THERE, There 
+TOOMANYPARAMETERS, Too many parameters
 UNIT, unit
 UNITS, units
 UNIT0NOTPOSSIBLE, Unit 0/Peasants not possible here

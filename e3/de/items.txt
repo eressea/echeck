@@ -28,17 +28,16 @@ Schwert; Schwerter
 Speer; Speere
 Armbrust; Armbrüste
 Mallornspeer; Mallornspeere
+Mallornlanze; Mallornlanzen
 Mallornarmbrust; Mallornarmbrüste
 Mallornbogen; Mallornbögen
 Samen; Samen
+Mallornsamen; Mallornsamen
 Bogen; Bögen
-#Langbogen; Langbögen
 Kettenhemd; Kettenhemden
 Plattenpanzer; Plattenpanzer
 Bihänder; Bihänder
-#Zweihänder
 Kriegsaxt; Kriegsäxte
-#Axt; Äxte
 Elfenbogen; Elfenbögen
 Laenschwert; Laenschwerter
 Laenschild; Laenschilde
@@ -48,14 +47,29 @@ Schild; Schilde
 Hellebarde; Hellebarden
 Lanze; Lanzen
 Mallorn; Mallorn
+Mallornsamen; Mallornsamen
 Katapultmunition; Katapultmunition
 Repetierarmbrust; Repetierarmbrüste
 Schuppenpanzer; Schuppenpanzer
 Turmschild; Turmschilde
 Streitross; Streitrösser
-Mallornsamen; Mallornsamen
+Adamantium; Admantium
+Adamantiumaxt; Admantiumäxte
+Adamantiumrüstung; Adamantiumrüstungen
+Schartiges Schwert; Schartige Schilde
 Rostiger Zweihänder; Rostige Zweihänder
+Rostige Kriegsaxt; Rostige Kriegsäxte
+Rostige Hellebarde; Rostige Hellebarden
+Rostiger Schild; Rostige Schilde
 Rostiges Kettenhemd; Rostige Kettenhemden
+Flammenschwert; Flammenschwerter
+Runenschwert; Runenschwerter
+Amulett des Wahren Sehens; Amulette des Wahren Sehens
+Ring der Flinken Finger, Ringe der Flinken Finger
+Ring der Macht, Ringe der Macht
+Ring der Unsichtbarkeit; Ringe der Unsichtbarkeit
+Magischer Kräuterbeutel; Magische Kräuterbeutel
+Zauberbeutel; Zauberbeutel
 
 # So, das waren die offiziellen Items; diese Liste sollte man nicht ändern,
 # wenn man auf das Ergebnis von ECheck Wert legt...

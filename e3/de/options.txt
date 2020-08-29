@@ -12,9 +12,7 @@ Computer
 Statistik
 Zipped
 Zugvorlage
-Silberpool
-Materialpool
 Adressen
 Bzip2
-punkte
-talentverschiebung
+Punkte
+Talentverschiebung

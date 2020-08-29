@@ -9,9 +9,6 @@ Dwarves
 Elves
 Orcs
 Demons
-Aquarians
 Halflings
 Trolls
 Goblins
-Cats
-Insects

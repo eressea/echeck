@@ -22,12 +22,8 @@ AGGRESSIVE,  aggressiv
 DEFENSIVE,   defensiv
 CONTROL,     Kommando
 HERBS,       Kräuter
+TREES,       Bäume
 NOT,         Nicht
-
-NEXT,        Nächster
-# ^^ muß hier als Parameter stehen!
-
-FACTION,     Eressea
 FACTION,     Partei
 PERSON,      Personen
 REGION,      Region
@@ -48,7 +44,6 @@ HORSES,      Pferde
 FOREIGN,     fremdes
 NUMBER,      Nummer
 # ^^ TARNE PARTEI NUMMER
-LOCALE, Locale
 
 BEFORE,      vor
 AFTER,       hinter

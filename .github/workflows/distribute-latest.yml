@@ -1,0 +1,150 @@
+name: Automatic build and release
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build_win:
+    name: Build for Windows
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: make
+        run: |
+          make test
+          make clean
+          make echeck
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: binaries.win
+          # note: mingw gcc appears to ignore -o option
+          path: echeck.exe
+
+  build_mac:
+    name: Build for MacOS
+    runs-on: macOS-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: make
+        run: |
+          make test
+          make clean
+          make echeck
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: binaries.mac
+          path: echeck
+
+  build_nix:
+    name: Build and zip
+    needs: [ build_win, build_mac ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # get all tags
+          fetch-depth: 0
+      - name: make
+        run: |
+          make test
+          make clean
+          make echeck
+
+      - name: configure tag
+        run: |
+          VERSION=$(grep echeck_version echeck.c | head -1 | cut -f2 -d'"')
+          if [[ ! "${VERSION}" =~ ^[0-9][.][0-9]+[.][0-9]+$ ]]; then
+            echo "version tag X.Y.Z not found: $VERSION"
+            exit 1
+          fi
+          LASTTAG=$(git tag -l "v*" --sort='-committerdate' | head -1)
+          if [[ ! "${LASTTAG}" =~ ^v[0-9][.][0-9]+[.][0-9]+$ ]]; then
+            echo "last tag vX.Y.Z not found: $LASTTAG"
+            exit 1
+          fi
+          VTAG=$(git tag -l "v$VERSION")
+
+          echo "latest tag: $LASTTAG, current version: $VERSION, existing tag: $VTAG"
+
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git remote -v
+          REMOTE="https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
+
+          if [[ "v$VERSION" != "$LASTTAG" && "$VTAG" == "" ]]; then
+            # create new tag and release draft
+            TAG="v$VERSION"
+            name="Release $VERSION"
+            body="Dies ist ein stabiles Release. Diese Beschrebung solle geändert werden.\n\nThis is a stable release draft. This description should be updated.\n\n$date"
+            draft=true
+            prerelease=false
+
+            git tag "$TAG"
+            git push "$REMOTE" "$TAG"
+          elif [[ "$VTAG" != "" && "$VTAG" == "v$VERSION" ]]; then
+            # update vX.Y-latest tag and prerelease
+            draft=false
+            prerelease=true
+            name="Pre-Release $VERSION"
+            body="Dies ist eine automatisch generierte Version mit den neuesten Änderungen. Sie kann eher Fehler enthalten als eine stabile Version.\n\nThis is an automatic release of the latest version. It is less safe to use than a stable version.\n\n$date"
+            short=$(echo "${VERSION}" | cut -d. -f-2)
+            TAG="${short}-latest"
+
+            git tag -f "$TAG"
+            git push --force "$REMOTE" "$TAG"
+          else
+            echo "not creating any release"
+            draft=
+            prerelease=
+          fi
+
+          body="${body//'%'/'%25'}"
+          body="${body//'\n'/'%0A'}"
+          body="${body//'\r'/'%0D'}"
+
+          echo "::set-env name=PRERELEASE::$prerelease"
+          echo "::set-env name=DRAFT::$draft"
+          echo "::set-env name=VERSION::$VERSION"
+          echo "::set-env name=TAG::$TAG"
+          echo "::set-env name=NAME::$name"
+          echo "::set-env name=BODY::$body"
+
+      - name: Download all binaries
+        uses: actions/download-artifact@v2
+
+      - name: Create zip
+        run: |
+          mv binaries.mac/echeck ./echeck.macos
+          mv binaries.win/echeck.exe ./echeck.exe
+          zip -r echeck.zip echeck echeck.macos echeck.exe e2 e3 changelog.txt LIESMICH.txt README.txt
+
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: release
+          path: echeck.zip
+
+      - name: Create release
+        uses: meeDamian/github-release@2.0
+        if: env.PRERELEASE != '' && env.DRAFT != ''
+        with:
+          prerelease: ${{ env.PRERELEASE }}
+          draft: ${{ env.DRAFT }}
+          allow_override: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.TAG }}
+          # commitish: ${{ github.ref }}
+          name: ${{ env.NAME }}
+          body: ${{ env.BODY }}
+          gzip: folders
+          files: >
+            echeck.zip

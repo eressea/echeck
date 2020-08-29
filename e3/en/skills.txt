@@ -9,17 +9,14 @@
 #############################################################################
 
 unarmed combat
-alchemy, 200
 crossbow
 endurance
 bow
 catapult
-herbalism, 200
 riding
-tactics, 200
+tactics, 500
 mining
 masonry
-trade
 forestry
 
 magic, -1
@@ -32,16 +29,10 @@ armoursmithing
 sailing
 quarrying
 roadwork
-stealth
-entertainment
 weaponsmithing
 cartmaking
-perception
-espionage, 100
-taxation
 melee
 polearm
 shipcraft
 
 # additional talents can be added at will
-

@@ -1,5 +1,6 @@
 MINGW_STRIP = i686-w64-mingw32-strip
 MINGW_CC = i686-w64-mingw32-gcc
+GCC = gcc
 CFLAGS = -Wall -std=c99 -Werror -I.
 RELEASE_CFLAGS = $(CFLAGS) -Os
 DEBUG_CFLAGS = $(CFLAGS) -g
@@ -31,14 +32,18 @@ echeck.exe: echeck.c unicode.c unicode.h config.h
 	$(MINGW_CC) $(RELEASE_CFLAGS) -o echeck.exe echeck.c unicode.c
 	$(MINGW_STRIP) echeck.exe
 
-echeck: echeck.c unicode.c unicode.h config.h $(TEST_SRC) $(TEST_HDR)
-	$(CC) $(DEBUG_CFLAGS) -DWITH_CUTEST -o echeck echeck.c unicode.c $(TEST_SRC)
+echeck.dbg: echeck.c unicode.c unicode.h config.h $(TEST_SRC) $(TEST_HDR)
+	$(GCC) $(DEBUG_CFLAGS) -DWITH_CUTEST -o echeck.dbg echeck.c unicode.c $(TEST_SRC)
+
+echeck: echeck.c unicode.c unicode.h config.h
+	$(GCC) $(RELEASE_CFLAGS) -o echeck echeck.c unicode.c
 
 clean:
-	@rm -f *.o core *.bak echeck echeck.exe echeck.zip
+	@rm -f *.o core *.bak echeck echeck.dbg echeck.exe echeck.zip
 
-test: echeck
-	@./echeck -T=all -Lde -Re2 -b
+test: echeck.dbg
+	@./echeck.dbg -T=all -Lde -Re3 -b
+	@./echeck.dbg -T=all -Lde -Re2 -b
 
 echeck.zip: echeck.exe changelog.txt LIESMICH.txt README.txt
 	zip -r echeck.zip echeck.exe e2 e3 changelog.txt LIESMICH.txt README.txt

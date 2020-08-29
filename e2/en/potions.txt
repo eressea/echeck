@@ -30,10 +30,13 @@ peasant blood
 peasant love potion
 peasant love potion
 potion of nest warmth
-potion of truth
 potions of nest warmth
+potion of truth
 potions of truth
 seven mile teas
 seven mile tea
 water of life
 waters of life
+brain boosts
+potions of skill
+potion of skill

@@ -22,12 +22,8 @@ AGGRESSIVE,  aggressiv
 DEFENSIVE,   defensiv
 CONTROL,     Kommando
 HERBS,       Kräuter
+TREES,       Bäume
 NOT,         Nicht
-
-NEXT,        Nächster
-# ^^ muß hier als Parameter stehen!
-
-FACTION,     Eressea
 FACTION,     Partei
 PERSON,      Personen
 REGION,      Region
@@ -36,11 +32,9 @@ SILVER,      Silber
 ROAD,        Straßen
 TEMP,        Temporär
 PRIVATE,     Privat
-FIGHT,       Kämpfe
 OBSERVE,     Wahrnehmung
 GIVE,        Gib
 GUARD,       Bewache
-FACTIONSTEALTH, Parteitarnung
 WARN,        Warnung
 LEVEL,       Stufe
 HORSES,      Pferde
@@ -48,9 +42,13 @@ HORSES,      Pferde
 FOREIGN,     fremdes
 NUMBER,      Nummer
 # ^^ TARNE PARTEI NUMMER
-LOCALE, Locale
 
 BEFORE,      vor
 AFTER,       hinter
 ALLIANCE,    allianz
+KICK,        Ausstoßen
+LEAVE,       Verlassen
+NEW,         Neu
+INVITE,      Einladen
+JOIN,        Beitreten
 AUTO, auto

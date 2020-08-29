@@ -14,8 +14,8 @@
 
 0PERSONSLEARN, Einheit %s hat 0 Personen und wird von Einheit 
 0PERSONSTEACH, Einheit %s hat 0 Personen und lehrt Einheit 
-1ATTACKPERUNIT, Pro Einheit muß ein ATTACKIERE-Befehl gegeben werden
-1CARRYPERUNIT, Pro Einheit muß ein TRANSPORTIERE-Befehl gegeben werden
+1ATTACKPERUNIT, Pro Einheit muss ein ATTACKIERE-Befehl gegeben werden
+1CARRYPERUNIT, Pro Einheit muss ein TRANSPORTIERE-Befehl gegeben werden
 1PERSONPERMAGEUNIT, Magiereinheiten dürfen nur eine Person haben
 ACTIVATED, ~aktiviert.
 ALREADYUSEDINLINE, "TEMP %s" wurde in Zeile %d schon gebraucht
@@ -37,9 +37,10 @@ CANTMAINTAINBUILDING, Einheit %s kann ein Gebäude nicht erhalten, es fehlen noc
 CANTMAKETHAT, Sowas kann man nicht machen
 CANTREADFILE, Kann Datei '%s' nicht lesen\n
 CANTRENAMEOBJECT, Objekt kann nicht umbenannt werden
-CHECKYOURORDERS, \nBitte überprüfe, ob Du die Befehle korrekt eingesandt hast.\nBeachte dabei besonders, daß die Befehle nicht als HTML, Word-Dokument\noder als Attachment (Anlage) eingeschickt werden dürfen.\n
+CHECKYOURORDERS, \nBitte überprüfe, ob du die Befehle korrekt eingesandt hast.\nBeachte dabei besonders, dass die Befehle nicht als HTML, Word-Dokument\noder als Attachment (Anlage) eingeschickt werden dürfen.\n
 COMBATSPELLSET, Kampfzauber gesetzt
-DELIVERYTO, ; Zustellung an 
+DELIVERYTO, ; Zustellung an
+DESTROYNOSTREET, nur ZERSTOERE oder ZERSTOERE STRASSE sind erlaubt
 DIRECTION, <richtung>
 DISCOVERED, ~entdeckt.\n
 DOESNTCARRY, Einheit %s fährt mit Einheit %s, diese transportiert aber nicht
@@ -51,11 +52,11 @@ ERRORHELP, Helfe-Status falsch
 ERRORINLINE, Fehler in Zeile
 ERRORLEVELPARAMETERS, Fehler bei STUFE-Parameter
 ERRORNAMEFOREIGN, BENENNE FREMD nicht mit %s
-ERROROPINION, Nummer der Meinung muß größer 0 sein
+ERROROPINION, Nummer der Meinung muss größer 0 sein
 ERRORREGION, REGION fehlerhaft
 ERRORREGIONPARAMETER, Fehler bei REGION-Parameter
 ERRORSPELLSYNTAX, [ ] und  < >  dürfen nicht mit eingegeben werden!
-ERRORSURVEY, Nummer der Umfrage muß größer 0 sein
+ERRORSURVEY, Nummer der Umfrage muss größer 0 sein
 FACTION0USED, Partei 0 verwendet
 FACTIONINVALID, Partei "%s" ungültig
 FACTIONMISSING, Partei fehlt
@@ -73,6 +74,7 @@ ISUSEDIN2REGIONS, "TEMP %s" wird in Region %d,%d und Region %d,%d (Zeile %d) geb
 ISNOTCOMBATSPELL, k
 ITEM, Gegenstand
 LINETOOLONG, Zeile zu lang
+LOCALEMISMATCH, Locales '%s' von ECheck und '%s' der Befehle passen nicht zusammen
 LONGCOMBATNOLONGORDER, Längere Kämpfe schließen den langen Befehl aus
 LONGORDERMISSING, Einheit %s hat keinen langen Befehl bekommen
 MAGIC, Magie
@@ -92,9 +94,10 @@ MISSINGNUMRECRUITS, Anzahl Rekruten fehlt
 MISSINGOFFER, Geldgebot fehlt
 MISSINGPARAMETERS, Parameter STUFE oder REGION fehlt
 MISSINGPASSWORD, Kein Passwort angeben
+MISSINGSTART, ERESSEA partei-nummer "Passwort" fehlt oder versehentliches NAECHSTER!
 MISSINGUNITNUMBER, Keine Einheitsnummer
 MOVENOTPOSSIBLEWITHPAUSE, NACH geht nicht mit PAUSE
-MSGTO, BOTSCHAFT AN PARTEI, BOTSCHAFT AN EINHEIT oder BOTSCHAFT AN REGION
+MSGTO, BOTSCHAFT PARTEI, BOTSCHAFT EINHEIT oder BOTSCHAFT REGION
 NAMECONTAINSBRACKETS, Namen dürfen keine Klammern enthalten
 NEEDBOTHCOORDINATES, Beide Koordinaten müssen angegeben werden
 NOCARRIER, Kann zu transportierende Einheit nicht ermitteln
@@ -109,6 +112,7 @@ NOTEXT, Kein Text
 NOTFOUND, nicht gefunden
 NTOOBIG, Zahl zu groß
 NUMBER0SENSELESS, Anzahl 0 macht keinen Sinn
+NUMBEREXPECTED, Zahl erwartet
 NUMBERNOTPOSSIBLE, Anzahl hier nicht möglich
 NUMCASTLEMISSING, Nummer der Burg fehlt
 NUMLUXURIESMISSING, Anzahl Luxusgüter fehlt
@@ -149,6 +153,7 @@ TEMPUNITSCANTRESERVE, TEMP-Einheiten können nichts reservieren! Bitte GIB benut
 TEMPUNITSCANTGIVE, TEMP-Einheiten können nichts übergebenen! Befehlsreihenfolge beachten!
 TEXTTOOLONG, Text zu lang (max. %d)
 THERE, Es 
+TOOMANYPARAMETERS, Zu viele Parameter
 UNIT, Einheit
 UNITS, Einheiten
 UNIT0NOTPOSSIBLE, Einheit 0 bzw. Bauern geht hier nicht

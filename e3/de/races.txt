@@ -12,9 +12,6 @@ Zwerge
 Elfen
 Orks
 Dämonen
-Meermenschen
 Halblinge
 Trolle
 Goblins
-Katzen
-Insekten
