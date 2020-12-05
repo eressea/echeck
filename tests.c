@@ -115,18 +115,6 @@ static void test_igetstr(CuTest * tc)
   CuAssertStrEquals(tc, "derp", igetstr(0));
 }
 
-static void test_cont(CuTest *tc)
-{
-  mock_input("a line\\\n continued\n");
-  CuAssertStrEquals(tc, "a linecontinued", getbuf());
-  mock_input("a line \\\ncontinued\n");
-  CuAssertStrEquals(tc, "a line continued", getbuf());
-  mock_input("a \"string \\\ncontinued\"\n");
-  CuAssertStrEquals(tc, "a string~continued", getbuf());
-  mock_input("a \" \\\nstring continued \"\n");
-  CuAssertStrEquals(tc, "a string~continued", getbuf());
-}
-
 static void test_give_each(CuTest * tc)
 {
   set_order_unit(newunit(1, 0));
@@ -224,33 +212,6 @@ static void test_check_additional_parameters(CuTest *tc)
 
 }
 
-static void test_check_quotes(CuTest *tc)
-{
-  test_orders(tc, "MACHE 1 Rostiges~Kettenhemd", 0, 0);
-  test_orders(tc, "MACHE 2 \" Rostiges Kettenhemd \"", 0, 0);
-  test_orders(tc, "MACHE 3 'Rostiges Kettenhemd'", 0, 0);
-  test_orders(tc, "MACHE 4 \"Rostiges Kettenhemd'", 0, 2);
-  test_orders(tc, "MACHE 5 'Rostiges Kettenhemd\"", 0, 2);
-  test_orders(tc, "MACHE 6 \"Rostiges~Kettenhemd\"", 0, 0);
-
-  test_orders(tc, "DEFAULT \"ARBEITE\"", 0, 0);
-  test_orders(tc, "DEFAULT 'ARBEITE'", 0, 0);
-  test_orders(tc, "DEFAULT ARBEITE", 0, 0);
-
-  test_orders(tc, "DEFAULT 'MACHE 1 Schwert'", 0, 0);
-  test_orders(tc, "DEFAULT \"MACHE 2 Schwert\"", 0, 0);
-  // currently not working
-  //  test_orders(tc, "DEFAULT \"MACHE 3 'Rostiges Kettenhemd'\"", 0);
-  //  test_orders(tc, "DEFAULT \"MACHE 4 Rostiges~Kettenhemd\"", 0);
-  //  test_orders(tc, "DEFAULT \"MACHE 5 'Rostiges~Kettenhemd'\"", 0);
-  //  test_orders(tc, "DEFAULT 'MACHE 6 \"Rostiges Kettenhemd\"', 0);
-
-  test_orders(tc, "BENENNE EINHEIT \"a \\\"nice\\\" name\"", 0, 0);
-  test_orders(tc, "BENENNE EINHEIT 'parser\\'s nightmare'", 0, 0);
-  test_orders(tc, "BENENNE EINHEIT \"parser\\'s nightmare\"", 0, 0);
-  test_orders(tc, "BENENNE EINHEIT \"parser\\\"s nightmare\"", 0, 0);
-}
-
 static void test_plant(CuTest *tc)
 {
   test_orders(tc, "PFLANZE KRÄUTER", 0, 0);
@@ -318,7 +279,6 @@ int AddTestSuites(CuSuite * suite, const char * args)
       cs = CuSuiteNew();
       SUITE_ADD_TEST(cs, test_getbuf);
       SUITE_ADD_TEST(cs, test_igetstr);
-      SUITE_ADD_TEST(cs, test_cont);
       SUITE_ADD_TEST(cs, test_nothing);
       CuSuiteAddSuite(suite, cs);
     }
@@ -363,8 +323,6 @@ int AddTestSuites(CuSuite * suite, const char * args)
       cs = CuSuiteNew();
       SUITE_ADD_TEST(cs, test_check_additional_parameters);
       SUITE_ADD_TEST(cs, test_origin);
-      SUITE_ADD_TEST(cs, test_check_quotes);
-      SUITE_ADD_TEST(cs, test_language);
       CuSuiteAddSuite(suite, cs);
     }
     name = strtok(0, ",");
