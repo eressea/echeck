@@ -89,7 +89,6 @@ MISSINGNUMRECRUITS, Number of recruits missing
 MISSINGOFFER, Missing offer
 MISSINGPARAMETERS, LEVEL or REGION missing
 MISSINGPASSWORD, Missing password
-MISSINGSTART, ERESSEA faction-no "Password" not found
 MISSINGUNITNUMBER, Missing unit number
 MOVENOTPOSSIBLEWITHPAUSE, MOVE and PAUSE cannot be combined
 NAMECONTAINSBRACKETS, Names must not contain brackets

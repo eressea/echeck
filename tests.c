@@ -323,6 +323,7 @@ int AddTestSuites(CuSuite * suite, const char * args)
       cs = CuSuiteNew();
       SUITE_ADD_TEST(cs, test_check_additional_parameters);
       SUITE_ADD_TEST(cs, test_origin);
+      SUITE_ADD_TEST(cs, test_language);
       CuSuiteAddSuite(suite, cs);
     }
     name = strtok(0, ",");

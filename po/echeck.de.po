@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: echeck 4.4.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-05 16:00+0100\n"
+"POT-Creation-Date: 2020-12-05 18:29+0100\n"
 "PO-Revision-Date: 2020-11-22 18:44+0100\n"
 "Last-Translator: Enno Rehling <enno@eressea.de>\n"
 "Language-Team: German (Deutsch) <echeck@eressea.de>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: echeck.c:1707
+#: echeck.c:1705
 msgid ""
 "\n"
 "\n"
@@ -34,58 +34,58 @@ msgstr ""
 "  ****  Passwort fehlt!  ****\n"
 "\n"
 
-#: echeck.c:5544
+#: echeck.c:5522
 #, c-format
 msgid "%d error"
 msgid_plural "%d errors"
 msgstr[0] "%d Fehler"
 msgstr[1] "%d Fehler"
 
-#: echeck.c:5519
+#: echeck.c:5497
 #, c-format
 msgid "%d faction"
 msgid_plural "%d factions"
 msgstr[0] "%d Partei"
 msgstr[1] "%d Parteien"
 
-#: echeck.c:5522
+#: echeck.c:5500
 #, c-format
 msgid "%d unit"
 msgid_plural "%d units"
 msgstr[0] "%d Einheit"
 msgstr[1] "%d Einheiten"
 
-#: echeck.c:4544
+#: echeck.c:4531
 #, c-format
 msgid "%s %s lacks closing %s"
 msgstr "Einheit %s %s wird nirgends mit %s abgeschlossen"
 
-#: echeck.c:3146
+#: echeck.c:3133
 #, c-format
 msgid "%s and %s cannot be combined"
 msgstr "%s geht nicht mit %s"
 
-#: echeck.c:2764
+#: echeck.c:2751
 #, c-format
 msgid "%s is a combat spell"
 msgstr "%s ist ein Kampfzauber"
 
-#: echeck.c:2761
+#: echeck.c:2748
 #, c-format
 msgid "%s is not a combat spell"
 msgstr "%s ist kein Kampfzauber"
 
-#: echeck.c:4031
+#: echeck.c:4018
 #, c-format
 msgid "%s needs parameters"
 msgstr "%s ohne Argumente"
 
-#: echeck.c:2751
+#: echeck.c:2738
 #, c-format
 msgid "%s or %s missing"
 msgstr "Parameter %s oder %s fehlt"
 
-#: echeck.c:4637
+#: echeck.c:4624
 #, c-format
 msgid ""
 "-Ppath  search path for the additional files; locale %s will be appended\n"
@@ -157,70 +157,70 @@ msgstr ""
 "-Q      Leise\n"
 "-C      Kompakte Ausgabe\n"
 
-#: echeck.c:2382
+#: echeck.c:2369
 msgid "; Delivery to"
 msgstr "; Zustellung an"
 
-#: echeck.c:1513
+#: echeck.c:1511
 msgid "<--MISSING-->"
 msgstr "<--FEHLT-->"
 
-#: echeck.c:1614 echeck.c:1678
+#: echeck.c:1612 echeck.c:1676
 msgid "<internal check>"
 msgstr "<interner test>"
 
-#: echeck.c:3402
+#: echeck.c:3389
 msgid "Assuming learning costs of 200 silver"
 msgstr "Lernkosten mit 200 Silber angenommen"
 
-#: echeck.c:1711
+#: echeck.c:1709
 msgid "Attention! QUIT found! Your faction will be cancelled!"
 msgstr "Achtung! STIRB gegeben! Die Partei wird aufgelöst!"
 
-#: echeck.c:2960
+#: echeck.c:2947
 msgid "BUY and ALL cannot be combined"
 msgstr "KAUFE ALLES ist nicht erlaubt"
 
-#: echeck.c:1693
+#: echeck.c:1691
 msgid "Both coordinated must be supplied"
 msgstr "Beide Koordinaten müssen angegeben werden"
 
-#: echeck.c:1694
+#: echeck.c:1692
 msgid "Can't find unit to carry"
 msgstr "Kann die zu fahrende Einheit nicht finden"
 
-#: echeck.c:3884
+#: echeck.c:3871
 msgid "Cannot attack a newly formed unit"
 msgstr "Neu erschaffene Einheiten können nicht attackiert werden"
 
-#: echeck.c:2436 echeck.c:2444 echeck.c:2456
+#: echeck.c:2423 echeck.c:2431 echeck.c:2443
 msgid "Cannot parse this unit's comment"
 msgstr "Unverständlicher Einheitenkommentar"
 
-#: echeck.c:5489
+#: echeck.c:5467
 #, c-format
 msgid "Cannot read file %s."
 msgstr "Kann die Datei %s nicht lesen."
 
-#: echeck.c:5550
+#: echeck.c:5528
 #, c-format
 msgid "Detected %d error."
 msgid_plural "Detected %d errors."
 msgstr[0] "%d Fehler gefunden."
 msgstr[1] "%d Fehler gefunden."
 
-#: echeck.c:5539
+#: echeck.c:5517
 #, c-format
 msgid "Detected %d warning"
 msgid_plural "Detected %d warnings"
 msgstr[0] "%d Warnung gefunden"
 msgstr[1] "%d Warnungen gefunden"
 
-#: echeck.c:2711
+#: echeck.c:2698
 msgid "Do not use [ ] and < >"
 msgstr "[ ] und  < >  dürfen nicht mit eingegeben werden"
 
-#: echeck.c:5444
+#: echeck.c:5422
 #, c-format
 msgid ""
 "ECheck (Version %s, %s), order file checker for Eressea - freeware!\n"
@@ -229,227 +229,223 @@ msgstr ""
 "ECheck (Version %s, %s), Befehlsprüfer für Eressea - Freeware!\n"
 "\n"
 
-#: echeck.c:5195
-msgid "ERESSEA faction-no \"Password\" not found"
-msgstr "ERESSEA partei-nummer \"Passwort\" fehlt"
-
-#: echeck.c:1521
+#: echeck.c:1519
 #, c-format
 msgid "Error in line %d"
 msgstr "Fehler in Zeile %d"
 
-#: echeck.c:2738
+#: echeck.c:2725
 msgid "Error with LEVEL parameter"
 msgstr "Fehler bei STUFE-Parameter"
 
-#: echeck.c:5065
+#: echeck.c:5052
 msgid "Error with REGION"
 msgstr "REGION fehlerhaft"
 
-#: echeck.c:2729
+#: echeck.c:2716
 msgid "Error with REGION parameter"
 msgstr "Fehler bei REGION-Parameter"
 
-#: echeck.c:2725
+#: echeck.c:2712
 msgid "Error with region coordinates"
 msgstr "Fehler bei Regions-Koordinaten"
 
-#: echeck.c:1695
+#: echeck.c:1693
 msgid "FIND has been replaced by OPTION ADDRESSES"
 msgstr "FINDE wurde gegen OPTION ADRESSEN ersetzt"
 
-#: echeck.c:1677
+#: echeck.c:1675
 msgid "FOLLOW UNIT xx, FOLLOW SHIP xx or FOLLOW"
 msgstr "FOLGE EINHEIT xx, FOLGE SCHIFF xx oder FOLGE"
 
-#: echeck.c:2265
+#: echeck.c:2252
 #, c-format
 msgid "Faction '%s' invalid"
 msgstr "Partei '%s' ungültig"
 
-#: echeck.c:2245
+#: echeck.c:2232
 msgid "Faction 0 used"
 msgstr "Partei 0 verwendet"
 
-#: echeck.c:2241
+#: echeck.c:2228
 msgid "Faction missing"
 msgstr "Partei fehlt"
 
-#: echeck.c:5100
+#: echeck.c:5087
 #, c-format
 msgid "Found orders for faction %s."
 msgstr "Befehle für Partei %s gefunden."
 
-#: echeck.c:2850
+#: echeck.c:2837
 msgid "Give what?"
 msgstr "Was übergeben?"
 
-#: echeck.c:3371 echeck.c:3934
+#: echeck.c:3358 echeck.c:3921
 #, c-format
 msgid "Illegal argument for %s"
 msgstr "Ungültiger %s Status"
 
-#: echeck.c:3536
+#: echeck.c:3523
 #, c-format
 msgid "In %s (%d,%d) there was reserved more silver (%d) than available (%d)."
 msgstr "In %s (%d, %d) wurde %d Silber reserviert, aber nur %d ist verfügbar."
 
-#: echeck.c:4570
+#: echeck.c:4557
 msgid "Incorrect password"
 msgstr "Nicht das korrekte Passwort eingesetzt"
 
-#: echeck.c:2146 echeck.c:2201
+#: echeck.c:2144 echeck.c:2188
 msgid "Line too long"
 msgstr "Zeile zu lang"
 
-#: echeck.c:3890
+#: echeck.c:3877
 msgid "Longer combats exclude long orders"
 msgstr "Längere Kämpfe schließen den langen Befehl aus"
 
-#: echeck.c:4153
+#: echeck.c:4140
 msgid "Magicians may have only one person"
 msgstr "Magier dürfen nur eine Person haben"
 
-#: echeck.c:3251
+#: echeck.c:3238
 #, c-format
 msgid "Messages must be sent to a %s, %s or %s"
 msgstr "Botschaften müssen an %s, %s oder %s gesendet werden"
 
-#: echeck.c:1686 echeck.c:2209
+#: echeck.c:1684 echeck.c:2196
 msgid "Missing \""
 msgstr "Fehlendes \""
 
-#: echeck.c:5089 echeck.c:5206
+#: echeck.c:5076 echeck.c:5184
 #, c-format
 msgid "Missing %s"
 msgstr "%s fehlt"
 
-#: echeck.c:3938 echeck.c:4481
+#: echeck.c:3925 echeck.c:4468
 #, c-format
 msgid "Missing argument for %s"
-msgstr "Fehlender Parameter für %s Befehl"
+msgstr ""
 
-#: echeck.c:1687
+#: echeck.c:1685
 msgid "Missing faction number"
 msgstr "Es fehlen Dateien für"
 
-#: echeck.c:5447
+#: echeck.c:5425
 msgid "Missing files containing"
 msgstr "Es fehlen Dateien für"
 
-#: echeck.c:4929
+#: echeck.c:4916
 #, c-format
 msgid "Missing locale, using '%s'"
 msgstr "Unbekannte Sprache, benutze '%s'"
 
-#: echeck.c:1689
+#: echeck.c:1687
 msgid "Missing offer"
 msgstr "Geldgebot fehlt"
 
-#: echeck.c:1690
+#: echeck.c:1688
 msgid "Missing password"
 msgstr "Kein Passwort angeben"
 
-#: echeck.c:1732 echeck.c:2305
+#: echeck.c:1730 echeck.c:2292
 msgid "Missing unit"
 msgstr "Keine Einheitsnummer"
 
-#: echeck.c:1691
+#: echeck.c:1689
 msgid "Missing unit number"
 msgstr "Keine Einheitsnummer"
 
-#: echeck.c:2655
+#: echeck.c:2642
 #, c-format
 msgid "Moved maintainance for building from unit %s to unit %s"
 msgstr "Gebäudeunterhalt von Einheit %s nach Einheit %s verschoben"
 
-#: echeck.c:1705
+#: echeck.c:1703
 msgid "NUMBER SHIP, NUMBER CASTLE, NUMBER FACTION or NUMBER UNIT"
 msgstr "NUMMER SCHIFF, NUMMER BURG, NUMMER PARTEI oder NUMMER EINHEIT"
 
-#: echeck.c:1692 echeck.c:2594
+#: echeck.c:1690 echeck.c:2581
 msgid "Names must not contain brackets"
 msgstr "Namen dürfen keine Klammern enthalten"
 
-#: echeck.c:2805
+#: echeck.c:2792
 msgid "New units cannot GIVE anything"
 msgstr "Neue Einheiten können nichts übergeben"
 
-#: echeck.c:3294
+#: echeck.c:3281
 msgid "New units cannot use RESERVE, try using GIVE instead"
 msgstr "Neue Einheiten könenn nichts reservieren"
 
-#: echeck.c:1697
+#: echeck.c:1695
 msgid "No TEMPORARY number"
 msgstr "Keine TEMP-Nummer"
 
-#: echeck.c:3979
+#: echeck.c:3966
 msgid "No matching MAKE TEMP for END"
 msgstr "ENDE ohne MACHE TEMP"
 
-#: echeck.c:1698 echeck.c:1773
+#: echeck.c:1696 echeck.c:1771
 msgid "No text"
 msgstr "Kein Text"
 
-#: echeck.c:2975
+#: echeck.c:2962
 msgid "Not a luxury item"
 msgstr "Kein Luxusgut"
 
-#: echeck.c:5192
+#: echeck.c:5175
 msgid "Not carried out by any unit"
 msgstr "Wird von keiner Einheit ausgeführt"
 
-#: echeck.c:2998 echeck.c:3843 echeck.c:4442
+#: echeck.c:2985 echeck.c:3830 echeck.c:4429
 msgid "Number 0 does not make sense here"
 msgstr "Anzahl 0 macht keinen Sinn"
 
-#: echeck.c:1700 echeck.c:3014 echeck.c:3927
+#: echeck.c:1698 echeck.c:3001 echeck.c:3914
 msgid "Number is not possible here"
 msgstr "Hier darf keine Zahl stehen"
 
-#: echeck.c:1701
+#: echeck.c:1699
 msgid "Number of castle missing"
 msgstr "Nummer der Burg fehlt"
 
-#: echeck.c:1703
+#: echeck.c:1701
 msgid "Number of items/men/silver missing"
 msgstr "Anzahl fehlt"
 
-#: echeck.c:1702
+#: echeck.c:1700
 msgid "Number of luxuries missing"
 msgstr "Anzahl der Luxusgüter fehlt"
 
-#: echeck.c:2965
+#: echeck.c:2952
 msgid "Number of luxury items missing"
 msgstr "Anzahl der Luxusgüter fehlt"
 
-#: echeck.c:1688
+#: echeck.c:1686
 msgid "Number of recruits missing"
 msgstr "Anzahl der Rekruten fehlt"
 
-#: echeck.c:1549
+#: echeck.c:1547
 #, c-format
 msgid "Number too big: '%s'. Using 1 instead"
 msgstr "Zahl zu groß: %s"
 
-#: echeck.c:3997
+#: echeck.c:3984
 msgid "Only herbs can be researched"
 msgstr "Kann nur nach Kräutern forschen"
 
-#: echeck.c:3215
+#: echeck.c:3202
 msgid "Only ships can be sabotaged"
 msgstr "Nur Schiffe können sabotiert werden"
 
-#: echeck.c:5524
+#: echeck.c:5502
 #, c-format
 msgid "Orders have been read for %s and %s."
 msgstr "Es wurden Befehle für %s und %s gelesen."
 
-#: echeck.c:1706
+#: echeck.c:1704
 msgid "Password cleared"
 msgstr "Passwort gelöscht"
 
-#: echeck.c:5529
+#: echeck.c:5507
 msgid ""
 "Please make sure you have sent in your orders properly.\n"
 "Remember that orders must not be sent as HTML or word-documents."
@@ -458,449 +454,440 @@ msgstr ""
 "Beachte dabei besonders, dass die Befehle nicht als HTML oder\n"
 "Word-Dokumente eingeschickt werden dürfen."
 
-#: echeck.c:2372 echeck.c:2373
+#: echeck.c:2359 echeck.c:2360
 msgid "Please set email with EMAIL"
 msgstr "Email bitte mit EMAIL setzen"
 
-#: echeck.c:3921
+#: echeck.c:3908
 msgid "Positive value expected"
 msgstr "Positiver Wert erwartet"
 
-#: echeck.c:1710 echeck.c:5495
+#: echeck.c:1708 echeck.c:5473
 #, c-format
 msgid "Processing file '%s'."
 msgstr "Verarbeite Datei '%s'."
 
-#: echeck.c:1712
+#: echeck.c:1710
 msgid "RESERVE 0 xxx doesn't make any sense"
 msgstr "Nichts zu reservieren ist sinnlos"
 
-#: echeck.c:1713
+#: echeck.c:1711
 msgid "RESERVE what?"
 msgstr "Was soll reserviert werden?"
 
-#: echeck.c:1714
+#: echeck.c:1712
 #, c-format
 msgid "ROUTE is not cyclic; (%d,%d) -> (%d,%d)"
 msgstr "ROUTE ist kein Kreis; (%d,%d) -> (%d,%d)"
 
-#: echeck.c:1715
+#: echeck.c:1713
 msgid "ROUTE starts with PAUSE"
 msgstr "ROUTE beginnt mit PAUSE"
 
-#: echeck.c:5111
+#: echeck.c:5098
 #, c-format
 msgid "Recruit costs have been set to %d silver, warning level %d"
 msgstr "Rekrutierungskosten auf %d Silber gesetzt, Warnungen Stufe %d"
 
-#: echeck.c:1696
+#: echeck.c:1694
 msgid "SEND has been renamed into OPTION"
 msgstr "SENDE wurde in OPTION umbenannt"
 
-#: echeck.c:1718
+#: echeck.c:1716
 msgid "SORT BEFORE or BEHIND <unit>"
 msgstr "SORTIERE VOR oder HINTER <einheit>"
 
-#: echeck.c:1716
+#: echeck.c:1714
 #, c-format
 msgid "School '%s' chosen.\n"
 msgstr "Magiegebiet '%s' gewählt.\n"
 
-#: echeck.c:4363
+#: echeck.c:4350
 #, c-format
 msgid "School '%s' does not exist"
 msgstr "Magiegebiet '%s' gibt es nicht"
 
-#: echeck.c:1717
+#: echeck.c:1715
 msgid "Search path is"
 msgstr "Suchpfad ist"
 
-#: echeck.c:5114
+#: echeck.c:5101
 msgid "Silver pool is active."
 msgstr "Silberpool ist aktiv."
 
-#: echeck.c:2015
+#: echeck.c:2013
 msgid "Space not allowed here"
-msgstr "Leerzeichen hier nicht erlaubt"
+msgstr ""
 
-#: echeck.c:1881
+#: echeck.c:1879
 #, c-format
 msgid "TEMP %s is used in region %d, %d and region %d, %d (line %d)"
 msgstr "TEMP %s wird in Region %d,%d und Region %d,%d (Zeile %d) gebraucht"
 
-#: echeck.c:2511
+#: echeck.c:2498
 #, c-format
 msgid "TEMP %s was already used in line %d"
 msgstr "TEMP %s wurde bereits in Zeile %d benutzt"
 
-#: echeck.c:1722
+#: echeck.c:1720
 msgid "TEMPORARY units can't use GIVE, it happens before MAKE!"
 msgstr "Neue Einheiten können nichts übergeben! Befehlsreihenfolge beachten!"
 
-#: echeck.c:1721
+#: echeck.c:1719
 msgid "TEMPORARY units can't use RESERVE! Use GIVE instead!"
 msgstr "Neue Einheiten können nichts reservieren! Befehlsreihenfolge beachten!"
 
-#: echeck.c:4119
+#: echeck.c:4106
 msgid "Teacher needs students"
 msgstr "Lehrer braucht Schüler"
 
-#: echeck.c:1769
+#: echeck.c:1767
 #, c-format
 msgid "Text too long (max. %d characters)"
 msgstr "Text zu lang (max %d Zeichen)"
 
-#: echeck.c:5535
+#: echeck.c:5513
 msgid "The orders look good."
 msgstr "Die Befehle scheinen in Ordnung zu sein."
 
-#: echeck.c:3693
+#: echeck.c:3680
 #, c-format
 msgid ""
 "There is not enough silver in %s (%d,%d) for upkeep; %d silver is missing."
 msgstr ""
 "Das Silber in %s (%d,%d) reicht evtl. nicht zum Leben; es fehlen %d Silber."
 
-#: echeck.c:3894
+#: echeck.c:3881
 msgid "There must be one ATTACK-order per unit"
 msgstr "Für jede attackierte Einheit muss ein separater Befehl gegeben werden"
 
-#: echeck.c:4351
+#: echeck.c:4338
 msgid "There must be one CARRY-order per unit"
 msgstr ""
 "Für jede transportierter Einheit muss ein separater Befehl gegeben werden"
 
-#: echeck.c:3119
+#: echeck.c:3106
 msgid "This cannot be made"
 msgstr "Das kann man nicht machen"
 
-#: echeck.c:2640
+#: echeck.c:2627
 msgid "This object cannot be described"
 msgstr "Das kann nicht beschrieben werden"
 
-#: echeck.c:2692
+#: echeck.c:2679
 msgid "This object cannot be entered"
 msgstr "Das kann man nicht betreten"
 
-#: echeck.c:2613
+#: echeck.c:2600
 msgid "This object cannot be renamed"
 msgstr "Das kann man nicht umbenennen"
 
-#: echeck.c:3762
+#: echeck.c:3749
 #, c-format
 msgid "Unit %s Unit could benefit from %d more teachers"
 msgstr "Einheit %s kann noch %d Lehrer gebrauchen"
 
-#: echeck.c:1725
+#: echeck.c:1723
 #, c-format
 msgid "Unit %s already has a "
 msgstr "Einheit %s hat bereits einen "
 
-#: echeck.c:2413
+#: echeck.c:2400
 #, c-format
 msgid "Unit %s already has a long order in line %d"
 msgstr "Einheit %s hat in Zeile %d bereits einen langen Befehl bekommen"
 
-#: echeck.c:1726 echeck.c:2571
+#: echeck.c:1724 echeck.c:2558
 #, c-format
 msgid "Unit %s already has a long order in line %d (%s)"
 msgstr "Einheit %s hat in Zeile %d bereits einen langen Befehl (%s)"
 
-#: echeck.c:1728
+#: echeck.c:1726
 #, c-format
 msgid "Unit %s already has got orders in line %d"
 msgstr "Einheit %s hat bereits in Zeile %d Befehle bekommen"
 
-#: echeck.c:1727
+#: echeck.c:1725
 #, c-format
 msgid "Unit %s already has moved"
 msgstr "Einheit %s hat sich bereits bewegt"
 
-#: echeck.c:1729 echeck.c:3758
+#: echeck.c:1727 echeck.c:3745
 #, c-format
 msgid "Unit %s can teach %d more students"
 msgstr "Einheit %s kann noch %d weitere Schüler lehren"
 
-#: echeck.c:3658
+#: echeck.c:3645
 #, c-format
 msgid "Unit %s carries unit %s, but the latter does not ride with the former"
 msgstr "Einheit %s transportiert Einheit %s, diese fährt aber nicht"
 
-#: echeck.c:1731
+#: echeck.c:1729
 #, c-format
 msgid "Unit %s has %d men"
 msgstr "Einheit %s hat %d Personen"
 
-#: echeck.c:3563
+#: echeck.c:3550
 #, c-format
 msgid "Unit %s has %d silver"
 msgstr "Einheit %s hat %d Silber"
 
-#: echeck.c:3562
+#: echeck.c:3549
 #, c-format
 msgid "Unit %s has %d silver before income"
 msgstr "Einheit %s hat %d Silber vor den Einnahmen"
 
-#: echeck.c:3723
+#: echeck.c:3710
 #, c-format
 msgid "Unit %s has 0 men and is taught by unit %s"
 msgstr "Einheit %s hat 0 Personen und wird von Einheit %s gelehrt"
 
-#: echeck.c:3727
+#: echeck.c:3714
 #, c-format
 msgid "Unit %s has 0 men and teaches unit %s"
 msgstr "Einheit %s hat 0 Personen und lehrt Einheit %s"
 
-#: echeck.c:2397
+#: echeck.c:2384
 #, c-format
 msgid "Unit %s has no long order"
 msgstr "Einheit %s hat keinen langen Befehl"
 
-#: echeck.c:3620
+#: echeck.c:3607
 #, c-format
 msgid "Unit %s is carried by unit %s but rides with %s"
 msgstr "Einheit %s möchte mit %s fahren, wird aber von %s transportiert"
 
-#: echeck.c:3742
+#: echeck.c:3729
 #, c-format
 msgid "Unit %s is taught by unit %s but doesn't learn"
 msgstr "Einheit %s wird von Einheit %s gelehrt, lernt aber nicht"
 
-#: echeck.c:3571
+#: echeck.c:3558
 #, c-format
 msgid "Unit %s lacks %d silver to maintain a building"
 msgstr "Einheit %s braucht noch %d Silber um ein Gebäude zu unterhalten"
 
-#: echeck.c:3153
+#: echeck.c:3140
 #, c-format
 msgid "Unit %s may be moving too far"
 msgstr "Einheit %s bewegt sich evtl. zu weit"
 
-#: echeck.c:1737 echeck.c:2934
+#: echeck.c:1735 echeck.c:2921
 #, c-format
 msgid "Unit %s may be on ship %s instead of ship %s"
 msgstr "Einheit %s ist evtl. nicht auf Schiff %s sondern auf Schiff %s"
 
-#: echeck.c:1733
+#: echeck.c:1731
 #, c-format
 msgid "Unit %s may have not enough men"
 msgstr "Einheit %s hat evtl. zu wenig Personen"
 
-#: echeck.c:1734
+#: echeck.c:1732
 #, c-format
 msgid "Unit %s may have not enough silver"
 msgstr "Einheit %s hat evtl. zu wenig Silber"
 
-#: echeck.c:2929
+#: echeck.c:2916
 #, c-format
 msgid "Unit %s may lack control over ship %s"
 msgstr "Einheit %s will hat evtl. nicht das Kommando über Schiff %s"
 
-#: echeck.c:3501
+#: echeck.c:3488
 #, c-format
 msgid "Unit %s may lose silver and/or items"
 msgstr "Einheit %s verliert Silber und evtl. Gegenstände"
 
-#: echeck.c:1735
+#: echeck.c:1733
 #, c-format
 msgid "Unit %s moves ship %s and may lack control"
 msgstr "Einheit %s will Schiff %s bewegen und hat evtl. kein Kommando"
 
-#: echeck.c:3568
+#: echeck.c:3555
 #, c-format
 msgid "Unit %s needs %d more silver to maintain a building"
 msgstr ""
 
-#: echeck.c:1613
+#: echeck.c:1611
 #, c-format
 msgid "Unit %s not found"
 msgstr "Einheit %s nicht gefunden"
 
-#: echeck.c:1738
+#: echeck.c:1736
 #, c-format
 msgid "Unit %s on ship %s has already moved"
 msgstr "Einheit %s auf dem Schiff %s hat sich shcon bewegt"
 
-#: echeck.c:3634
+#: echeck.c:3621
 #, c-format
 msgid "Unit %s rides with unit %s, but the latter doesn't carry the former"
 msgstr "Einheit %s fährt mit Einheit %s, diese transportiert aber nicht"
 
-#: echeck.c:2279
+#: echeck.c:2266
 #, c-format
 msgid "Unit '%s' is not possible here"
 msgstr "Einheit '%s' geht hier nicht"
 
-#: echeck.c:1724
+#: echeck.c:1722
 msgid "Unit 0 used"
 msgstr "Einheit 0 verwendet"
 
-#: echeck.c:1723
+#: echeck.c:1721
 msgid "Unit 0/Peasants not possible here"
 msgstr "Einheit 0 bzw. Bauern geht hier nicht"
 
-#: echeck.c:3498
+#: echeck.c:3485
 #, c-format
 msgid "Unit TEMP %s has no men and has not recruited any"
 msgstr "Einheit TEMP %s hat nicht rekrutiert und keine Personen bekommen"
 
-#: echeck.c:3485
+#: echeck.c:3472
 #, c-format
 msgid "Unit TEMP %s was never created with MAKE TEMP"
 msgstr "Einheit TEMP %s wurde nicht mit MACHE TEMP erschaffen"
 
-#: echeck.c:1720
+#: echeck.c:1718
 #, c-format
 msgid "Unit TEMPORARY %s hasn't been generated with MAKE TEMPORARY"
 msgstr "Einheit TEMP %s wurde nirgends erschaffen"
 
-#: echeck.c:1719
+#: echeck.c:1717
 #, c-format
 msgid "Unit TEMPORARY %s hasn't got men and hasn't recruited anyone"
 msgstr "Einheit TEMP %s hat nicht rekrutiert und keine Personen bekommen"
 
-#: echeck.c:1730
+#: echeck.c:1728
 #, c-format
 msgid ""
 "Unit TEMPORARY %s hasn't recruited and hasn't got any men! It may lose "
 "silver and/or items"
 msgstr "Einheit TEMP %s verliert Silber und evtl. Gegenstände"
 
-#: echeck.c:1736
+#: echeck.c:1734
 msgid "Unit must be in a castle, in a building or on a ship"
 msgstr "Die Einheit muss in einem Schiff oder Gebäude sein"
 
-#: echeck.c:4939
+#: echeck.c:4926
 #, c-format
 msgid "Unknown option -%s"
 msgstr "Unbekannte Option -%s"
 
-#: echeck.c:1739
+#: echeck.c:1737
 msgid "Unrecognized direction"
 msgstr "Richtung nicht erkannt"
 
-#: echeck.c:1740 echeck.c:2598 echeck.c:2626 echeck.c:2678 echeck.c:2900
+#: echeck.c:1738 echeck.c:2585 echeck.c:2613 echeck.c:2665 echeck.c:2887
 msgid "Unrecognized object"
 msgstr "Unbekanntes Objekt"
 
-#: echeck.c:1741
+#: echeck.c:1739
 msgid "Unrecognized option"
 msgstr "Unbekannte Option"
 
-#: echeck.c:1742 echeck.c:4486
+#: echeck.c:1740 echeck.c:4473
 msgid "Unrecognized order"
 msgstr "Unbekannter Befehl"
 
-#: echeck.c:1743
+#: echeck.c:1741
 msgid "Unrecognized potion"
 msgstr "Unbekannter Trank"
 
-#: echeck.c:4280
+#: echeck.c:4267
 msgid "Unrecognized report option"
 msgstr "Unbekannte Reportoption"
 
-#: echeck.c:4127 echeck.c:4147
+#: echeck.c:4114 echeck.c:4134
 msgid "Unrecognized skill"
 msgstr "Unbekanntes Talent"
 
-#: echeck.c:2749
+#: echeck.c:2736
 msgid "Unrecognized spell"
 msgstr "Unbekannter Zauber"
 
-#: echeck.c:2422
+#: echeck.c:2409
 #, c-format
 msgid "Using unit %s"
 msgstr "Benutze Einheit %s"
 
-#: echeck.c:1630 echeck.c:1657
+#: echeck.c:1628 echeck.c:1655
 #, c-format
 msgid "Warning in line %d"
 msgstr "Warnung in Zeile %d"
 
-#: echeck.c:4065 echeck.c:4068
+#: echeck.c:4052 echeck.c:4055
 msgid "Wrong fight state"
 msgstr "Falscher Kampfstatus"
 
-#: echeck.c:3805
+#: echeck.c:3792
 msgid "Wrong number"
 msgstr "Falsche Nummer"
 
-#: echeck.c:4290
+#: echeck.c:4277
 msgid "Wrong output level"
 msgstr "Falscher Ausgabe-Level"
 
-#: echeck.c:3961 echeck.c:4022 echeck.c:4101
+#: echeck.c:3948 echeck.c:4009 echeck.c:4088
 msgid "Wrong parameter"
 msgstr "Falscher Parameter"
 
-#: echeck.c:4629
+#: echeck.c:4616
 #, c-format
 msgid "cannot read configuration files from %s/%s"
 msgstr "Konfigurationsdateien nicht gefunden in %s/%s"
 
-#: echeck.c:2779
+#: echeck.c:2766
 msgid "combat magic set"
 msgstr "Kampfzauber gesetzt"
 
-#: echeck.c:1681
+#: echeck.c:1679
 msgid "commands"
 msgstr "Befehle"
 
-#: echeck.c:3052
+#: echeck.c:3039
 msgid "direction"
 msgstr "Richtung"
 
-#: echeck.c:1684
+#: echeck.c:1682
 msgid "directions"
 msgstr "Richtungen"
 
-#: echeck.c:1679 echeck.c:2379
+#: echeck.c:1677 echeck.c:2366
 msgid "invalid email address"
 msgstr "Ungültige Email-Adresse"
 
-#: echeck.c:1682
+#: echeck.c:1680
 msgid "items"
 msgstr ""
 
-#: echeck.c:1685
+#: echeck.c:1683
 msgid "messages"
 msgstr "Meldungen"
 
-#: echeck.c:1699
+#: echeck.c:1697
 msgid "not found"
 msgstr "nicht gefunden"
 
-#: echeck.c:1704
+#: echeck.c:1702
 msgid "number of object missing"
 msgstr "Anzahl Gegenstände fehlt"
 
-#: echeck.c:1680
+#: echeck.c:1678
 msgid "parameters"
 msgstr "Parameter"
 
-#: echeck.c:1708
+#: echeck.c:1706
 msgid "post-"
 msgstr ""
 
-#: echeck.c:1709
+#: echeck.c:1707
 msgid "pre-"
 msgstr ""
 
-#: echeck.c:1683
+#: echeck.c:1681
 msgid "skills"
 msgstr "Talente"
 
+#~ msgid "No space allowed here"
+#~ msgstr "Leerzeichen hier nicht erlaubt"
+
 #~ msgid "This cannot be bred"
 #~ msgstr "So etwas kann man nicht züchten"
-
-#~ msgid "TEMP %s is used in region %d,%d and region %d,%d (line %d)"
-#~ msgstr "TEMP %s wird in Region %d,%d und Region %d,%d (Zeile %d) benutzt"
-
-#~ msgid "Mage units may have only one person"
-#~ msgstr "Magier dürfen nur eine Person haben"
-
-#~ msgid "Unrecognized race"
-#~ msgstr "Unbekannte Rasse"
-
-#~ msgid "Who should be taught?"
-#~ msgstr "Wen lehren?"

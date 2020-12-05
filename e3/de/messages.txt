@@ -89,7 +89,6 @@ MISSINGNEXT, NÄCHSTER fehlt
 MISSINGNUMRECRUITS, Anzahl Rekruten fehlt
 MISSINGOFFER, Geldgebot fehlt
 MISSINGPASSWORD, Kein Passwort angeben
-MISSINGSTART, ERESSEA partei-nummer "Passwort" fehlt
 MISSINGUNITNUMBER, Keine Einheitsnummer
 NAMECONTAINSBRACKETS, Namen dürfen keine Klammern enthalten
 NEEDBOTHCOORDINATES, Beide Koordinaten müssen angegeben werden
