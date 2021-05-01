@@ -49,12 +49,8 @@ locale/%/LC_MESSAGES/echeck.mo: po/echeck.de.po
 	@rmdir $@
 	msgfmt -f -c $< -o $@
 
-echeck.exe: echeck.c unicode.c unicode.h
-	$(MINGW_CC) $(CFLAGS) $(RELEASE_FLAGS) -o echeck.exe echeck.c unicode.c
-	$(MINGW_STRIP) echeck.exe
-
-echeck: echeck.c unicode.c unicode.h whereami.c whereami.h
-	$(CC) $(LFLAGS) $(CFLAGS) $(RELEASE_FLAGS) -o echeck echeck.c unicode.c whereami.c
+echeck: main.c echeck.c unicode.c unicode.h whereami.c whereami.h
+	$(CC) $(LFLAGS) $(CFLAGS) $(RELEASE_FLAGS) -o echeck main.c echeck.c unicode.c whereami.c
 
 tests: echeck.c whereami.c whereami.h unicode.c unicode.h $(TEST_SRC) $(TEST_HDR)
 	$(CC) $(LFLAGS) $(CFLAGS) $(DEBUG_FLAGS) -DTESTING -o tests echeck.c whereami.c unicode.c $(TEST_SRC)
