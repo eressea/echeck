@@ -82,7 +82,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.6.0";
+static const char *echeck_version = "4.6.1";
 
 #define DEFAULT_PATH "."
 
@@ -200,7 +200,7 @@ int rec_cost = RECRUIT_COST,
                        this_command,
     this_unit, /* wird von getaunit gesetzt */
   Rx, Ry;      /* Koordinaten der aktuellen Region */
-static const char *g_path;
+static char *g_path;
 FILE *F;
 
 enum { OUT_NORMAL, OUT_COMPILE, OUT_MAGELLAN };
@@ -958,8 +958,10 @@ int readitem(char *s) { /* parsed einen String nach Items */
       it->preis = atoi(s);
     else {
       t_names *n = (t_names *)calloc(1, sizeof(t_names));
-      n->txt = STRDUP(transliterate(buffer, sizeof(buffer), s));
-      n->next = it->name;
+      if (n) {
+        n->txt = STRDUP(transliterate(buffer, sizeof(buffer), s));
+        n->next = it->name;
+      }
       it->name = n;
     }
     if (x) {
@@ -1308,33 +1310,100 @@ void porder(void) {
     indent = next_indent;
 }
 
-void Error(const char *text, int line, const char *order) {
+int
+this_unit_id(void)
+{
+  return order_unit ? order_unit->no : 0;
+}
+
+#define LOG_ERROR 0
+
+void
+log_message_va(
+  int level, 
+  const char *file,
+  int line, 
+  const char *order,
+  int unit_id, 
+  const char *format, va_list va)
+{
   char bf[65];
 
+  if (brief) return;
+
   if (!order)
-    strcpy(bf, _("<--MISSING-->"));
+    strcpy(bf, "...");
   else
     strncpy(bf, order, 64);
   strcpy(bf + 61, "..."); /* zu lange Befehle ggf. kürzen */
-  error_count++;
-  if (!brief) {
-    switch (compile) {
-    case OUT_NORMAL:
+
+  if (level == LOG_ERROR) {
+    ++error_count;
+    if (compile == OUT_NORMAL) {
       fprintf(ERR, _("Error in line %d"), line);
-      fprintf(ERR, ": %s.\n  '%s'\n", text, bf);
-      break;
-    case OUT_COMPILE:
-      fprintf(ERR, "%s:%d|%s|%s. '%s'\n", filename, line, 
-        order_unit ? itob(order_unit->no) : "", text, bf);
-      break;
-    case OUT_MAGELLAN:
-      fprintf(ERR, "%s|%d|0|%s. '%s'\n", filename, line, text, bf);
-      break;
     }
+  }
+  else if (level > show_warnings) {
+    return;
+  }
+  else {
+    ++warning_count;
+    if (compile == OUT_NORMAL) {
+      fprintf(ERR, _("Warning in line %d"), line);
+    }
+  }
+  switch (compile) {
+  case OUT_MAGELLAN:
+    fprintf(ERR, "%s|%d|%d|", filename, line, level);
+    vfprintf(ERR, format, va);
+    fprintf(ERR, ". '%s'\n", bf);
+    break;
+  case OUT_COMPILE:
+    fprintf(ERR, "%s:%d|%d|%s|", filename, line, level, itob(unit_id)); 
+    vfprintf(ERR, format, va);
+    fprintf(ERR, "|%s\n", bf);
+    break;
+  default:
+    fputs(": ", ERR);
+    vfprintf(ERR, format, va);
+    fprintf(ERR, ".\n  '%s'\n", bf);
+    break;
   }
 }
 
-#define anerror(s) Error(s, line_no, order_buf)
+void
+log_error(
+  const char *file,
+  int line,
+  const char *order,
+  int unit_id,
+  const char *format, ...)
+{
+  va_list va;
+  va_start(va, format);
+  log_message_va(LOG_ERROR, file, line, order, unit_id, format, va);
+  va_end(va);
+}
+
+#define anerror(s) log_error(filename, line_no, order_buf, this_unit_id(), s)
+
+void
+log_warning(
+  int level,
+  const char *file,
+  int line,
+  const char *order,
+  int unit_id,
+  const char *format, ...)
+{
+  va_list va;
+  if (warn_off) {
+    return;
+  }
+  va_start(va, format);
+  log_message_va(level, file, line, order, unit_id, format, va);
+  va_end(va);
+}
 
 int btoi(char *s) {
   char *x = s;
@@ -1348,8 +1417,8 @@ int btoi(char *s) {
   *s = 0;
   s = x;
   if (strlen(s) > 4) {
-    sprintf(message_buf, _("Number too big: '%s'. Using 1 instead"), s);
-    anerror(message_buf);
+    log_error(filename, line_no, order_buf, this_unit_id(),
+              _("Number too big: '%s'. Using 1 instead"), s);
     return 1;
   }
 #ifdef HAVE_STRTOL
@@ -1407,59 +1476,17 @@ const char *Uid(int i) {
   if (!u)
     u = find_unit(i, 1);
   if (!u) {
-    sprintf(warn_buf, _("Unit %s not found"), itob(i));
-    Error(warn_buf, line_no, _("<internal check>"));
     u = newunit(-1, 0);
   }
   return uid(u);
 }
 
 void warn(char *s, int line, int level) {
-  if (warn_off)
-    return;
-  if (level > show_warnings)
-    return;
-  warning_count++;
-  if (show_warnings && !brief) {
-    switch (compile) {
-    case OUT_NORMAL:
-      fprintf(ERR, _("Warning in line %d"), line);
-      fprintf(ERR, ": %s\n", s);
-      break;
-    case OUT_COMPILE:
-      fprintf(ERR, "%s(%d)|%d|%s\n", filename, line, level, s);
-      break;
-    case OUT_MAGELLAN:
-      fprintf(ERR, "%s|%d|%d|%s\n", filename, line, level, s);
-      break;
-    }
-  }
+  log_warning(level, filename, line, NULL, 0, s);
 }
 
 void warning(const char *s, int line, char *order, char level) {
-  char bf[65];
-
-  strncpy(bf, order, 64);
-  strcpy(bf + 61, "..."); /* zu lange Befehle ggf. kürzen */
-  if (warn_off)
-    return;
-  if (level > show_warnings)
-    return;
-  warning_count++;
-  if (show_warnings && !brief) {
-    switch (compile) {
-    case OUT_NORMAL:
-      fprintf(ERR, _("Warning in line %d"), line);
-      fprintf(ERR, ": %s.\n  '%s'\n", s, bf);
-      break;
-    case OUT_COMPILE:
-      fprintf(ERR, "%s(%d)%d|%s `%s.'\n", filename, line, level, s, bf);
-      break;
-    case OUT_MAGELLAN:
-      fprintf(ERR, "%s|%d|%d|%s `%s.'\n", filename, line, level, s, bf);
-      break;
-    }
-  }
+  log_warning(level, filename, line, order, this_unit_id(), s);
 }
 
 #define awarning(s, level) warning(s, line_no, order_buf, level)
@@ -1669,10 +1696,9 @@ unit *newunit(int n, int t) {
   }
 
   if (u->temp < 0) {
-    sprintf(warn_buf,
-            _("TEMP %s is used in region %d, %d and region %d, %d (line %d)"),
-            itob(u->no), Rx, Ry, u->newx, u->newy, u->start_of_orders_line);
-    anerror(warn_buf);
+    log_error(filename, line_no, order_buf, this_unit_id(),
+              _("TEMP %s is used in region %d, %d and region %d, %d (line %d)"),
+              itob(u->no), Rx, Ry, u->newx, u->newy, u->start_of_orders_line);
     u->long_order_line = 0;
   }
 
@@ -1921,10 +1947,11 @@ char *getbuf(void) {
        * wenn die Zeile länger als erlaubt war, wird der Rest
        * weggeworfen:
        */
-      while (bp && !lbuf[MAXLINE - 1] && lbuf[MAXLINE - 2] != '\n')
+      while (bp && !lbuf[MAXLINE - 1] && lbuf[MAXLINE - 2] != '\n') {
         bp = fgetbuffer(warn_buf, 1024, F);
-      sprintf(warn_buf, "%.30s", lbuf);
-      Error(_("Line too long"), line_no, warn_buf);
+      }
+      lbuf[MAXLINE - 1] = 0;
+      log_warning(1, filename, line_no, lbuf, this_unit_id(), _("Line too long"));
       bp = lbuf;
     }
     cont = false;
@@ -1958,16 +1985,15 @@ char *getbuf(void) {
       --cp;
       if (!report) {
         report = true;
-        sprintf(lbuf, "%.30s", warn_buf);
-        Error(_("Line too long"), line_no, lbuf);
+        log_error(filename, line_no, lbuf, this_unit_id(), _("Line too long"));
       }
     }
     *cp = 0;
   } while (cont || cp == warn_buf);
 
-  if (quote)
-    Error(_("Missing \""), line_no, lbuf);
-
+  if (quote) {
+    log_error(filename, line_no, lbuf, this_unit_id(), _("Missing \""));
+  }
   return warn_buf;
 }
 
@@ -2719,8 +2745,9 @@ void getluxuries(int cmd) {
   s = getstr();
   i = finditem(s);
 
-  if (ItemPrice(i) < 1)
+  if (ItemPrice(i) < 1) {
     anerror(_("Not a luxury item"));
+  }
   else {
     Scat(ItemName(i, n != 1));
     if (cmd == K_BUY) { /* Silber abziehen; nur Grundpreis! */
@@ -3134,7 +3161,9 @@ int studycost(t_skills *talent) {
 
     i = findstr(magiegebiet, s, 5);
     if (i >= 0) {
-      fprintf(ERR, cgettext(Errors[SCHOOLCHOSEN]), magiegebiet[i]);
+      if (!compile) {
+        fprintf(ERR, cgettext(Errors[SCHOOLCHOSEN]), magiegebiet[i]);
+      }
       i = geti();
     } else
       i = atoi(s);
@@ -3224,9 +3253,8 @@ void check_money(
         continue; /* auslassen, weil deren Geldbedarf nicht  zählt */
 
       if (u->temp && abs(u->temp) != 42) {
-        sprintf(warn_buf, _("Unit TEMP %s was never created with MAKE TEMP"),
-                itob(u->no));
-        Error(warn_buf, u->line_no, u->order);
+        log_error(filename, u->line_no, u->order, 0,
+          _("Unit TEMP %s was never created with MAKE TEMP"), itob(u->no));
       }
       if (u->people < 0) {
         sprintf(warn_buf, cgettext(Errors[UNITHASPERSONS]), uid(u), u->people);
@@ -3236,17 +3264,18 @@ void check_money(
       if (u->people == 0 &&
           ((!nolost && !u->temp && u->money > 0) || u->temp)) {
         if (u->temp) {
-          if (u->money > 0)
-            sprintf(warn_buf, cgettext(Errors[UNITHASNTPERSONS]), itob(u->no));
-          else
-            sprintf(warn_buf,
-                    _("Unit TEMP %s has no men and has not recruited any"),
-                    itob(u->no));
-          warn(warn_buf, u->line_no, 2);
+          if (u->money > 0) {
+            log_warning(2, filename, u->line_no, u->order, 0,
+              cgettext(Errors[UNITHASNTPERSONS]), itob(u->no));
+          }
+          else {
+            log_warning(2, filename, u->line_no, u->order, 0,
+              _("Unit TEMP %s has no men and has not recruited any"),
+              itob(u->no));
+          }
         } else if (no_comment <= 0) {
-          sprintf(warn_buf, _("Unit %s may lose silver and/or items"),
-                  itob(u->no));
-          warn(warn_buf, u->line_no, 3);
+          log_warning(3, filename, u->line_no, u->order, 0,
+            _("Unit %s may lose silver and/or items"), itob(u->no));
         }
       }
     }
@@ -3282,11 +3311,10 @@ void check_money(
       for (r = Regionen; r; r = r->next) {
         if (r->reserviert > 0 &&
             r->reserviert > r->geld) { /* nur  explizit   mit  RESERVIERE  */
-          sprintf(warn_buf,
-                  _("In %s (%d,%d) there was reserved more silver (%d) than "
+            log_warning(3, filename, r->line_no, NULL, 0,
+                 _("In %s (%d,%d) there was reserved more silver (%d) than "
                     "available (%d)."),
                   r->name, r->x, r->y, r->reserviert, r->geld);
-          warn(warn_buf, r->line_no, 3);
         }
       }
 
@@ -3385,19 +3413,19 @@ void check_money(
     if (u->drive) { /* FAHRE; in u->transport steht die  transportierende
                        Einheit */
       if (u->hasmoved > 0) {
-        sprintf(warn_buf, cgettext(Errors[UNITALREADYHASMOVED]), uid(u));
-        Error(warn_buf, u->line_no, u->long_order);
+        log_error(filename, u->line_no, u->long_order, u->no,
+          cgettext(Errors[UNITALREADYHASMOVED]), uid(u));
       }
       if (u->transport == 0) {
         t = find_unit(u->drive, 0);
         if (!t)
           t = find_unit(u->drive, 1);
         if (t && t->lives) {
-          sprintf(warn_buf,
-                  _("Unit %s rides with unit %s, but the latter doesn't carry "
-                    "the former"),
-                  uid(u), Uid(u->drive));
-          Error(warn_buf, u->line_no, u->long_order);
+          log_error(filename, u->line_no, u->long_order, u->no,
+            _("Unit %s rides with unit %s, but the latter doesn't carry "
+              "the former"),
+            uid(u), Uid(u->drive));
+
         } else { /* unbekannte Einheit -> unbekanntes Ziel */
           u->hasmoved = 1;
           u->newx = -9999;
@@ -3420,11 +3448,9 @@ void check_money(
       if (!t)
         t = find_unit(u->transport, 1);
       if (t && t->lives && t->drive != u->no) {
-        sprintf(warn_buf,
-                _("Unit %s carries unit %s, but the latter does not ride with "
-                  "the former"),
-                Uid(u->transport), uid(u));
-        Error(warn_buf, u->line_no, u->long_order);
+        log_error(filename, u->line_no, u->long_order, u->no,
+          _("Unit %s carries unit %s, but the latter does not ride with "
+            "the former"), Uid(u->transport), uid(u));
       }
     }
 
@@ -4455,14 +4481,14 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
           if (argv[i][2] == 0) { /* -P path */
             i++;
             if (argv[i]) {
-              g_path = argv[i];
+              g_path = STRDUP(argv[i]);
             } else {
               fputs("Leere Pfad-Angabe ungültig\nEmpty path invalid\n", stderr);
               exit(1);
             }
           } else if (*(argv[i] + 2)) {
             /* -Ppath */
-            g_path = argv[i] + 2;
+            g_path = STRDUP(argv[i] + 2);
           }
         }
         break;
@@ -5095,7 +5121,7 @@ const char *findfiles(const char *dir) {
   return NULL;
 }
 
-static const char *findpath(void) {
+static char *findpath(void) {
   const char *hints[] = {".",
 #ifndef WIN32
                          "/usr/share/games/echeck", "/usr/share/echeck",
@@ -5105,8 +5131,20 @@ static const char *findpath(void) {
   int i;
   for (i = 0; hints[i]; ++i) {
     if (findfiles(hints[i])) {
-      return hints[i];
+      return STRDUP(hints[i]);
     }
+  }
+  i = wai_getExecutablePath(NULL, 0, NULL);
+  g_path = malloc(i);
+  wai_getExecutablePath(g_path, i, &i);
+
+  if (i > 0) {
+    g_path[i] = '\0';
+    if (findfiles(g_path)) {
+      return g_path;
+    }
+    free(g_path);
+    g_path = NULL;
   }
   return NULL;
 }
@@ -5122,7 +5160,10 @@ void echeck_init(void) {
    */
   filename = getenv("ECHECKOPTS");
   g_path = getenv("ECHECKPATH");
-  if (!g_path) {
+  if (g_path) {
+    g_path = STRDUP(g_path);
+  }
+  else {
     g_path = findpath();
   }
 }
@@ -5254,6 +5295,8 @@ int echeck_main(int argc, char *argv[]) {
    */
   if (F == stdin)
     process_order_file(&faction_count, &unit_count);
+
+  free(g_path);
 
   if (compile) {
     return error_count;

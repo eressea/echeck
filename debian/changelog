@@ -1,3 +1,10 @@
+echeck (4.6.1-1) stable; urgency=low
+
+  * fix config file detection.
+  * change compile output again, change logging code.
+
+  -- Enno Rehling <enno@eressea.de> Sun, 02 May 2021 23:00:00 +0200
+
 echeck (4.6.0-1) stable; urgency=low
 
   * add a windows target for a binary with no console.
