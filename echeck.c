@@ -1689,6 +1689,13 @@ unit *newunit(int n, int t) {
 
   if (!u) {
     u = (unit *)calloc(1, sizeof(unit));
+    if (units) {
+      for (c = units; c->next; c = c->next)
+        ;          /* letzte unit der Liste */
+      c->next = u; /* unit hinten dranklemmen */
+    }
+    else
+      units = u;
   }
   if (u) {
     u->no = n;
@@ -1698,14 +1705,6 @@ unit *newunit(int n, int t) {
     u->newx = Rx;
     u->newy = Ry;
     u->temp = t;
-    if (units) {
-      for (c = units; c->next; c = c->next)
-        ;          /* letzte unit der Liste */
-      c->next = u; /* unit hinten dranklemmen */
-    }
-    else
-      units = u;
-
     if (u->temp < 0) {
       log_error(filename, line_no, order_buf, this_unit_id(),
         _("TEMP %s is used in region %d, %d and region %d, %d (line %d)"),
