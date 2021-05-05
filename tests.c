@@ -236,7 +236,7 @@ int AddTestSuites(CuSuite *suite, const char *args) {
   char names[256], *name;
   size_t len;
   if (!args || strcmp(args, "all") == 0) {
-    args = "echeck,process,give";
+    args = "echeck,process,give,claim,entertain"; /* plant,common */
   }
   len = strlen(args);
   if (len >= sizeof(names)) {

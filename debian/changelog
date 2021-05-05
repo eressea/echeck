@@ -2,8 +2,9 @@ echeck (4.6.1-1) stable; urgency=low
 
   * fix config file detection.
   * change compile output again, change logging code.
+  * reactivate some disabled tests
 
-  -- Enno Rehling <enno@eressea.de> Sun, 02 May 2021 23:00:00 +0200
+  -- Enno Rehling <enno@eressea.de> Wed, 05 May 2021 21:00:00 +0200
 
 echeck (4.6.0-1) stable; urgency=low
 

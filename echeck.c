@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.6.1";
+static const char *echeck_version = "4.6.2";
 
 #define DEFAULT_PATH "."
 
@@ -3260,8 +3260,8 @@ void check_money(
           _("Unit TEMP %s was never created with MAKE TEMP"), itob(u->no));
       }
       if (u->people < 0) {
-        sprintf(warn_buf, cgettext(Errors[UNITHASPERSONS]), uid(u), u->people);
-        warn(warn_buf, u->line_no, 3);
+        log_warning(3, filename, u->line_no, u->order, 0,
+              cgettext(Errors[UNITHASPERSONS]), uid(u), u->people);
       }
 
       if (u->people == 0 &&
@@ -3688,8 +3688,8 @@ void checkanorder(char *Orders) {
       attack_warning = 1;
     }
     if (getaunit(42) == 42) {
-      strcpy(warn_buf, _("There must be one ATTACK-order per unit"));
-      anerror(warn_buf);
+      log_error(filename, line_no, order_buf, this_unit_id(),
+          _("There must be one ATTACK-order per unit"));
     }
     break;
 
@@ -4139,7 +4139,8 @@ void checkanorder(char *Orders) {
         dwarning(Errors[NOCARRIER], 3);
     }
     if (getaunit(42) == 42)
-      anerror(_("There must be one CARRY-order per unit"));
+      log_error(filename, line_no, order_buf, this_unit_id(),
+         _("There must be one CARRY-order per unit"));
     break;
 
   case K_PIRACY:
