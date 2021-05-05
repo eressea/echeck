@@ -4,8 +4,7 @@ echeck (4.6.1-1) stable; urgency=low
   * change compile output again, change logging code.
   * reactivate some disabled tests
 
-  -- Enno Rehling <enno@eressea.de> Wed, 05 May 2021 21:00:00 +0200
-
+ -- Enno Rehling <enno@eressea.de>  Wed, 05 May 2021 21:00:00 +0200
 echeck (4.6.0-1) stable; urgency=low
 
   * add a windows target for a binary with no console.
@@ -13,44 +12,41 @@ echeck (4.6.0-1) stable; urgency=low
   * exit code equals number of errors.
   * make output less verbose (no version info unless -V specified).
 
-  -- Enno Rehling <enno@eressea.de> Sat, 01 May 2021 20:00:00 +0200
-
+ -- Enno Rehling <enno@eressea.de>  Sat, 01 May 2021 20:00:00 +0200
 echeck (4.5.8-1) stable; urgency=low
 
   * fix bugs in whitespace-handling code, eliminate isxspace
   * remove unused unicode codepage support
 
-  -- Enno Rehling <enno@eressea.de> Sun, 24 Apr 2021 12:10:00 +0200
-
+ -- Enno Rehling <enno@eressea.de>  Sun, 24 Apr 2021 12:10:00 +0200
 echeck (4.5.7-1) stable; urgency=low
 
   * skip BOM, hack to ignore crazy non-whitespace spaces.
 
-  -- Enno Rehling <enno@eressea.de> Sun, 18 Apr 2021 19:14:00 +0200
-
+ -- Enno Rehling <enno@eressea.de>  Sun, 18 Apr 2021 19:14:00 +0200
 echeck (4.5.6-1) stable; urgency=low
 
   * complete the german translations.
 
-  -- Enno Rehling <enno@eressea.de> Sat, 25 Dec 2020 19:14:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Sat, 25 Dec 2020 19:14:00 +0200
 echeck (4.5.2) stable; urgency=low
 
   * warnings use input language for keywords, not current locale. 
 
-  -- Enno Rehling <enno@eressea.de> Sat, 05 Dec 2020 9:24:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Sat, 05 Dec 2020 9:24:00 +0200
 echeck (4.5.0) stable; urgency=low
 
   * Fix segmentation faults
   * i18n support for version and usage messages
 
-  -- Enno Rehling <enno@eressea.de> Sat, 29 Oct 2020 19:34:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Sat, 29 Oct 2020 19:34:00 +0200
 echeck (4.4.9) stable; urgency=low
 
   * Fixed a parser bug related to quote marks and unicode
 
-  -- Enno Rehling <enno@eressea.de> Sat, 28 Oct 2020 19:24:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Sat, 28 Oct 2020 19:24:00 +0200
 echeck (4.4.8) stable; urgency=low
 
   * Initial release
 
-  -- Enno Rehling <enno@eressea.de> Sat, 26 Oct 2020 22:00:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Sat, 26 Oct 2020 22:00:00 +0200
