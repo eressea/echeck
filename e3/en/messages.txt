@@ -38,7 +38,6 @@ CANTREADFILE, Can't read file '%s'\n
 CANTRENAMEOBJECT, This object cannot be renamed
 CHECKYOURORDERS, \nPlease check if you have sent in your orders properly.\nKeep in mind that orders must not be sent as HTML, word-documents\nor attachments.\n
 COMBATSPELLSET, combat magic set
-DELIVERYTO, ; Delivery to
 DIRECTION, <direction>
 DISCOVERED, ~\n
 DOESNTCARRY, Unit %s rides with unit %s, but the latter doesn't carry the former

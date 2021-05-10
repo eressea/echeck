@@ -38,7 +38,6 @@ CANTREADFILE, Kann Datei '%s' nicht lesen\n
 CANTRENAMEOBJECT, Objekt kann nicht umbenannt werden
 CHECKYOURORDERS, \nBitte überprüfe, ob du die Befehle korrekt eingesandt hast.\nBeachte dabei besonders, dass die Befehle nicht als HTML, Word-Dokument\noder als Attachment (Anlage) eingeschickt werden dürfen.\n
 COMBATSPELLSET, Kampfzauber gesetzt
-DELIVERYTO, ; Zustellung an 
 DIRECTION, <richtung>
 DISCOVERED, ~entdeckt.\n
 DOESNTCARRY, Einheit %s fährt mit Einheit %s, diese transportiert aber nicht

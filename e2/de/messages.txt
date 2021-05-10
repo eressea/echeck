@@ -37,7 +37,6 @@ CANTMAKETHAT, Sowas kann man nicht machen
 CANTREADFILE, Kann Datei '%s' nicht lesen\n
 CANTRENAMEOBJECT, Objekt kann nicht umbenannt werden
 COMBATSPELLSET, Kampfzauber gesetzt
-DELIVERYTO, ; Zustellung an 
 DIRECTION, <richtung>
 DISCOVERED, ~entdeckt.\n
 DOESNTCARRY, Einheit %s fährt mit Einheit %s, diese transportiert aber nicht
