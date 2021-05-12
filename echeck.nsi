@@ -5,7 +5,7 @@
 Name "ECheck"
 
 ; The file to write
-OutFile "echeckinst.exe"
+OutFile "..\echeckinst.exe"
 
 ; Request application privileges for Windows Vista and higher
 RequestExecutionLevel admin
@@ -42,9 +42,9 @@ Section "ECheck (required)"
   SetOutPath $INSTDIR
   
   ; Put files there
-  File echeck.exe
-  File echeckw.exe
-  File *.dll
+  File out\build\x64-Release\echeck.exe
+  File out\build\x64-Release\echeckw.exe
+  File out\build\x64-Release\*.dll
   File /r locale
   File /r e2
   File /r e3
