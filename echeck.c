@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.6.4";
+static const char *echeck_version = "4.6.5";
 
 #define DEFAULT_PATH "."
 

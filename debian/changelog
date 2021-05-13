@@ -1,3 +1,9 @@
+echeck (4.6.5-1) stable; urgency=low
+
+  * fix various messages
+  * add missing German translations
+
+ -- Enno Rehling <enno@eressea.de>  Thu, 13 May 2021 15:30:00 +0200
 echeck (4.6.4-1) stable; urgency=low
 
   * fix bindtextdomain call
