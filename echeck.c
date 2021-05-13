@@ -2392,16 +2392,18 @@ void check_leave(void) {
 
   s = order_unit->ship;
   order_unit->ship = 0;
-  for (t = units; t; t = t->next)
-    if (t->region == order_unit->region) {
-      t->unterhalt += order_unit->unterhalt;
-      log_warning(5, filename, line_no, order_buf, this_unit_id(),
-        _("Moved maintainance for building from unit %s to unit %s"),
-        uid1(order_unit), uid2(t));
-      break;
-    }
-  order_unit->unterhalt =
-    0;         /* ACHTUNG! hierdurch geht die  Unterhaltsinfo verloren! */
+  if (order_unit->unterhalt) {
+    for (t = units; t; t = t->next)
+      if (t->region == order_unit->region) {
+        t->unterhalt += order_unit->unterhalt;
+        log_warning(5, filename, line_no, order_buf, this_unit_id(),
+          _("Moved maintainance for building from unit %s to unit %s"),
+          uid1(order_unit), uid2(t));
+        break;
+      }
+    order_unit->unterhalt = 0;
+    /* ACHTUNG! hierdurch geht die Unterhaltsinfo verloren! */
+  }
   if (s < 0) { /* wir waren Kapitän, neuen suchen */
     for (t = units; t; t = t->next)
       if (t->ship == -s) /* eine Unit auf dem selben Schiff */
