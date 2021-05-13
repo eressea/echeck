@@ -459,10 +459,6 @@ enum {
   UNITALREADYHAS,
   UNITALREADYHASMOVED,
   UNITALREADYHASORDERS,
-  UNITHASNTPERSONS,
-  UNITHASPERSONS,
-  UNITMISSPERSON,
-  UNITMISSSILVER,
   UNITMOVESSHIP,
   UNITMUSTBEONSHIP,
   UNITONSHIPHASMOVED,
@@ -521,10 +517,6 @@ static const char *Errors[MAX_ERRORS] = {
   "UNITALREADYHAS",
   "UNITALREADYHASMOVED",
   "UNITALREADYHASORDERS",
-  "UNITHASNTPERSONS",
-  "UNITHASPERSONS",
-  "UNITMISSPERSON",
-  "UNITMISSSILVER",
   "UNITMOVESSHIP",
   "UNITMUSTBEONSHIP",
   "UNITONSHIPHASMOVED",
@@ -1491,7 +1483,6 @@ void warning(const char *s, int line, char *order, char level) {
   log_warning(level, filename, line, order, this_unit_id(), s);
 }
 
-#define awarning(s, level) warning(s, line_no, order_buf, level)
 #define dwarning(s, level) warning_deprecated(s, line_no, order_buf, level)
 
 static const struct warning {
@@ -1551,11 +1542,6 @@ static const struct warning {
   {"UNITALREADYHASMOVED", t("Unit %s already has moved")},
   {"UNITALREADYHASORDERS", t("Unit %s already has got orders in line %d")},
   {"UNITCANSTILLTEACH", t("Unit %s can teach %d more students")},
-  {"UNITHASNTPERSONS", t("Unit TEMPORARY %s hasn't recruited and hasn't got "
-                         "any men! It may lose silver and/or items")},
-  {"UNITHASPERSONS", t("Unit %s has %d men")},
-  {"UNITMISSPERSON", t("Unit %s may have not enough men")},
-  {"UNITMISSSILVER", t("Unit %s may have not enough silver")},
   {"UNITMOVESSHIP", t("Unit %s moves ship %s and may lack control")},
   {"UNITMUSTBEONSHIP",
    t("Unit must be in a castle, in a building or on a ship")},
@@ -1584,11 +1570,11 @@ void warning_deprecated(const char *token, int line_no, char *order_buf,
 
 void checkstring(char *s, size_t l, int type) {
   if (l > 0 && strlen(s) > l) {
-    sprintf(warn_buf, _("Text too long (max. %d characters)"), (int)l);
-    awarning(warn_buf, 2);
+    log_warning(2, filename, line_no, order_buf, this_unit_id(), _("Text too long (max. %d characters)"), (int)l);
   }
-  if (s[0] == 0 && type == NECESSARY)
-    awarning(_("No text"), 1);
+  if (s[0] == 0 && type == NECESSARY) {
+    log_warning(1, filename, line_no, order_buf, this_unit_id(), _("No text"));
+  }
 
   strncpy(warn_buf, s, l);
 
@@ -2036,7 +2022,7 @@ void getafaction(char *s) {
     log_error(filename, line_no, order_buf, this_unit_id(), _("Faction missing"));
   } else {
     if (!i)
-      awarning(_("Faction 0 used"), 1);
+      log_warning(1, filename, line_no, order_buf, this_unit_id(), _("Faction 0 used"));
     icat(i);
   }
 }
@@ -2158,7 +2144,8 @@ void checkemail(void) {
   checkstring(addr, DESCRIBESIZE, NECESSARY);
 
   if (!addr) {
-    awarning(_("Please set email with EMAIL"), 3);
+    log_warning(3, filename, line_no, order_buf, this_unit_id(),
+      _("Please set email with EMAIL"));
     sprintf(bf, "; %s!", _("Please set email with EMAIL"));
     scat(bf);
     return;
@@ -2182,9 +2169,9 @@ void end_unit_orders(void) {
 
   if (order_unit->lives > 0 && !order_unit->long_order_line &&
       order_unit->people > 0) {
-    sprintf(warn_buf, _("Unit %s has no long order"), uid(order_unit));
-    warning(warn_buf, order_unit->start_of_orders_line,
-            order_unit->start_of_orders, 2);
+    log_warning(2, filename, order_unit->start_of_orders_line,
+      order_unit->start_of_orders, this_unit_id(),
+      _("Unit %s has no long order"), uid(order_unit));
   }
 }
 
@@ -2205,8 +2192,7 @@ void orders_for_unit(int i, unit *u) {
         i = 1;
       u = newunit(i, 0);
     } while (u->start_of_orders_line);
-    sprintf(warn_buf, _("Using unit %s"), itob(i));
-    awarning(warn_buf, 1);
+    log_warning(1, filename, line_no, order_buf, this_unit_id(), _("Using unit %s"), itob(i));
     set_order_unit(u);
   }
 
@@ -2219,7 +2205,7 @@ void orders_for_unit(int i, unit *u) {
 
   k = strchr(order_buf, '[');
   if (!k) {
-    awarning(_("Cannot parse this unit's comment"), 4);
+    log_warning(4, filename, line_no, order_buf, this_unit_id(), _("Cannot parse this unit's comment"));
     no_comment++;
     return;
   }
@@ -2228,7 +2214,7 @@ void orders_for_unit(int i, unit *u) {
                         Zugvorlage */
     k = strchr(k, '[');
     if (!k) {
-      awarning(_("Cannot parse this unit's comment"), 4);
+      log_warning(4, filename, line_no, order_buf, this_unit_id(), _("Cannot parse this unit's comment"));
       no_comment++;
       return;
     }
@@ -2240,7 +2226,7 @@ void orders_for_unit(int i, unit *u) {
   if (!j)
     j = strchr(k, ';');
   if (!j || j > e) {
-    awarning(_("Cannot parse this unit's comment"), 4);
+    log_warning(4, filename, line_no, order_buf, this_unit_id(), _("Cannot parse this unit's comment"));
     no_comment++;
     return;
   }
@@ -2355,10 +2341,10 @@ void long_order(void) {
     /*
      * zu lange Befehle kappen
      */
-    sprintf(warn_buf, _("Unit %s already has a long order in line %d (%s)"),
-            uid(order_unit), order_unit->long_order_line,
-            order_unit->long_order);
-    awarning(warn_buf, 1);
+    log_warning(1, filename, line_no, order_buf, this_unit_id(),
+      _("Unit %s already has a long order in line %d (%s)"),
+      uid(order_unit), order_unit->long_order_line,
+      order_unit->long_order);
   } else {
     order_unit->long_order = STRDUP(order_buf);
     order_unit->long_order_line = line_no;
@@ -2378,7 +2364,7 @@ void checknaming(void) {
     s = getstr();
   }
   if (strchr(s, '('))
-    awarning(_("Names must not contain brackets"), 1);
+    log_warning(1, filename, line_no, order_buf, this_unit_id(), _("Names must not contain brackets"));
 
   switch (i) {
   case -1:
@@ -2562,9 +2548,9 @@ int getaspell(char *s, char spell_typ, unit *u, int reallycast) {
         strcat(warn_buf, cgettext(Errors[PRE]));
         break;
       }
-      strcat(warn_buf, _("combat magic set"));
       if (show_warnings > 0) /* nicht bei -w0 */
-        awarning(warn_buf, 1);
+        log_warning(1, filename, line_no, order_buf, this_unit_id(),
+          _("combat magic set"));
     }
     if (u) {
       p = sp->typ * reallycast;
@@ -2643,8 +2629,7 @@ void checkgiving(void) {
         cmd_unit->people += n;
       order_unit->people -= n;
       if (order_unit->people < 0 && no_comment < 1 && !does_default) {
-        sprintf(warn_buf, Errors[UNITMISSPERSON], uid(order_unit));
-        awarning(warn_buf, 4);
+        log_warning(4, filename, line_no, order_buf, this_unit_id(), _("Unit %s may have not enough men"));
       }
       break;
 
@@ -2658,8 +2643,8 @@ void checkgiving(void) {
       }
       order_unit->money -= n;
       if (order_unit->money < 0 && no_comment < 1 && !does_default) {
-        sprintf(warn_buf, Errors[UNITMISSSILVER], uid(order_unit));
-        awarning(warn_buf, 4);
+        log_warning(4, filename, line_no, order_buf, this_unit_id(), 
+          _("Unit %s may have not enough silver"), uid(order_unit));
       }
       break;
 
@@ -2680,7 +2665,8 @@ void checkgiving(void) {
               qcat(printliste(i, potionnames));
             }
           } else {
-            awarning(_("Unrecognized object"), 1);
+            log_warning(1, filename, line_no, order_buf, this_unit_id(),
+              _("Unrecognized object"));
           }
         } else {
           if (piping) {
@@ -2709,15 +2695,15 @@ void checkgiving(void) {
   } else if (findparam(s) == P_CONTROL) {
     if (order_unit->ship && !does_default) {
       if (order_unit->ship > 0) {
-        sprintf(warn_buf, _("Unit %s may lack control over ship %s"),
-                uid(order_unit), itob(order_unit->ship));
-        awarning(warn_buf, 4);
+        log_warning(4, filename, line_no, order_buf, this_unit_id(),
+          _("Unit %s may lack control over ship %s"),
+          uid(order_unit), itob(order_unit->ship));
       } else if (cmd_unit) {
         if (cmd_unit->ship != 0 && abs(cmd_unit->ship) != -order_unit->ship) {
-          sprintf(warn_buf, _("Unit %s may be on ship %s instead of ship %s"),
-                  uid(cmd_unit), itob(-order_unit->ship),
-                  itob(abs(cmd_unit->ship)));
-          awarning(warn_buf, 4);
+          log_warning(4, filename, line_no, order_buf, this_unit_id(),
+            _("Unit %s may be on ship %s instead of ship %s"),
+            uid(cmd_unit), itob(-order_unit->ship),
+            itob(abs(cmd_unit->ship)));
         }
         cmd_unit->ship = order_unit->ship;
       }
@@ -2777,7 +2763,8 @@ void checkmake(void) {
   if (isdigit(*s)) { /* MACHE anzahl "Gegenstand" */
     j = atoi(s);
     if (j == 0)
-      awarning(_("Number 0 does not make sense here"), 2);
+      log_warning(2, filename, line_no, order_buf, this_unit_id(),
+        _("Number 0 does not make sense here"));
     s = getstr();
   }
 
@@ -2921,7 +2908,8 @@ void checkdirections(int key) {
       log_error(filename, line_no, order_buf, this_unit_id(), _("Unrecognized direction"));
     } else {
       if (key == K_ROUTE && i == D_PAUSE && count == 0)
-        awarning(_("ROUTE starts with PAUSE"), 2);
+        log_warning(2, filename, line_no, order_buf, this_unit_id(),
+          _("ROUTE starts with PAUSE"));
       if (key == K_MOVE && i == D_PAUSE) {
         log_error(filename, line_no, order_buf, this_unit_id(), _("%s and %s cannot be combined"),
                 printkeyword(K_MOVE), printdirection(D_PAUSE));
@@ -2930,9 +2918,8 @@ void checkdirections(int key) {
         Scat(printdirection(i));
         count++;
         if (!noship && order_unit->ship == 0 && key != K_ROUTE && count == 4) {
-          sprintf(warn_buf, _("Unit %s may be moving too far"),
-                  uid(order_unit));
-          awarning(warn_buf, 4);
+          log_warning(4, filename, line_no, order_buf, this_unit_id(),
+            _("Unit %s may be moving too far"), uid(order_unit));
         }
         switch (i) {
         case D_NORTHEAST:
@@ -2969,8 +2956,8 @@ void checkdirections(int key) {
   if (!count)
     log_error(filename, line_no, order_buf, this_unit_id(), _("Unrecognized direction"));
   if (key == K_ROUTE && !noroute && (sx != x || sy != y)) {
-    sprintf(warn_buf, cgettext(Errors[ROUTENOTCYCLIC]), sx, sy, x, y);
-    awarning(warn_buf, 4);
+    log_warning(4, filename, line_no, order_buf, this_unit_id(),
+      _("ROUTE is not cyclic; (%d,%d) -> (%d,%d)"), sx, sy, x, y);
   }
   if (!does_default) {
     if (order_unit->hasmoved) {
@@ -3054,7 +3041,8 @@ void claim(void) {
   }
   i = finditem(s);
   if (i <= 0) {
-    awarning(_("Unrecognized object"), 1);
+    log_warning(1, filename, line_no, order_buf, this_unit_id(),
+      _("Unrecognized object"));
   }
   Scat(ItemName(i, n != 1));
 }
@@ -3173,7 +3161,8 @@ int studycost(t_skills *talent) {
       i = atoi(s);
     if (i < 100) {
       i = 200;
-      awarning(_("Assuming learning costs of 200 silver"), 2);
+      log_warning(2, filename, line_no, order_buf, this_unit_id(),
+        _("Assuming learning costs of 200 silver"));
     }
     return i;
   }
@@ -3262,7 +3251,7 @@ void check_money(
       }
       if (u->people < 0) {
         log_warning(3, filename, u->line_no, NULL, 0, 
-          cgettext(Errors[UNITHASPERSONS]), uid(u), u->people);
+          _("Unit %s has %d men"), uid(u), u->people);
       }
 
       if (u->people == 0 &&
@@ -3270,7 +3259,8 @@ void check_money(
         if (u->temp) {
           if (u->money > 0) {
             log_warning(2, filename, u->line_no, u->order, 0,
-              cgettext(Errors[UNITHASNTPERSONS]), itob(u->no));
+              _("Unit TEMPORARY %s hasn't recruited and hasn't got "
+                "any men! It may lose silver and/or items"), itob(u->no));
           }
           else {
             log_warning(2, filename, u->line_no, u->order, 0,
@@ -3639,7 +3629,8 @@ void checkanorder(char *Orders) {
       i = atoi(s);
       icat(i);
       if (i == 0)
-        awarning(_("Number 0 does not make sense here"), 2);
+        log_warning(2, filename, line_no, order_buf, this_unit_id(),
+          _("Number 0 does not make sense here"));
       s = getstr();
     }
 
@@ -3653,7 +3644,8 @@ void checkanorder(char *Orders) {
       } else if (!(*s)) {
         log_error(filename, line_no, order_buf, this_unit_id(), _("Unrecognized object"));
       } else {
-        awarning(_("Unrecognized object"), 1);
+        log_warning(1, filename, line_no, order_buf, this_unit_id(),
+          _("Unrecognized object"));
       }
     }
     /* additional parameters may be in order */
@@ -3716,7 +3708,8 @@ void checkanorder(char *Orders) {
     if (isdigit(*s)) { /* ZÜCHTE anzahl KRÄUTER */
       x = atoi(s);
       if (x <= 0)
-        awarning(_("Positive value expected"), 2);
+        log_warning(2, filename, line_no, order_buf, this_unit_id(),
+          _("Positive value expected"));
       s = getstr();
     }
 
@@ -3770,7 +3763,8 @@ void checkanorder(char *Orders) {
 
   case K_END:
     if (from_temp_unit_no == 0) {
-      awarning(_("No matching MAKE TEMP for END"), 2);
+      log_warning(2, filename, line_no, order_buf, this_unit_id(),
+        _("No matching MAKE TEMP for END"));
     }
     scat(printkeyword(K_END));
     indent = next_indent = INDENT_ORDERS;
@@ -3822,8 +3816,8 @@ void checkanorder(char *Orders) {
       icat(i);
       break;
     }
-    sprintf(warn_buf, _("%s needs parameters"), printkeyword(K_SETSTEALTH));
-    awarning(warn_buf, 5);
+    log_warning(5, filename, line_no, order_buf, this_unit_id(),
+      _("%s needs parameters"), printkeyword(K_SETSTEALTH));
     break;
 
   case K_GIVE:
@@ -4232,7 +4226,8 @@ void checkanorder(char *Orders) {
     if (isdigit(*s)) { /* PFLANZE anzahl "Kraeuter/Samen/Mallornsamen" */
       n = atoi(s);
       if (n == 0) {
-        awarning(_("Number 0 does not make sense here"), 2);
+        log_warning(2, filename, line_no, order_buf, this_unit_id(),
+          _("Number 0 does not make sense here"));
       }
       icat(n);
       s = getstr();
@@ -4248,7 +4243,8 @@ void checkanorder(char *Orders) {
       } else if (!(*s)) {
         log_error(filename, line_no, order_buf, this_unit_id(), _("Unrecognized object"));
       } else {
-        awarning(_("Unrecognized object"), 1);
+        log_warning(1, filename, line_no, order_buf, this_unit_id(),
+          _("Unrecognized object"));
       }
     }
     long_order();
@@ -4332,9 +4328,9 @@ void readaunit(void) {
         case P_NEXT:
         case P_REGION:
           if (from_temp_unit_no != 0) {
-            sprintf(warn_buf, _("%s %s lacks closing %s"), printparam(P_TEMP),
+            log_warning(2, filename, line_no, order_buf, this_unit_id(),
+              _("%s %s lacks closing %s"), printparam(P_TEMP),
                     itob(from_temp_unit_no), printkeyword(K_END));
-            awarning(warn_buf, 2);
             from_temp_unit_no = 0;
           }
           return;
@@ -4849,7 +4845,8 @@ void process_order_file(int *faction_count, int *unit_count) {
       } else
         Rx = Ry = -10000;
       if (Rx < -9999 || Ry < -9999)
-        awarning(_("Error with REGION"), 0);
+        log_error(filename, line_no, order_buf, this_unit_id(),
+          _("Error with REGION"));
       r = addregion(Rx, Ry, 0);
       r->line_no = line_no;
       x = strchr(order_buf, ';');
@@ -4973,7 +4970,8 @@ void process_order_file(int *faction_count, int *unit_count) {
         check_comment();
       } else {
         if (f && order_buf[0])
-          awarning(_("Not carried out by any unit"), 1);
+          log_warning(1, filename, line_no, order_buf, this_unit_id(),
+            _("Not carried out by any unit"));
       }
       get_order();
     }
