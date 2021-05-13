@@ -1328,16 +1328,22 @@ this_unit_id(void)
 
 void
 log_message_va(
-  int level, 
+  int level,
   const char *file,
-  int line, 
+  int line,
   const char *order,
-  int unit_id, 
+  int unit_id,
   const char *format, va_list va)
 {
   char bf[65];
 
-  if (brief) return;
+  if (brief) {
+    if (level == LOG_ERROR)
+      ++error_count;
+    else if (level <= show_warnings)
+      ++warning_count;
+    return;
+  }
 
   if (!order)
     strcpy(bf, "...");
@@ -1367,7 +1373,7 @@ log_message_va(
     fprintf(ERR, ". '%s'\n", bf);
     break;
   case OUT_COMPILE:
-    fprintf(ERR, "%s:%d|%d|%s|", filename, line, level, itob(unit_id)); 
+    fprintf(ERR, "%s:%d|%d|%s|", filename, line, level, itob(unit_id));
     vfprintf(ERR, format, va);
     fprintf(ERR, "|%s\n", bf);
     break;
