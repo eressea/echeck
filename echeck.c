@@ -144,8 +144,6 @@ const t_ech_file ECheck_Files[] = {
   {"tokens.txt", -1}};
 
 const int filecount = sizeof(ECheck_Files) / sizeof(ECheck_Files[0]);
-int verbose = 1;
-static int compact = 0;
 
 #define SPACE_REPLACEMENT '~'
 #define SPACE ' '
@@ -4420,52 +4418,75 @@ void files_not_found(FILE *F) {
 }
 
 void printversion() {
-  fprintf(stdout,
+  fprintf(ERR,
           _("ECheck (Version %s, %s), order file checker for Eressea - "
-            "freeware!\n\n"),
+            "freeware!"),
           echeck_version, __DATE__);
+  fputc('\n', ERR);
 }
 
-void printhelp(int argc, char *argv[], int index) {
+void printhelp() {
   printversion();
-  fprintf(stdout,
+  fputc('\n', ERR);
+  fprintf(ERR,
           _("-Ppath  search path for the additional files;"
             " locale %s will be appended\n"
             "-Rgame  read files from subdirectory game; default: e2\n"
+            "-Lloc   select locale loc\n"
             "-       use stdin instead of an input file\n"
             "-b      suppress warnings and errors (brief)\n"
-            "-q      do not expect hints regarding men/silver within [] after "
-            "UNIT\n"
-            "-rnnn   set recruit costs to nnn silver\n"
             "-c      compiler-like output\n"
             "-m      magellan-useable output\n"
             "-e      send checked file to stdout, errors to stderr\n"
             "-E      send checked file to stdout, errors to stdout\n"
+            "-s      use stderr for warnings, errors, etc. instead of stdout\n"
             "-ofile  write checked file into 'file'\n"
             "-Ofile  write errors into 'file'\n"
-            "-h      show this little help\n"
-            "-s      use stderr for warnings, errors, etc. instead of stdout\n"
             "-p      abbreviate some output for piping\n"
+            "-q      do not expect hints regarding men/silver within [] after "
+            "UNIT\n"
+            "-rnnn   set recruit costs to nnn silver\n"
             "-l      simulate silverpool\n"
+            "-x      line counting starts with FACTION\n"
             "-n      do not count lines with NameMe comments (;;)\n"
             "-noxxx  no xxx warnings. xx can be:\n"
             "  ship   unit steers a ship but may lack control\n"
             "  route  do not check for cyclic ROUTE\n"
             "  lost   unit loses silver and items\n"
-            "-w[n]   warnings of level n (default:   4)\n"
-            "-x      line counting starts with FACTION\n"
-            "-Lloc   select locale loc\n"
-            "-vm.l   mainversion.level - to check for correct ECheck-Version\n"
-            "-Q      quiet\n"
-            "-C      compact output\n"),
+            "-w[n]   warnings of level n (default: 4)\n"
+            "        1: mainly syntax errors\n"
+            "        4: almost all errors\n"
+            "        5: teachers / students\n"
+            "-Q      no effect\n"
+            "-C      no effect\n"
+            "-vm.l   no effect\n"
+            "-h      show this little help and exit\n"
+            "-V      print version information and exit"),
           echeck_locale);
+  fputc('\n', ERR);
 }
+
+enum {
+  ACT_DEFAULT,
+  ACT_VERSION,
+  ACT_HELP,
+  ACT_ABORT,
+  ACT_ERROR
+};
+
+static int action = ACT_DEFAULT;
+
+static void set_action(int new_action) {
+  if (new_action > action)
+    action = new_action;
+}
+
 
 int check_options(int argc, char *argv[], char dostop, char command_line) {
   int i;
   char *x;
 
-  for (i = 1; i < argc; i++) {
+  for (i = 1; i < argc && action < ACT_ABORT; i++) {
     if (argv[i][0] == '-') {
       switch (argv[i][1]) {
       case 'P':
@@ -4475,8 +4496,9 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
             if (argv[i]) {
               g_basedir = argv[i];
             } else {
-              fputs("Leere Pfad-Angabe ungültig\nEmpty path invalid\n", stderr);
-              exit(1);
+              fputs(_("Empty path invalid"), stderr);
+              fputc('\n', stderr);
+              set_action(ACT_ERROR);
             }
           } else if (*(argv[i] + 2)) {
             /* -Ppath */
@@ -4486,26 +4508,17 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
         break;
 
       case 'Q':
-        verbose = 0;
+        /* deprecated, was: non-verbose output */
         break;
 
       case 'C':
-        compact = 1;
+        /* deprecated, was: compact output */
         break;
 
       case 'v':
+        /* deprecated */
         if (argv[i][2] == 0) { /* -V version */
           i++;
-          if (!argv[i])
-            break;
-        }
-        x = strchr(argv[i], '.');
-        if (x) {
-          *x = 0;
-          if (strncmp(echeck_version, argv[i] + 2, strlen(argv[i] + 2)) == 0) {
-            *x = '.';
-            x++;
-          }
         }
         break;
 
@@ -4529,11 +4542,11 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
           i++;
           if (argv[i])
             rec_cost = atoi(argv[i]);
-          else if (verbose)
+          else {
             fprintf(stderr,
-                    "Fehlende Rekrutierungskosten, auf %d gesetzt\n"
-                    "Missing recruiting costs, set to %d",
-                    rec_cost, rec_cost);
+                    _("Missing recruiting costs, set to %d"), rec_cost);
+            fputc('\n', stderr);
+          }
         } else
           rec_cost = atoi(argv[i] + 2);
         break;
@@ -4570,20 +4583,18 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
           } else /* "-Ofile" */
             x = argv[i] + 2;
           if (!x) {
-            fputs("Keine Datei für Fehler-Texte, stderr benutzt\n"
-                  "Using stderr for error output\n",
-                  stderr);
+            fputs(_("Using stderr for error output"), stderr);
+            fputc('\n', stderr);
             ERR = stderr;
             break;
           }
           ERR = fopen(x, "w");
           if (!ERR) {
             fprintf(stderr,
-                    "Kann Datei `%s' nicht schreiben:\n"
-                    "Can't write to file `%s':\n"
-                    " %s",
-                    x, x, strerror(errno));
-            exit(0);
+                    _("Can't write to file `%s':\n"
+                    " %s"), x, strerror(errno));
+            fputc('\n', stderr);
+            set_action(ACT_ABORT);
           }
         }
         break;
@@ -4597,20 +4608,17 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
             x = argv[i] + 2;
           echo_it = 1;
           if (!x) {
-            fputs("Leere Datei für 'geprüfte Datei', stdout benutzt\n"
-                  "Empty file for checked file, using stdout\n",
-                  stderr);
+            fputs(_("No name given for checked file, using stdout"), stderr);
+            fputc('\n', stderr);
             OUT = stdout;
             break;
           }
           OUT = fopen(x, "w");
           if (!OUT) {
-            fprintf(stderr,
-                    "Kann Datei `%s' nicht schreiben:\n"
-                    "Can't write to file `%s':\n"
-                    " %s",
-                    x, x, strerror(errno));
-            exit(0);
+            fprintf(stderr, _("Can't write to file `%s':\n"
+                    " %s"), x, strerror(errno));
+            fputc('\n', stderr);
+            action = ACT_ABORT;
           }
         }
         break;
@@ -4652,7 +4660,8 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
           } else
             x = argv[i] + 3;
           if (!x) {
-            fputs("-no ???\n", stderr);
+            fputs(_("-no what?"), stderr);
+            fputc('\n', stderr);
             break;
           }
           switch (*x) {
@@ -4676,17 +4685,15 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
       case '-':
         if (strcmp(argv[i] + 2, "help") == 0) { /* '--help' */
           if (dostop) { /* bei Optionen via "; ECHECK" nicht mehr  machen */
-            printhelp(argc, argv, i);
-            exit(0);
+            set_action(ACT_HELP);
           }
-          else
-            fprintf(ERR,
-                    "Option `%s' unbekannt.\n"
-                    "Unknow option `%s'\n",
-                    argv[i], argv[i]);
-          if (dostop) /* Nicht stoppen, wenn dies die Parameter  aus der Datei
+        } else {
+          fprintf(ERR, _("Unknown option %s"), argv[i]);
+          fputc('\n', stderr);
+          if (dostop) { /* Nicht stoppen, wenn dies die Parameter  aus der Datei
                          selbst sind! */
-            exit(-1);
+            set_action(ACT_ERROR);
+          }
         }
         break;
 
@@ -4694,8 +4701,7 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
       case 'h':
         if (dostop) {
           /* bei Optionen via "; ECHECK" nicht mehr  machen */
-          printhelp(argc, argv, i);
-          exit(0);
+          set_action(ACT_HELP);
         }
         break;
       case 'R': /* -R rules */
@@ -4709,8 +4715,9 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
         }
         break;
       case 'V':
-        printversion();
-        exit(0);
+        if (dostop) {
+          set_action(ACT_VERSION);
+        }
         break;
       case 'L':
         if (argv[i][2] == 0) { /* -L loc */
@@ -4728,17 +4735,41 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
 
       default:
         if (argv[i][1]) { /* sonst ist das nur '-' => stdin lesen */
-          fprintf(ERR, _("Unknown option -%s"), argv[i]);
+          fprintf(ERR, _("Unknown option %s"), argv[i]);
+          fputc('\n', ERR);
           if (dostop) {
             /* Nicht stoppen, wenn dies die Parameter aus der Datei selbst sind!
              */
-            exit(10);
+            set_action(ACT_ABORT);
           }
         }
       }
     } else
       break;
   }
+
+  switch (action) {
+  case ACT_HELP:
+    printhelp();
+    exit(0);
+    break;
+  case ACT_VERSION:
+    printversion();
+    exit(0);
+    break;
+  case ACT_ABORT:
+    exit(0);
+    break;
+  case ACT_ERROR:
+    exit(-1);
+    break;
+  case ACT_DEFAULT:
+    break;
+  default:
+    fputs("Internal Error", stderr);
+    break;
+  }
+
   return i;
 }
 
@@ -4890,17 +4921,15 @@ void process_order_file(int *faction_count, int *unit_count) {
       if (befehle_ende)
         return;
       if (!compile) {
-        if (verbose) {
-          fprintf(
-            ERR,
-            _("Recruit costs have been set to %d silver, warning level %d"),
-            rec_cost, show_warnings);
-          fputc('\n', ERR);
-          if (silberpool) {
-            fputs(_("Silver pool is active."), ERR);
-          }
-          fputs("\n\n", ERR);
+        fprintf(
+          ERR,
+          _("Recruit costs have been set to %d silver, warning level %d"),
+          rec_cost, show_warnings);
+        fputc('\n', ERR);
+        if (silberpool) {
+          fputs(_("Silver pool is active."), ERR);
         }
+        fputs("\n\n", ERR);
       }
       next = 0;
       break;
@@ -5294,8 +5323,7 @@ int echeck_main(int argc, char *argv[]) {
       filename = argv[i];
       if (!compile) {
         fprintf(ERR, _("Processing file '%s'."), argv[i]);
-        if (!compact)
-          fputc('\n', ERR);
+        fputc('\n', ERR);
       }
       bom = fgetc(F);
       if (bom == 0xef) {
