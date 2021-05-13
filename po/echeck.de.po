@@ -307,7 +307,7 @@ msgid "No matching MAKE TEMP for END"
 msgstr "ENDE ohne MACHE TEMP"
 
 msgid "No text"
-msgstr ""
+msgstr "Kein Text"
 
 msgid "Not a luxury item"
 msgstr "Kein Luxusgut"
@@ -463,7 +463,7 @@ msgstr "Einheit %s kann noch %d Lehrer gebrauchen"
 
 #, c-format
 msgid "Unit %s already has a %s spell set"
-msgstr ""
+msgstr "Einheit %s hat bereits einen %szauber"
 
 #, c-format
 msgid "Unit %s already has a long order in line %d (%s)"
@@ -511,7 +511,7 @@ msgstr "Einheit %s hat keinen langen Befehl"
 
 #, c-format
 msgid "Unit %s is carried by unit %s but rides with %s"
-msgstr ""
+msgstr "Einheit %s wird von %s transportiert, aber fährt mit %s"
 
 #, c-format
 msgid "Unit %s is taught by unit %s but doesn't learn"
@@ -551,11 +551,11 @@ msgstr "Einheit %s will Schiff %s bewegen und hat evtl. kein Kommando"
 
 #, c-format
 msgid "Unit %s needs %d more silver to maintain a building"
-msgstr ""
+msgstr "Einheit %s braucht noch %d Silber für den Gebäudeunterhalt"
 
 #, c-format
 msgid "Unit %s on ship %s has already moved"
-msgstr ""
+msgstr "Einheit %s auf Schiff %s hat sich schon bewegt"
 
 #, c-format
 msgid "Unit %s rides with unit %s, but the latter doesn't carry the former"
@@ -643,7 +643,7 @@ msgid "cannot read configuration files from %s/%s"
 msgstr "Konfigurationsdateien nicht gefunden in %s/%s"
 
 msgid "combat"
-msgstr ""
+msgstr "Kampf"
 
 msgid "commands"
 msgstr "Befehle"
@@ -658,7 +658,7 @@ msgid "invalid email address"
 msgstr "Ungültige Email-Adresse"
 
 msgid "items"
-msgstr ""
+msgstr "Gegenstände"
 
 msgid "messages"
 msgstr "Meldungen"
@@ -670,52 +670,11 @@ msgid "parameters"
 msgstr "Parameter"
 
 msgid "post-combat"
-msgstr ""
+msgstr "Post-Kampf"
 
 msgid "pre-combat"
-msgstr ""
+msgstr "Prä-Kampf"
 
 msgid "skills"
 msgstr "Talente"
 
-#~ msgid "Unit %s already has a "
-#~ msgstr "Einheit %s hat bereits einen "
-
-#~ msgid "Unit %s already has a long order in line %d"
-#~ msgstr "Einheit %s hat in Zeile %d bereits einen langen Befehl bekommen"
-
-#~ msgid "combat magic set"
-#~ msgstr "Kampfzauber gesetzt"
-
-#~ msgid "<--MISSING-->"
-#~ msgstr "<--FEHLT-->"
-
-#~ msgid "Unit %s not found"
-#~ msgstr "Einheit %s nicht gefunden"
-
-#~ msgid "ERESSEA faction-no \"Password\" not found"
-#~ msgstr "ERESSEA partei-nummer \"Passwort\" fehlt"
-
-#~ msgid "Search path is"
-#~ msgstr "Suchpfad ist"
-
-#~ msgid "Unit 0 used"
-#~ msgstr "Einheit 0 verwendet"
-
-#~ msgid "Unrecognized potion"
-#~ msgstr "Unbekannter Trank"
-
-#~ msgid "This cannot be bred"
-#~ msgstr "So etwas kann man nicht züchten"
-
-#~ msgid "TEMP %s is used in region %d,%d and region %d,%d (line %d)"
-#~ msgstr "TEMP %s wird in Region %d,%d und Region %d,%d (Zeile %d) benutzt"
-
-#~ msgid "Mage units may have only one person"
-#~ msgstr "Magier dürfen nur eine Person haben"
-
-#~ msgid "Unrecognized race"
-#~ msgstr "Unbekannte Rasse"
-
-#~ msgid "Who should be taught?"
-#~ msgstr "Wen lehren?"
