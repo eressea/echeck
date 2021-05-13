@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-12 08:45+0200\n"
+"POT-Creation-Date: 2021-05-13 15:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -421,11 +421,7 @@ msgid "Unit %s Unit could benefit from %d more teachers"
 msgstr ""
 
 #, c-format
-msgid "Unit %s already has a "
-msgstr ""
-
-#, c-format
-msgid "Unit %s already has a long order in line %d"
+msgid "Unit %s already has a %s spell set"
 msgstr ""
 
 #, c-format
@@ -605,7 +601,7 @@ msgstr ""
 msgid "cannot read configuration files from %s/%s"
 msgstr ""
 
-msgid "combat magic set"
+msgid "combat"
 msgstr ""
 
 msgid "commands"
@@ -632,10 +628,10 @@ msgstr ""
 msgid "parameters"
 msgstr ""
 
-msgid "post-"
+msgid "post-combat"
 msgstr ""
 
-msgid "pre-"
+msgid "pre-combat"
 msgstr ""
 
 msgid "skills"

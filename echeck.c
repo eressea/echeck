@@ -192,7 +192,6 @@ char *filename;
 
 static char order_buf[BUFSIZE], /* current order line */
   checked_buf[BUFSIZE],    /* checked order line */
-  message_buf[BUFSIZE],    /* messages are composed here */
   warn_buf[BUFSIZE],       /* warnings are composed here */
   indent, next_indent,     /* indent index */
   does_default = 0,        /* Ist DEFAULT aktiv? */
