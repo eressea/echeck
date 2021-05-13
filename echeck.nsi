@@ -51,6 +51,7 @@ Section "ECheck (required)"
   
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\ECheck "Install_Dir" "$INSTDIR"
+  WriteRegStr HKCU SOFTWARE\Eressea\CSMap\settings "echeck_dir" "$INSTDIR"
   
   ; Write the uninstall keys for Windows
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\ECheck" "DisplayName" "ECheck"
