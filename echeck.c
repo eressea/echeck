@@ -435,7 +435,6 @@ enum {
   MISSINGUNITNUMBER,
   NAMECONTAINSBRACKETS,
   NEEDBOTHCOORDINATES,
-  NOCARRIER,
   NOFIND,
   NOSEND,
   NOTEMPNUMBER,
@@ -445,10 +444,7 @@ enum {
   OBJECTNUMBERMISSING,
   ORDERNUMBER,
   ORDERSREAD,
-  PASSWORDCLEARED,
   PASSWORDMSG2,
-  POST,
-  PRE,
   PROCESSINGFILE,
   QUITMSG,
   RECRUITCOSTSSET,
@@ -456,11 +452,8 @@ enum {
   ROUTENOTCYCLIC,
   SCHOOLCHOSEN,
   SORT,
-  UNITALREADYHAS,
-  UNITALREADYHASMOVED,
   UNITALREADYHASORDERS,
   UNITMOVESSHIP,
-  UNITMUSTBEONSHIP,
   UNITONSHIPHASMOVED,
   MAX_ERRORS
 };
@@ -493,7 +486,6 @@ static const char *Errors[MAX_ERRORS] = {
   "MISSINGUNITNUMBER",
   "NAMECONTAINSBRACKETS",
   "NEEDBOTHCOORDINATES",
-  "NOCARRIER",
   "NOFIND",
   "NOSEND",
   "NOTEMPNUMBER",
@@ -503,10 +495,7 @@ static const char *Errors[MAX_ERRORS] = {
   "OBJECTNUMBERMISSING",
   "ORDERNUMBER",
   "ORDERSREAD",
-  "PASSWORDCLEARED",
   "PASSWORDMSG2",
-  "POST",
-  "PRE",
   "PROCESSINGFILE",
   "QUITMSG",
   "RECRUITCOSTSSET",
@@ -514,11 +503,8 @@ static const char *Errors[MAX_ERRORS] = {
   "ROUTENOTCYCLIC",
   "SCHOOLCHOSEN",
   "SORT",
-  "UNITALREADYHAS",
-  "UNITALREADYHASMOVED",
   "UNITALREADYHASORDERS",
   "UNITMOVESSHIP",
-  "UNITMUSTBEONSHIP",
   "UNITONSHIPHASMOVED",
 };
 
@@ -1483,8 +1469,6 @@ void warning(const char *s, int line, char *order, char level) {
   log_warning(level, filename, line, order, this_unit_id(), s);
 }
 
-#define dwarning(s, level) warning_deprecated(s, line_no, order_buf, level)
-
 static const struct warning {
   const char *token;
   const char *message;
@@ -1506,7 +1490,6 @@ static const struct warning {
   {"MISSINGUNITNUMBER", t("Missing unit number")},
   {"NAMECONTAINSBRACKETS", t("Names must not contain brackets")},
   {"NEEDBOTHCOORDINATES", t("Both coordinated must be supplied")},
-  {"NOCARRIER", t("Can't find unit to carry")},
   {"NOFIND", t("FIND has been replaced by OPTION ADDRESSES")},
   {"NOSEND", t("SEND has been renamed into OPTION")},
   {"NOTEMPNUMBER", t("No TEMPORARY number")},
@@ -1517,11 +1500,8 @@ static const struct warning {
   {"OBJECTNUMBERMISSING", t("number of object missing")},
   {"ORDERNUMBER",
    t("NUMBER SHIP, NUMBER CASTLE, NUMBER FACTION or NUMBER UNIT")},
-  {"PASSWORDCLEARED", t("Password cleared")},
   {"PASSWORDMSG2", t("\n\n  ****  A T T E N T I O N !  ****\n\n  ****  "
                      "Password missing!  ****\n\n")},
-  {"POST", t("post-")},
-  {"PRE", t("pre-")},
   {"PROCESSINGFILE", t("Processing file '%s'.")},
   {"QUITMSG", t("Attention! QUIT found! Your faction will be cancelled!")},
   {"RESERVE0SENSELESS", t("RESERVE 0 xxx doesn't make any sense")},
@@ -1536,10 +1516,6 @@ static const struct warning {
    t("TEMPORARY units can't use RESERVE! Use GIVE instead!")},
   {"TEMPUNITSCANTGIVE",
    t("TEMPORARY units can't use GIVE, it happens before MAKE!")},
-  {"UNITALREADYHAS", t("Unit %s already has a ")},
-  {"UNITALREADYHASLONGORDERS",
-   t("Unit %s already has a long order in line %d (%s)")},
-  {"UNITALREADYHASMOVED", t("Unit %s already has moved")},
   {"UNITALREADYHASORDERS", t("Unit %s already has got orders in line %d")},
   {"UNITCANSTILLTEACH", t("Unit %s can teach %d more students")},
   {"UNITMOVESSHIP", t("Unit %s moves ship %s and may lack control")},
@@ -1561,11 +1537,6 @@ const char *cgettext(const char *token) {
     }
   }
   return token;
-}
-
-void warning_deprecated(const char *token, int line_no, char *order_buf,
-                        int level) {
-  warning(cgettext(token), line_no, order_buf, level);
 }
 
 void checkstring(char *s, size_t l, int type) {
@@ -2184,15 +2155,14 @@ void orders_for_unit(int i, unit *u) {
   set_order_unit(mother_unit = u);
 
   if (u->start_of_orders_line) {
-    sprintf(warn_buf, _("Unit %s already has a long order in line %d"), uid(u),
-            u->start_of_orders_line);
     do {
       i++;
       if (i < 1)
         i = 1;
       u = newunit(i, 0);
     } while (u->start_of_orders_line);
-    log_warning(1, filename, line_no, order_buf, this_unit_id(), _("Using unit %s"), itob(i));
+    log_warning(1, filename, line_no, order_buf, this_unit_id(),
+      _("Using unit %s"), itob(i));
     set_order_unit(u);
   }
 
@@ -2205,7 +2175,8 @@ void orders_for_unit(int i, unit *u) {
 
   k = strchr(order_buf, '[');
   if (!k) {
-    log_warning(4, filename, line_no, order_buf, this_unit_id(), _("Cannot parse this unit's comment"));
+    log_warning(4, filename, line_no, order_buf, this_unit_id(),
+      _("Cannot parse this unit's comment"));
     no_comment++;
     return;
   }
@@ -2214,7 +2185,8 @@ void orders_for_unit(int i, unit *u) {
                         Zugvorlage */
     k = strchr(k, '[');
     if (!k) {
-      log_warning(4, filename, line_no, order_buf, this_unit_id(), _("Cannot parse this unit's comment"));
+      log_warning(4, filename, line_no, order_buf, this_unit_id(),
+        _("Cannot parse this unit's comment"));
       no_comment++;
       return;
     }
@@ -2226,7 +2198,8 @@ void orders_for_unit(int i, unit *u) {
   if (!j)
     j = strchr(k, ';');
   if (!j || j > e) {
-    log_warning(4, filename, line_no, order_buf, this_unit_id(), _("Cannot parse this unit's comment"));
+    log_warning(4, filename, line_no, order_buf, this_unit_id(),
+      _("Cannot parse this unit's comment"));
     no_comment++;
     return;
   }
@@ -2364,7 +2337,8 @@ void checknaming(void) {
     s = getstr();
   }
   if (strchr(s, '('))
-    log_warning(1, filename, line_no, order_buf, this_unit_id(), _("Names must not contain brackets"));
+    log_warning(1, filename, line_no, order_buf, this_unit_id(),
+      _("Names must not contain brackets"));
 
   switch (i) {
   case -1:
@@ -2422,10 +2396,9 @@ void check_leave(void) {
   for (t = units; t; t = t->next)
     if (t->region == order_unit->region) {
       t->unterhalt += order_unit->unterhalt;
-      strcpy(message_buf, uid(order_unit));
-      sprintf(warn_buf,
-              _("Moved maintainance for building from unit %s to unit %s"),
-              message_buf, uid(t));
+      log_warning(5, filename, line_no, order_buf, this_unit_id(),
+        _("Moved maintainance for building from unit %s to unit %s"),
+        uid1(order_unit), uid2(t));
       break;
     }
   order_unit->unterhalt =
@@ -2539,18 +2512,19 @@ int getaspell(char *s, char spell_typ, unit *u, int reallycast) {
     }
   } else {
     if (u && (sp->typ & SP_BATTLE) && (u->spell & sp->typ)) {
-      sprintf(warn_buf, cgettext(Errors[UNITALREADYHAS]), uid(u));
+      const char *spelltype;
       switch (sp->typ) {
       case SP_POST:
-        strcat(warn_buf, cgettext(Errors[POST]));
+        spelltype = _("post-combat");
         break;
       case SP_PRAE:
-        strcat(warn_buf, cgettext(Errors[PRE]));
+        spelltype = _("pre-combat");
         break;
+      default:
+        spelltype = _("combat");
       }
-      if (show_warnings > 0) /* nicht bei -w0 */
-        log_warning(1, filename, line_no, order_buf, this_unit_id(),
-          _("combat magic set"));
+      log_warning(1, filename, line_no, order_buf, this_unit_id(),
+        _("Unit %s already has a %s spell set"), uid(u), spelltype);
     }
     if (u) {
       p = sp->typ * reallycast;
@@ -2629,7 +2603,8 @@ void checkgiving(void) {
         cmd_unit->people += n;
       order_unit->people -= n;
       if (order_unit->people < 0 && no_comment < 1 && !does_default) {
-        log_warning(4, filename, line_no, order_buf, this_unit_id(), _("Unit %s may have not enough men"));
+        log_warning(4, filename, line_no, order_buf, this_unit_id(),
+          _("Unit %s may have not enough men"));
       }
       break;
 
@@ -2886,7 +2861,8 @@ void checkmake(void) {
   if (s[0])
     log_error(filename, line_no, order_buf, this_unit_id(), _("This cannot be made"));
   else
-    dwarning(Errors[UNITMUSTBEONSHIP], 4);
+    log_warning(4, filename, line_no, order_buf, this_unit_id(),
+      _("Unit must be in a castle, in a building or on a ship"));
   long_order();
   /*
    * es kam ja eine Meldung - evtl. kennt ECheck das nur nicht?
@@ -2962,7 +2938,7 @@ void checkdirections(int key) {
   if (!does_default) {
     if (order_unit->hasmoved) {
       log_error(filename, line_no, order_buf, this_unit_id(), 
-        cgettext(Errors[UNITALREADYHASMOVED]), uid(order_unit));
+        _("Unit %s already has moved"), uid(order_unit));
       return;
     }
     order_unit->hasmoved = 2; /* 2: selber bewegt */
@@ -3407,7 +3383,7 @@ void check_money(
                        Einheit */
       if (u->hasmoved > 0) {
         log_error(filename, u->line_no, u->long_order, u->no,
-          cgettext(Errors[UNITALREADYHASMOVED]), uid(u));
+          _("Unit %s already has moved"), uid(u));
       }
       if (u->transport == 0) {
         t = find_unit(u->drive, 0);
@@ -3677,7 +3653,8 @@ void checkanorder(char *Orders) {
       /*
        * damit laengere Angriffe nicht in Warnungs-Tiraden ausarten
        */
-      dwarning(_("Longer combats exclude long orders"), 5);
+      log_warning(5, filename, line_no, order_buf, this_unit_id(), 
+        _("Longer combats exclude long orders"));
       attack_warning = 1;
     }
     if (getaunit(42) == 42) {
@@ -3966,7 +3943,8 @@ void checkanorder(char *Orders) {
     scat(printkeyword(K_PASSWORD));
     s = getstr();
     if (!s[0])
-      dwarning(Errors[PASSWORDCLEARED], 0);
+      log_error(filename, line_no, order_buf, this_unit_id(), 
+        _("Password cleared"));
     else
       checkstring(s, NAMESIZE, POSSIBLE);
     break;
@@ -3997,7 +3975,7 @@ void checkanorder(char *Orders) {
       log_error(filename, line_no, order_buf, this_unit_id(), cgettext(Errors[MISSINGPASSWORD]));
     else
       checkstring(s, NAMESIZE, POSSIBLE);
-    dwarning(Errors[QUITMSG], 0);
+    log_error(filename, line_no, order_buf, this_unit_id(), cgettext(Errors[QUITMSG]));
     break;
 
   case K_TAX:
@@ -4131,7 +4109,8 @@ void checkanorder(char *Orders) {
         cmd_unit->transport = order_unit->no;
         cmd_unit->hasmoved = -1;
       } else
-        dwarning(Errors[NOCARRIER], 3);
+        log_warning(3, filename, line_no, order_buf, this_unit_id(),
+          _("Can't find unit to carry"));
     }
     if (getaunit(42) == 42)
       log_error(filename, line_no, order_buf, this_unit_id(), 
@@ -4266,8 +4245,8 @@ void checkanorder(char *Orders) {
     if (*s)
       Scat(s);
     else {
-      sprintf(warn_buf, _("Missing argument for %s"), printkeyword(i));
-      log_error(filename, line_no, order_buf, this_unit_id(), warn_buf);
+      log_error(filename, line_no, order_buf, this_unit_id(), 
+        _("Missing argument for %s"), printkeyword(i));
     }
     break;
   default:
