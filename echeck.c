@@ -2137,7 +2137,7 @@ void end_unit_orders(void) {
   if (order_unit->lives > 0 && !order_unit->long_order_line &&
       order_unit->people > 0) {
     log_warning(2, filename, order_unit->start_of_orders_line,
-      order_unit->start_of_orders, this_unit_id(),
+      NULL, this_unit_id(),
       _("Unit %s has no long order"), uid(order_unit));
   }
 }
@@ -2930,7 +2930,7 @@ void checkdirections(int key) {
   if (!count)
     log_error(filename, line_no, order_buf, this_unit_id(), _("Unrecognized direction"));
   if (key == K_ROUTE && !noroute && (sx != x || sy != y)) {
-    log_warning(4, filename, line_no, order_buf, this_unit_id(),
+    log_warning(5, filename, line_no, order_buf, this_unit_id(),
       _("ROUTE is not cyclic; (%d,%d) -> (%d,%d)"), sx, sy, x, y);
   }
   if (!does_default) {
@@ -3135,7 +3135,7 @@ int studycost(t_skills *talent) {
       i = atoi(s);
     if (i < 100) {
       i = 200;
-      log_warning(2, filename, line_no, order_buf, this_unit_id(),
+      log_warning(3, filename, line_no, order_buf, this_unit_id(),
         _("Assuming learning costs of 200 silver"));
     }
     return i;
