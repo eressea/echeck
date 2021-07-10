@@ -427,7 +427,6 @@ enum {
   MISSFILEITEM,
   MISSFILESKILL,
   MISSFILEDIR,
-  MISSINGFACTIONNUMBER,
   MISSINGNUMRECRUITS,
   MISSINGOFFER,
   MISSINGPASSWORD,
@@ -477,7 +476,6 @@ static const char *Errors[MAX_ERRORS] = {
   "MISSFILEITEM",
   "MISSFILESKILL",
   "MISSFILEDIR",
-  "MISSINGFACTIONNUMBER",
   "MISSINGNUMRECRUITS",
   "MISSINGOFFER",
   "MISSINGPASSWORD",
@@ -1478,9 +1476,6 @@ static const struct warning {
   {"MISSFILEITEM", t("items")},
   {"MISSFILESKILL", t("skills")},
   {"MISSFILEDIR", t("directions")},
-  {"MISSFILEMSG", t("messages")},
-  {"MISSINGQUOTES", t("Missing \"")},
-  {"MISSINGFACTIONNUMBER", t("Missing faction number")},
   {"MISSINGNUMRECRUITS", t("Number of recruits missing")},
   {"MISSINGOFFER", t("Missing offer")},
   {"MISSINGPASSWORD", t("Missing password")},
@@ -4335,9 +4330,10 @@ int readafaction(void) {
         fputs(cgettext(Errors[PASSWORDMSG2]), ERR);
     } else
       qcat(s);
-  } else
-    log_error(filename, line_no, order_buf, this_unit_id(), cgettext(Errors[MISSINGFACTIONNUMBER]));
-
+  }
+  else {
+    log_error(filename, line_no, order_buf, this_unit_id(), _("Missing faction number"));
+  }
   indent = next_indent = INDENT_FACTION;
   porder();
   return i;
