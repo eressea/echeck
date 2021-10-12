@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.6.5";
+static const char *echeck_version = "4.6.6";
 
 #define DEFAULT_PATH "."
 
@@ -3955,7 +3955,7 @@ void checkanorder(char *Orders) {
         break;
       u->money -= i * rec_cost;
       u->reserviert -= i * rec_cost;
-      u->people = i;
+      u->people += i;
       addregion(Rx, Ry, i);
     } else
       log_error(filename, line_no, order_buf, this_unit_id(), cgettext(Errors[MISSINGNUMRECRUITS]));

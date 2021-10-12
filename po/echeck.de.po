@@ -539,7 +539,7 @@ msgstr "Einheit %s hat evtl. zu wenig Silber"
 
 #, c-format
 msgid "Unit %s may lack control over ship %s"
-msgstr "Einheit %s will hat evtl. nicht das Kommando über Schiff %s"
+msgstr "Einheit %s hat evtl. nicht das Kommando über Schiff %s"
 
 #, c-format
 msgid "Unit %s may lose silver and/or items"
