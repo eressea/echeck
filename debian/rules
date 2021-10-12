@@ -26,5 +26,5 @@ override_dh_auto_configure:
 	  -DINSTALL_BIN_DIR=/usr/games \
 	  -DINSTALL_DATA_DIR=share/games/echeck
 
-override_dh_auto_install:
+#override_dh_auto_install:
 

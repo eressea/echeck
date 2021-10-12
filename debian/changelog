@@ -1,3 +1,8 @@
+echeck (4.6.6-2) stable; urgency=high
+
+  * fix broken package
+
+ -- Enno Rehling <enno@eressea.de>  Thu, 12 Oct 2021 18:16:00 +0200
 echeck (4.6.6-1) stable; urgency=low
 
   * fix person count after RECRUIT
