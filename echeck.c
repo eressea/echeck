@@ -691,7 +691,7 @@ void qcat(const char *s) {
 }
 
 void icat(int n) {
-  static char s[11];
+  static char s[12];
 
   sprintf(s, " %d", n);
   scat(s);
