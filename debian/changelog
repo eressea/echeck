@@ -1,3 +1,8 @@
+echeck (4.6.7-1) stable; urgency=high
+
+  * fix a crash at high warning levels (bug 2788)
+
+ -- Enno Rehling <enno@eressea.de>  Thu, 12 Dec 2021 10:00:00 +0200
 echeck (4.6.6-2) stable; urgency=high
 
   * fix broken package

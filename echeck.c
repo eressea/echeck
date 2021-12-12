@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.6.6";
+static const char *echeck_version = "4.6.7";
 
 #define DEFAULT_PATH "."
 
@@ -2597,7 +2597,7 @@ void checkgiving(void) {
       order_unit->people -= n;
       if (order_unit->people < 0 && no_comment < 1 && !does_default) {
         log_warning(4, filename, line_no, order_buf, this_unit_id(),
-          _("Unit %s may have not enough men"));
+          _("Unit %s may have not enough men"), uid(order_unit));
       }
       break;
 

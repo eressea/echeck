@@ -5,7 +5,7 @@
 Name "ECheck"
 
 ; The file to write
-OutFile "..\echeckinst.exe"
+OutFile "..\echeckinst-x64.exe"
 
 ; Request application privileges for Windows Vista and higher
 RequestExecutionLevel admin
@@ -14,7 +14,7 @@ RequestExecutionLevel admin
 Unicode True
 
 ; The default installation directory
-InstallDir $PROGRAMFILES\Eressea\ECheck
+InstallDir $PROGRAMFILES64\Eressea\ECheck
 
 ; Registry key to check for directory (so if you install again, it will 
 ; overwrite the old one automatically)
@@ -42,9 +42,9 @@ Section "ECheck (required)"
   SetOutPath $INSTDIR
   
   ; Put files there
-  File out\build\x86-Release\echeck.exe
-  File out\build\x86-Release\echeckw.exe
-  File out\build\x86-Release\*.dll
+  File out\build\x64-Release\echeck.exe
+  File out\build\x64-Release\echeckw.exe
+  File out\build\x64-Release\*.dll
   File /r locale
   File /r e2
   File /r e3
