@@ -4381,7 +4381,7 @@ void help_keys(char key) {
 
 void files_not_found(FILE *F) {
   fputs("\n  **  ", F);
-  fprintf(F, "ECheck V%s, %s", echeck_version, __DATE__);
+  fprintf(F, "ECheck V%s", echeck_version);
   fputs("   **\n\n", F);
   fprintf(F, _("cannot read configuration files from %s/%s"), g_basedir,
           echeck_locale);
@@ -4390,9 +4390,9 @@ void files_not_found(FILE *F) {
 
 void printversion() {
   fprintf(stdout,
-          _("ECheck (Version %s, %s), order file checker for Eressea - "
+          _("ECheck (Version %s), order file checker for Eressea - "
             "freeware!\n\n"),
-          echeck_version, __DATE__);
+          echeck_version);
 }
 
 void printhelp(int argc, char *argv[], int index) {
