@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.6.7";
+static const char *echeck_version = "4.6.8";
 
 #define DEFAULT_PATH "."
 
@@ -1911,7 +1911,6 @@ char *getbuf(void) {
       log_warning(1, filename, line_no, lbuf, this_unit_id(), _("Line too long"));
       bp = lbuf;
     }
-    cont = false;
     while (cp != warn_buf + MAXLINE && bp != lbuf + MAXLINE && *bp) {
       int c = *(unsigned char *)bp;
       char *skip = eatwhite(bp);
@@ -1919,7 +1918,7 @@ char *getbuf(void) {
         /* replace this whitespace with a single space */
         if (quote) {
           *(cp++) = SPACE_REPLACEMENT;
-        } else if (!start) {
+        } else if (cont || !start) {
           *(cp++) = ' ';
         }
         bp = skip;
