@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8...3.20)
+cmake_minimum_required(VERSION 3.2...3.20)
 project (echeck C)
 
 add_executable(echeck main.c echeck.c unicode.c whereami.c)
