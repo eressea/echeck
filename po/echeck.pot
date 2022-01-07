@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 18:04+0200\n"
+"POT-Creation-Date: 2022-01-10 11:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,9 +147,7 @@ msgid "Do not use [ ] and < >"
 msgstr ""
 
 #, c-format
-msgid ""
-"ECheck (Version %s, %s), order file checker for Eressea - freeware!\n"
-"\n"
+msgid "ECheck (Version %s,), order file checker for Eressea - freeware!"
 msgstr ""
 
 #, c-format
@@ -553,7 +551,7 @@ msgid "Unit must be in a castle, in a building or on a ship"
 msgstr ""
 
 #, c-format
-msgid "Unknown option -%s"
+msgid "Unknown option %s"
 msgstr ""
 
 msgid "Unrecognized direction"
