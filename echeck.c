@@ -4489,18 +4489,9 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
         break;
 
       case 'v':
+        /* deprecated */
         if (argv[i][2] == 0) { /* -V version */
           i++;
-          if (!argv[i])
-            break;
-        }
-        x = strchr(argv[i], '.');
-        if (x) {
-          *x = 0;
-          if (strncmp(echeck_version, argv[i] + 2, strlen(argv[i] + 2)) == 0) {
-            *x = '.';
-            x++;
-          }
         }
         break;
 
