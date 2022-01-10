@@ -4443,7 +4443,8 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
             if (argv[i]) {
               g_basedir = argv[i];
             } else {
-              fputs("Leere Pfad-Angabe ungültig\nEmpty path invalid\n", stderr);
+              fputs(_("Empty path invalid"), stderr);
+              fputc('\n', stderr);
               exit(1);
             }
           } else if (*(argv[i] + 2)) {
@@ -4497,11 +4498,11 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
           i++;
           if (argv[i])
             rec_cost = atoi(argv[i]);
-          else if (verbose)
+          else if (verbose) {
             fprintf(stderr,
-                    "Fehlende Rekrutierungskosten, auf %d gesetzt\n"
-                    "Missing recruiting costs, set to %d",
-                    rec_cost, rec_cost);
+                    _("Missing recruiting costs, set to %d"), rec_cost);
+            fputc('\n', stderr);
+          }
         } else
           rec_cost = atoi(argv[i] + 2);
         break;
@@ -4537,20 +4538,18 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
             x = argv[i];
           } else /* "-Ofile" */
             x = argv[i] + 2;
-          if (!x) {
-            fputs("Keine Datei für Fehler-Texte, stderr benutzt\n"
-                  "Using stderr for error output\n",
-                  stderr);
+            if (!x) {
+              fputs(_("Using stderr for error output"), stderr);
+            fputc('\n', stderr);
             ERR = stderr;
             break;
           }
           ERR = fopen(x, "w");
           if (!ERR) {
             fprintf(stderr,
-                    "Kann Datei `%s' nicht schreiben:\n"
-                    "Can't write to file `%s':\n"
-                    " %s",
-                    x, x, strerror(errno));
+                    _("Can't write to file `%s':\n"
+                    " %s"), x, strerror(errno));
+            fputc('\n', stderr);
             exit(0);
           }
         }
@@ -4565,19 +4564,16 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
             x = argv[i] + 2;
           echo_it = 1;
           if (!x) {
-            fputs("Leere Datei für 'geprüfte Datei', stdout benutzt\n"
-                  "Empty file for checked file, using stdout\n",
-                  stderr);
+            fputs(_("No name given for checked file, using stdout"), stderr);
+            fputc('\n', stderr);
             OUT = stdout;
             break;
           }
           OUT = fopen(x, "w");
           if (!OUT) {
-            fprintf(stderr,
-                    "Kann Datei `%s' nicht schreiben:\n"
-                    "Can't write to file `%s':\n"
-                    " %s",
-                    x, x, strerror(errno));
+            fprintf(stderr, _("Can't write to file `%s':\n"
+                    " %s"), x, strerror(errno));
+            fputc('\n', stderr);
             exit(0);
           }
         }
@@ -4620,7 +4616,8 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
           } else
             x = argv[i] + 3;
           if (!x) {
-            fputs("-no ???\n", stderr);
+            fputs(_("-no what?"), stderr);
+            fputc('\n', stderr);
             break;
           }
           switch (*x) {
@@ -4647,14 +4644,13 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
             printhelp(argc, argv, i);
             exit(0);
           }
-          else
-            fprintf(ERR,
-                    "Option `%s' unbekannt.\n"
-                    "Unknow option `%s'\n",
-                    argv[i], argv[i]);
-          if (dostop) /* Nicht stoppen, wenn dies die Parameter  aus der Datei
+        } else {
+          fprintf(ERR, _("Unknown option %s"), argv[i]);
+          fputc('\n', stderr);
+          if (dostop) { /* Nicht stoppen, wenn dies die Parameter  aus der Datei
                          selbst sind! */
             exit(-1);
+          }
         }
         break;
 

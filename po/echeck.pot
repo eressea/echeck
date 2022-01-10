@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-12 18:04+0200\n"
+"POT-Creation-Date: 2022-01-10 12:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,6 +100,9 @@ msgid ""
 "-C      compact output\n"
 msgstr ""
 
+msgid "-no what?"
+msgstr ""
+
 msgid "; Delivery to"
 msgstr ""
 
@@ -119,6 +122,12 @@ msgid "Both coordinated must be supplied"
 msgstr ""
 
 msgid "Can't find unit to carry"
+msgstr ""
+
+#, c-format
+msgid ""
+"Can't write to file `%s':\n"
+" %s"
 msgstr ""
 
 msgid "Cannot attack a newly formed unit"
@@ -148,8 +157,11 @@ msgstr ""
 
 #, c-format
 msgid ""
-"ECheck (Version %s, %s), order file checker for Eressea - freeware!\n"
+"ECheck (Version %s), order file checker for Eressea - freeware!\n"
 "\n"
+msgstr ""
+
+msgid "Empty path invalid"
 msgstr ""
 
 #, c-format
@@ -242,6 +254,10 @@ msgstr ""
 msgid "Missing password"
 msgstr ""
 
+#, c-format
+msgid "Missing recruiting costs, set to %d"
+msgstr ""
+
 msgid "Missing unit"
 msgstr ""
 
@@ -268,6 +284,9 @@ msgid "No TEMPORARY number"
 msgstr ""
 
 msgid "No matching MAKE TEMP for END"
+msgstr ""
+
+msgid "No name given for checked file, using stdout"
 msgstr ""
 
 msgid "No text"
@@ -553,6 +572,10 @@ msgid "Unit must be in a castle, in a building or on a ship"
 msgstr ""
 
 #, c-format
+msgid "Unknown option %s"
+msgstr ""
+
+#, c-format
 msgid "Unknown option -%s"
 msgstr ""
 
@@ -575,6 +598,9 @@ msgid "Unrecognized skill"
 msgstr ""
 
 msgid "Unrecognized spell"
+msgstr ""
+
+msgid "Using stderr for error output"
 msgstr ""
 
 #, c-format
