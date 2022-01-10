@@ -145,7 +145,6 @@ const t_ech_file ECheck_Files[] = {
 
 const int filecount = sizeof(ECheck_Files) / sizeof(ECheck_Files[0]);
 int verbose = 1;
-static int compact = 0;
 
 #define SPACE_REPLACEMENT '~'
 #define SPACE ' '
@@ -1301,11 +1300,11 @@ this_unit_id(void)
 
 void
 log_message_va(
-  int level, 
+  int level,
   const char *file,
-  int line, 
+  int line,
   const char *order,
-  int unit_id, 
+  int unit_id,
   const char *format, va_list va)
 {
   char bf[65];
@@ -1340,7 +1339,7 @@ log_message_va(
     fprintf(ERR, ". '%s'\n", bf);
     break;
   case OUT_COMPILE:
-    fprintf(ERR, "%s:%d|%d|%s|", filename, line, level, itob(unit_id)); 
+    fprintf(ERR, "%s:%d|%d|%s|", filename, line, level, itob(unit_id));
     vfprintf(ERR, format, va);
     fprintf(ERR, "|%s\n", bf);
     break;
@@ -1383,6 +1382,17 @@ log_warning(
   log_message_va(level, file, line, order, unit_id, format, va);
   va_end(va);
 }
+
+void
+log_footer(
+  const char *filename,
+  int warning_count,
+  int error_count)
+{
+  fprintf(ERR, "%s|warnings|%d\n%s|errors|%d\n",
+    filename, warning_count, filename, error_count);
+}
+
 
 int btoi(char *s) {
   char *x = s;
@@ -2245,7 +2255,7 @@ void orders_for_temp_unit(unit *u) {
     /*
      * in Regionen steht die aktuelle Region drin
      */
-    log_error(filename, line_no, order_buf, this_unit_id(), 
+    log_error(filename, line_no, order_buf, this_unit_id(),
       _("TEMP %s was already used in line %d"),
       itob(u->no), u->start_of_orders_line);
     /*
@@ -2610,7 +2620,7 @@ void checkgiving(void) {
       }
       order_unit->money -= n;
       if (order_unit->money < 0 && no_comment < 1 && !does_default) {
-        log_warning(4, filename, line_no, order_buf, this_unit_id(), 
+        log_warning(4, filename, line_no, order_buf, this_unit_id(),
           _("Unit %s may have not enough silver"), uid(order_unit));
       }
       break;
@@ -2929,7 +2939,7 @@ void checkdirections(int key) {
   }
   if (!does_default) {
     if (order_unit->hasmoved) {
-      log_error(filename, line_no, order_buf, this_unit_id(), 
+      log_error(filename, line_no, order_buf, this_unit_id(),
         _("Unit %s already has moved"), uid(order_unit));
       return;
     }
@@ -3218,7 +3228,7 @@ void check_money(
           _("Unit TEMP %s was never created with MAKE TEMP"), itob(u->no));
       }
       if (u->people < 0) {
-        log_warning(3, filename, u->line_no, NULL, 0, 
+        log_warning(3, filename, u->line_no, NULL, 0,
           _("Unit %s has %d men"), uid(u), u->people);
       }
 
@@ -3645,12 +3655,12 @@ void checkanorder(char *Orders) {
       /*
        * damit laengere Angriffe nicht in Warnungs-Tiraden ausarten
        */
-      log_warning(5, filename, line_no, order_buf, this_unit_id(), 
+      log_warning(5, filename, line_no, order_buf, this_unit_id(),
         _("Longer combats exclude long orders"));
       attack_warning = 1;
     }
     if (getaunit(42) == 42) {
-      log_error(filename, line_no, order_buf, this_unit_id(), 
+      log_error(filename, line_no, order_buf, this_unit_id(),
            _("There must be one ATTACK-order per unit"));
     }
     break;
@@ -3935,7 +3945,7 @@ void checkanorder(char *Orders) {
     scat(printkeyword(K_PASSWORD));
     s = getstr();
     if (!s[0])
-      log_error(filename, line_no, order_buf, this_unit_id(), 
+      log_error(filename, line_no, order_buf, this_unit_id(),
         _("Password cleared"));
     else
       checkstring(s, NAMESIZE, POSSIBLE);
@@ -4105,7 +4115,7 @@ void checkanorder(char *Orders) {
           _("Can't find unit to carry"));
     }
     if (getaunit(42) == 42)
-      log_error(filename, line_no, order_buf, this_unit_id(), 
+      log_error(filename, line_no, order_buf, this_unit_id(),
           _("There must be one CARRY-order per unit"));
     break;
 
@@ -4237,7 +4247,7 @@ void checkanorder(char *Orders) {
     if (*s)
       Scat(s);
     else {
-      log_error(filename, line_no, order_buf, this_unit_id(), 
+      log_error(filename, line_no, order_buf, this_unit_id(),
         _("Missing argument for %s"), printkeyword(i));
     }
     break;
@@ -4379,54 +4389,71 @@ void help_keys(char key) {
 }
 
 void files_not_found(FILE *F) {
-  fputs("\n  **  ", F);
-  fprintf(F, "ECheck V%s", echeck_version);
-  fputs("   **\n\n", F);
-  fprintf(F, _("cannot read configuration files from %s/%s"), g_basedir,
-          echeck_locale);
-  fputs("\n\n", F);
+    if (compile) {
+        fprintf(F, "%s|version|%s|0\n", filename, echeck_version);
+        fprintf(F, "%s|-1|-1|Internal Error|", filename);
+        fprintf(F, _("cannot read configuration files from %s/%s"),
+          g_basedir, echeck_locale);
+        fputc('\n', F);
+        log_footer(filename, warning_count, error_count+1);
+    } else {
+        fputs("\n  **  ", F);
+        fprintf(F, "ECheck V%s", echeck_version);
+        fputs("   **\n\n", F);
+        fprintf(F, _("cannot read configuration files from %s/%s"), g_basedir,
+        echeck_locale);
+        fputs("\n\n", F);
+    }
 }
 
 void printversion() {
-  fprintf(stdout,
-          _("ECheck (Version %s), order file checker for Eressea - "
-            "freeware!\n\n"),
+  /* The first , is for magellan */
+  fprintf(ERR,
+          _("ECheck (Version %s,), order file checker for Eressea - "
+            "freeware!"),
           echeck_version);
+  fputc('\n', ERR);
 }
 
-void printhelp(int argc, char *argv[], int index) {
+void printhelp() {
   printversion();
-  fprintf(stdout,
+  fputc('\n', ERR);
+  fprintf(ERR,
           _("-Ppath  search path for the additional files;"
             " locale %s will be appended\n"
             "-Rgame  read files from subdirectory game; default: e2\n"
+            "-Lloc   select locale loc\n"
             "-       use stdin instead of an input file\n"
             "-b      suppress warnings and errors (brief)\n"
-            "-q      do not expect hints regarding men/silver within [] after "
-            "UNIT\n"
-            "-rnnn   set recruit costs to nnn silver\n"
-            "-c      compiler-like output\n"
+            "-c      compiler-like output - may be removed in the future!\n"
             "-m      magellan-useable output\n"
             "-e      send checked file to stdout, errors to stderr\n"
             "-E      send checked file to stdout, errors to stdout\n"
+            "-s      use stderr for warnings, errors, etc. instead of stdout\n"
             "-ofile  write checked file into 'file'\n"
             "-Ofile  write errors into 'file'\n"
-            "-h      show this little help\n"
-            "-s      use stderr for warnings, errors, etc. instead of stdout\n"
             "-p      abbreviate some output for piping\n"
+            "-q      do not expect hints regarding men/silver within [] after "
+            "UNIT\n"
+            "-rnnn   set recruit costs to nnn silver\n"
             "-l      simulate silverpool\n"
+            "-x      line counting starts with FACTION\n"
             "-n      do not count lines with NameMe comments (;;)\n"
             "-noxxx  no xxx warnings. xx can be:\n"
             "  ship   unit steers a ship but may lack control\n"
             "  route  do not check for cyclic ROUTE\n"
             "  lost   unit loses silver and items\n"
-            "-w[n]   warnings of level n (default:   4)\n"
-            "-x      line counting starts with FACTION\n"
-            "-Lloc   select locale loc\n"
-            "-vm.l   mainversion.level - to check for correct ECheck-Version\n"
+            "-w[n]   warnings of level n (default: 4)\n"
+            "        1: mainly syntax errors\n"
+            "        4: almost all errors\n"
+            "        5: teachers / students\n"
             "-Q      quiet\n"
-            "-C      compact output\n"),
+            "-C      no effect\n"
+            "-vm.l   no effect\n"
+            "-h      show this little help and exit\n"
+            "-V      print version information and exit"),
           echeck_locale);
+  fputc('\n', ERR);
 }
 
 int check_options(int argc, char *argv[], char dostop, char command_line) {
@@ -4458,22 +4485,13 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
         break;
 
       case 'C':
-        compact = 1;
+        /* deprecated, was: compact output */
         break;
 
       case 'v':
+        /* deprecated */
         if (argv[i][2] == 0) { /* -V version */
           i++;
-          if (!argv[i])
-            break;
-        }
-        x = strchr(argv[i], '.');
-        if (x) {
-          *x = 0;
-          if (strncmp(echeck_version, argv[i] + 2, strlen(argv[i] + 2)) == 0) {
-            *x = '.';
-            x++;
-          }
         }
         break;
 
@@ -4696,7 +4714,8 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
 
       default:
         if (argv[i][1]) { /* sonst ist das nur '-' => stdin lesen */
-          fprintf(ERR, _("Unknown option -%s"), argv[i]);
+          fprintf(ERR, _("Unknown option %s"), argv[i]);
+          fputc('\n', ERR);
           if (dostop) {
             /* Nicht stoppen, wenn dies die Parameter aus der Datei selbst sind!
              */
@@ -4848,7 +4867,9 @@ void process_order_file(int *faction_count, int *unit_count) {
       befehle_ende = 0;
       f = readafaction();
       if (brief <= 1) {
-        if (!compile) {
+        if (compile) {
+          fprintf(ERR, "%s:faction:%s", filename, itob(f));
+        } else {
           fprintf(ERR, _("Found orders for faction %s."), itob(f));
         }
         fputc('\n', ERR);
@@ -5109,7 +5130,7 @@ static const char *findpath(void) {
     }
   }
 #endif
-  /* finally, check the binary's location, because windows installs 
+  /* finally, check the binary's location, because windows installs
    * everything in one place under program files.
    */
   i = wai_getExecutablePath(NULL, 0, NULL);
@@ -5264,8 +5285,9 @@ int echeck_main(int argc, char *argv[]) {
       filename = argv[i];
       if (!compile) {
         fprintf(ERR, _("Processing file '%s'."), argv[i]);
-        if (!compact)
-          fputc('\n', ERR);
+        fputc('\n', ERR);
+      } else {
+        fprintf(ERR, "%s|version|%s|%s\n", filename, echeck_version, __DATE__);
       }
       bom = fgetc(F);
       if (bom == 0xef) {
@@ -5280,12 +5302,15 @@ int echeck_main(int argc, char *argv[]) {
    * Falls es keine input Dateien gab, ist F immer noch auf stdin
    * gesetzt
    */
-  if (F == stdin)
+  if (F == stdin) {
+    if (compile)
+      fprintf(ERR, "%s|version|%s|%s\n", filename, echeck_version, __DATE__);
     process_order_file(&faction_count, &unit_count);
-
+  }
   free(g_path);
 
   if (compile) {
+    log_footer(filename, warning_count, error_count);
     return error_count;
   }
 
