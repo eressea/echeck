@@ -23,7 +23,6 @@ AND, ~and
 ASSUMING200STUDYCOSTS, Assuming learnng costs of 200 silver
 AWARNING, ~a warning
 BEFOREINCOME, before income 
-BREEDHORSESORHERBS, BREED HORSES or BREED HERBS
 BUILDINGNEEDSSILVER, Unit %s needs %d more silver to maintain a building
 BUTDOESNTLEARN, ~but doesn't learn
 BUYALLNOTPOSSIBLE, BUY and ALL cannot be combined

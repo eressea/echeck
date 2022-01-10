@@ -14,8 +14,8 @@
 
 0PERSONSLEARN, Einheit %s hat 0 Personen und wird von Einheit 
 0PERSONSTEACH, Einheit %s hat 0 Personen und lehrt Einheit 
-1ATTACKPERUNIT, Pro Einheit muß ein ATTACKIERE-Befehl gegeben werden
-1CARRYPERUNIT, Pro Einheit muß ein TRANSPORTIERE-Befehl gegeben werden
+1ATTACKPERUNIT, Pro Einheit muss ein ATTACKIERE-Befehl gegeben werden
+1CARRYPERUNIT, Pro Einheit muss ein TRANSPORTIERE-Befehl gegeben werden
 1PERSONPERMAGEUNIT, Magiereinheiten dürfen nur eine Person haben
 ACTIVATED, ~aktiviert.
 ALREADYUSEDINLINE, "TEMP %s" wurde in Zeile %d schon gebraucht
@@ -23,7 +23,6 @@ AND, ~und
 ASSUMING200STUDYCOSTS, Lernkosten mit 200 Silber angenommen
 AWARNING, ~eine Warnung
 BEFOREINCOME, vor den Einnahmen 
-BREEDHORSESORHERBS, ZÜCHTE PFERDE oder ZÜCHTE KRÄUTER
 BUILDINGNEEDSSILVER, Einheit %s braucht noch %d Silber, um ein Gebäude zu unterhalten.
 BUTDOESNTLEARN, ~gelehrt, lernt aber nicht.
 BUYALLNOTPOSSIBLE, KAUFE geht nicht mit ALLES
@@ -38,7 +37,6 @@ CANTMAKETHAT, Sowas kann man nicht machen
 CANTREADFILE, Kann Datei '%s' nicht lesen\n
 CANTRENAMEOBJECT, Objekt kann nicht umbenannt werden
 COMBATSPELLSET, Kampfzauber gesetzt
-DELIVERYTO, ; Zustellung an 
 DIRECTION, <richtung>
 DISCOVERED, ~entdeckt.\n
 DOESNTCARRY, Einheit %s fährt mit Einheit %s, diese transportiert aber nicht

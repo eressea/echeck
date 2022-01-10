@@ -2117,6 +2117,7 @@ void checkemail(void) {
     return;
   }
   scat(_("; Delivery to"));
+  scat(" ");
   scat(addr);
 }
 
