@@ -4415,40 +4415,45 @@ void printversion() {
   fputc('\n', ERR);
 }
 
-void printhelp(int argc, char *argv[], int index) {
+void printhelp() {
   printversion();
   fputc('\n', ERR);
   fprintf(ERR,
           _("-Ppath  search path for the additional files;"
             " locale %s will be appended\n"
             "-Rgame  read files from subdirectory game; default: e2\n"
+            "-Lloc   select locale loc\n"
             "-       use stdin instead of an input file\n"
             "-b      suppress warnings and errors (brief)\n"
-            "-q      do not expect hints regarding men/silver within [] after "
-            "UNIT\n"
-            "-rnnn   set recruit costs to nnn silver\n"
-            "-c      compiler-like output\n"
+            "-c      compiler-like output - may be removed in the future!\n"
             "-m      magellan-useable output\n"
             "-e      send checked file to stdout, errors to stderr\n"
             "-E      send checked file to stdout, errors to stdout\n"
+            "-s      use stderr for warnings, errors, etc. instead of stdout\n"
             "-ofile  write checked file into 'file'\n"
             "-Ofile  write errors into 'file'\n"
-            "-h      show this little help\n"
-            "-s      use stderr for warnings, errors, etc. instead of stdout\n"
             "-p      abbreviate some output for piping\n"
+            "-q      do not expect hints regarding men/silver within [] after "
+            "UNIT\n"
+            "-rnnn   set recruit costs to nnn silver\n"
             "-l      simulate silverpool\n"
+            "-x      line counting starts with FACTION\n"
             "-n      do not count lines with NameMe comments (;;)\n"
             "-noxxx  no xxx warnings. xx can be:\n"
             "  ship   unit steers a ship but may lack control\n"
             "  route  do not check for cyclic ROUTE\n"
             "  lost   unit loses silver and items\n"
-            "-w[n]   warnings of level n (default:   4)\n"
-            "-x      line counting starts with FACTION\n"
-            "-Lloc   select locale loc\n"
-            "-vm.l   mainversion.level - to check for correct ECheck-Version\n"
+            "-w[n]   warnings of level n (default: 4)\n"
+            "        1: mainly syntax errors\n"
+            "        4: almost all errors\n"
+            "        5: teachers / students\n"
             "-Q      quiet\n"
-            "-C      compact output\n"),
+            "-C      no effect\n"
+            "-vm.l   no effect\n"
+            "-h      show this little help and exit\n"
+            "-V      print version information and exit"),
           echeck_locale);
+  fputc('\n', ERR);
 }
 
 int check_options(int argc, char *argv[], char dostop, char command_line) {
