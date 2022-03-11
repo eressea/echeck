@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.6.8";
+static const char *echeck_version = "4.6.9";
 
 #define DEFAULT_PATH "."
 
@@ -2587,6 +2587,21 @@ void checkgiving(void) {
     }
     i = findparam(s);
     switch (i) {
+    case P_SHIP:
+      Scat(printparam(i));
+      if (cmd_unit->ship >= 0) {
+        log_warning(
+          4, filename, line_no, order_buf, cmd_unit->no,
+          _("Unit %s may not be in control of a ship"),
+          uid(cmd_unit));
+      }
+      if (order_unit->ship >= 0) {
+        log_warning(4, filename, line_no, order_buf, this_unit_id(),
+                    _("Unit %s may not be in control of a ship"),
+                    uid(order_unit));
+      }
+      break;
+
     case P_PERSON:
       Scat(printparam(i));
       if (n < 0)
