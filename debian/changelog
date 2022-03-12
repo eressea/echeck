@@ -1,6 +1,7 @@
 echeck (4.6.9-1) stable; urgency=high
 
   * implement support for GIVE SHIP (bug 2830)
+  * implement support for RESERVIERE ALLES (bug 2708)
 
  -- Enno Rehling <enno@eressea.de>  Fri, 11 Mar 2021 21:00:00 +0200
 echeck (4.6.8-1) stable; urgency=high

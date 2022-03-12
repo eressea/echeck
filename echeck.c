@@ -3044,21 +3044,27 @@ void reserve(void) {
   s = getstr();
   n = atoi(s);
   if (n < 1) {
-    if (findparam(s) == P_EACH) {
+    int p = findparam(s);
+    if (p == P_EACH) {
+      Scat(printparam(p));
       s = getstr();
       n = atoi(s);
+      icat(n);
       n *= order_unit->people;
       if (n < 1) {
-        log_error(filename, line_no, order_buf, this_unit_id(), cgettext(Errors[NUMMISSING]));
+        log_error(filename, line_no, order_buf, this_unit_id(),
+                  cgettext(Errors[NUMMISSING]));
         n = 1;
       }
+    } else if (p == P_ALLES) {
+      Scat(printparam(p));
+      n = 1;
     } else {
       log_error(filename, line_no, order_buf, this_unit_id(), cgettext(Errors[NUMMISSING]));
       n = 1;
+      icat(n);
     }
   }
-  if (n > 0)
-    icat(n);
 
   s = getstr();
 
