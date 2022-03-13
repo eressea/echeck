@@ -230,8 +230,8 @@ msgid "Illegal argument for %s"
 msgstr "Ungültiger %s Status"
 
 #, c-format
-msgid "Units in %s (%d,%d) reserved more silver (%d) than available (%d)."
-msgstr "In %s (%d, %d) wurde %d Silber reserviert, aber nur %d ist verfügbar."
+msgid "Units in %s (%d,%d) reserved more silver (%d) than available (%d)"
+msgstr "In %s (%d, %d) wurde %d Silber reserviert, aber nur %d ist verfügbar"
 
 msgid "Incorrect password"
 msgstr "Nicht das korrekte Passwort eingesetzt"
@@ -432,9 +432,9 @@ msgstr "Die Befehle scheinen in Ordnung zu sein."
 
 #, c-format
 msgid ""
-"There is not enough silver in %s (%d,%d) for upkeep; %d silver is missing."
+"There is not enough silver in %s (%d,%d) for upkeep; %d silver is missing"
 msgstr ""
-"Das Silber in %s (%d,%d) reicht evtl. nicht zum Leben; es fehlen %d Silber."
+"Das Silber in %s (%d,%d) reicht evtl. nicht zum Leben; es fehlen %d Silber"
 
 msgid "There must be one ATTACK-order per unit"
 msgstr "Für jede attackierte Einheit muss ein separater Befehl gegeben werden"

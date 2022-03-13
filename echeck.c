@@ -3255,8 +3255,7 @@ void check_money(
         if (r->reserviert > 0 &&
             r->reserviert > r->geld) { /* nur  explizit   mit  RESERVIERE  */
             log_warning(3, filename, r->line_no, NULL, 0,
-                 _("Units in %s (%d,%d) reserved more silver (%d) than "
-                    "available (%d)."),
+                 _("Units in %s (%d,%d) reserved more silver (%d) than available (%d)"),
                   r->name, r->x, r->y, r->reserviert, r->geld);
         }
       }
@@ -3428,7 +3427,7 @@ void check_living(void) {
         r->geld -= u->people * 10;
     if (r->geld < 0) {
       log_warning(4, filename, r->line_no, NULL, 0,
-        _("There is not enough silver in %s (%d,%d) for upkeep; %d silver is missing."),
+        _("There is not enough silver in %s (%d,%d) for upkeep; %d silver is missing"),
         r->name, r->x, r->y, -(r->geld));
     }
   }
@@ -5171,6 +5170,7 @@ void init_intl(void) {
   else {
     bindtextdomain("echeck", "/usr/share/locale");
   }
+  bind_textdomain_codeset("echeck", "UTF-8");
   textdomain("echeck");
 }
 #endif
