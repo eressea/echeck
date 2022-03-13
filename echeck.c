@@ -1311,11 +1311,12 @@ log_message_va(
 
   if (brief) return;
 
-  if (!order)
-    strcpy(bf, "...");
-  else
+  if (!order || order[0] == 0) {
+    bf[0] = 0;
+  } else {
     strncpy(bf, order, 64);
-  strcpy(bf + 61, "..."); /* zu lange Befehle ggf. kürzen */
+    strcpy(bf + 61, "..."); /* zu lange Befehle ggf. kürzen */
+  }
 
   if (level == LOG_ERROR) {
     ++error_count;
