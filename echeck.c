@@ -1298,13 +1298,13 @@ this_unit_id(void)
 
 #define LOG_ERROR 0
 
-void
+static void
 log_message_va(
-  int level, 
+  int level,
   const char *file,
-  int line, 
+  int line,
   const char *order,
-  int unit_id, 
+  int unit_id,
   const char *format, va_list va)
 {
   char bf[65];
@@ -1458,10 +1458,6 @@ const char *Uid(int i) {
     u = newunit(-1, 0);
   }
   return uid(u);
-}
-
-void warning(const char *s, int line, char *order, char level) {
-  log_warning(level, filename, line, order, this_unit_id(), s);
 }
 
 static const struct warning {
@@ -3346,9 +3342,9 @@ void check_money(
       continue;
 
     if (u->transport && u->drive && u->drive != u->transport) {
-      sprintf(checked_buf, _("Unit %s is carried by unit %s but rides with %s"),
-              uid(u), Uid(u->transport), Uid(u->drive));
-      warning(checked_buf, u->line_no, u->long_order, 1);
+      log_warning(1, filename, u->line_no, u->long_order, this_unit_id(),
+                  _("Unit %s is carried by unit %s but rides with %s"), uid(u),
+                  Uid(u->transport), Uid(u->drive));
       continue;
     }
     if (u->drive) { /* FAHRE; in u->transport steht die  transportierende
