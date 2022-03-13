@@ -177,7 +177,6 @@ int echo_it = 0,    /* option: echo input lines */
   use_stderr = 0,    /* option: use stderr for errors etc */
   brief = 0,         /* option: don't list errors */
   ignore_NameMe = 0, /* option: ignoriere NameMe-Kommentare ;; */
-  piping = 0,        /* option: wird output als pipe-input  benutzt? */
   lohn = 10,         /* Lohn für Arbeit - je Region zu setzen */
   silberpool = 1,    /* option: Silberpool-Verwaltung */
   line_start = 0,    /* option: Beginn der Zeilenzählung */
@@ -2637,40 +2636,16 @@ void checkgiving(void) {
         if (i < 0) {
           i = findpotion(s);
           if (i >= 0) {
-            if (piping) {
-              strcpy(warn_buf, printliste(i, potionnames));
-              s = strchr(warn_buf, ' ');
-              if (s)
-                *s = 0;
-              Scat(warn_buf);
-            } else {
-              qcat(printliste(i, potionnames));
-            }
+            qcat(printliste(i, potionnames));
           } else {
             log_warning(1, filename, line_no, order_buf, this_unit_id(),
               _("Unrecognized object"));
           }
         } else {
-          if (piping) {
-            strcpy(warn_buf, printliste(i, herbdata));
-            s = strchr(warn_buf, ' ');
-            if (s)
-              *s = 0;
-            Scat(warn_buf);
-          } else {
-            qcat(printliste(i, herbdata));
-          }
+          qcat(printliste(i, herbdata));
         }
       } else {
-        if (piping) {
-          strcpy(warn_buf, ItemName(i, n != 1));
-          s = strchr(warn_buf, ' ');
-          if (s)
-            *s = 0;
-          Scat(warn_buf);
-        } else {
-          qcat(ItemName(i, n != 1));
-        }
+        qcat(ItemName(i, n != 1));
       }
       break;
     }
@@ -2819,15 +2794,7 @@ void checkmake(void) {
   if (i >= 0 && ItemPrice(i) == 0) {
     if (j)
       icat(j);
-    if (piping) {
-      strcpy(warn_buf, ItemName(i, 1));
-      s = strchr(warn_buf, ' ');
-      if (s)
-        *s = 0;
-      Scat(warn_buf);
-    } else {
-      qcat(ItemName(i, 1));
-    }
+    qcat(ItemName(i, 1));
     long_order();
     return;
   }
@@ -2836,15 +2803,7 @@ void checkmake(void) {
   if (i != -1) {
     if (j)
       icat(j);
-    if (piping) {
-      strcpy(warn_buf, printliste(i, potionnames));
-      s = strchr(warn_buf, ' ');
-      if (s)
-        *s = 0;
-      Scat(warn_buf);
-    } else {
-      qcat(printliste(i, potionnames));
-    }
+    qcat(printliste(i, potionnames));
     long_order();
     return;
   }
@@ -4434,7 +4393,6 @@ void printhelp(int argc, char *argv[], int index) {
             "-Ofile  write errors into 'file'\n"
             "-h      show this little help\n"
             "-s      use stderr for warnings, errors, etc. instead of stdout\n"
-            "-p      abbreviate some output for piping\n"
             "-l      simulate silverpool\n"
             "-n      do not count lines with NameMe comments (;;)\n"
             "-noxxx  no xxx warnings. xx can be:\n"
@@ -4602,10 +4560,6 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
             exit(0);
           }
         }
-        break;
-
-      case 'p':
-        piping = 1;
         break;
 
       case 'x':
@@ -5175,6 +5129,7 @@ void echeck_init(void) {
 
 #ifdef HAVE_GETTEXT
 #ifdef WIN32
+#include <windows.h>
 #define PATH_SEP '\\'
 #else
 #define PATH_SEP '/'
@@ -5184,8 +5139,6 @@ void init_intl(void) {
   const char *reldir = "locale";
   size_t length;
   int dirname_length;
-
-  setlocale(LC_ALL, "");
 
   length = (size_t)wai_getExecutablePath(NULL, 0, &dirname_length);
   if (length > 0) {
