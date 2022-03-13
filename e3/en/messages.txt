@@ -125,7 +125,6 @@ QUITMSG, Attention! QUIT found! Your faction will be cancelled!
 REGIONMISSSILVER, There is not enough silver in %s (%d,%d) for upkeep; %d silver is missing.
 RESEARCHHERBSONLY, There is RESEARCH HERBS
 RESERVE0SENSELESS, RESERVE 0 xxx doesn't make any sense
-RESERVEDTOOMUCH, In %s (%d,%d) there was reserved more silver (%d) than available (%d).
 RESERVEWHAT, RESERVE what?
 RESTARTMSG, RESTART found!
 RIDESWRONGUNIT, Unit %s is carried by unit %s but rides with 

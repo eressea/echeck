@@ -124,7 +124,6 @@ QUITMSG, Achtung! STIRB gegeben! Die Partei wird aufgelöst!
 REGIONMISSSILVER, Das Silber in %s (%d,%d) reicht evtl. nicht zum Leben; es fehlen %d Silber.
 RESEARCHHERBSONLY, Es gibt nur FORSCHE KRÄUTER
 RESERVE0SENSELESS, RESERVIERE 0 xxx macht keinen Sinn
-RESERVEDTOOMUCH, In %s (%d,%d) wurde mehr Silber reserviert (%d) als vorhanden (%d).
 RESERVEWHAT, RESERVIERE was?
 RIDESWRONGUNIT, Einheit %s wird von Einheit %s transportiert, fährt aber mit 
 ROUTENOTCYCLIC, ROUTE ist kein Kreis; (%d,%d) -> (%d,%d)

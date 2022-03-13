@@ -3198,7 +3198,7 @@ void check_money(
           _("Unit TEMP %s was never created with MAKE TEMP"), itob(u->no));
       }
       if (u->people < 0) {
-        log_warning(3, filename, u->line_no, NULL, 0, 
+        log_warning(3, filename, u->line_no, NULL, u->no, 
           _("Unit %s has %d men"), uid(u), u->people);
       }
 
@@ -3216,7 +3216,7 @@ void check_money(
               itob(u->no));
           }
         } else if (no_comment <= 0) {
-          log_warning(3, filename, u->line_no, u->order, 0,
+          log_warning(3, filename, u->line_no, u->order, u->no,
             _("Unit %s may lose silver and/or items"), itob(u->no));
         }
       }
@@ -3254,7 +3254,7 @@ void check_money(
         if (r->reserviert > 0 &&
             r->reserviert > r->geld) { /* nur  explizit   mit  RESERVIERE  */
             log_warning(3, filename, r->line_no, NULL, 0,
-                 _("In %s (%d,%d) there was reserved more silver (%d) than "
+                 _("Units in %s (%d,%d) reserved more silver (%d) than "
                     "available (%d)."),
                   r->name, r->x, r->y, r->reserviert, r->geld);
         }

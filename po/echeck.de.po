@@ -230,7 +230,7 @@ msgid "Illegal argument for %s"
 msgstr "Ungültiger %s Status"
 
 #, c-format
-msgid "In %s (%d,%d) there was reserved more silver (%d) than available (%d)."
+msgid "Units in %s (%d,%d) reserved more silver (%d) than available (%d)."
 msgstr "In %s (%d, %d) wurde %d Silber reserviert, aber nur %d ist verfügbar."
 
 msgid "Incorrect password"
