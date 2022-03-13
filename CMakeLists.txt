@@ -12,6 +12,7 @@ target_compile_definitions (echeck PRIVATE -D_DEFAULT_SOURCE)
 target_compile_definitions (tests PRIVATE -D_DEFAULT_SOURCE)
 endif()
 find_package(Intl)
+find_package(Gettext)
 include_directories(${Intl_INCLUDE_DIR})
 
 if (Intl_FOUND)
