@@ -5164,7 +5164,11 @@ void init_intl(void) {
     bindtextdomain("echeck", reldir);
   }
   else {
+#ifdef WIN32
+    fprintf(stderr, "Cannot find echeck.mo message catalog\n");
+#else
     bindtextdomain("echeck", "/usr/share/locale");
+#endif
   }
   bind_textdomain_codeset("echeck", "UTF-8");
   textdomain("echeck");
