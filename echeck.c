@@ -1347,7 +1347,11 @@ log_message_va(
   default:
     fputs(": ", ERR);
     vfprintf(ERR, format, va);
-    fprintf(ERR, ".\n  '%s'\n", bf);
+    if (bf[0]) {
+      fprintf(ERR, ".\n  '%s'\n", bf);
+    } else {
+      fputc('\n', ERR);
+    }
     break;
   }
 }
