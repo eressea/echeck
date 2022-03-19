@@ -5131,44 +5131,28 @@ void echeck_init(void) {
 #define PATH_SEP '/'
 #endif
 void init_intl(void) {
-  char *path = NULL;
   const char *reldir = "locale";
-  size_t length;
-  int dirname_length;
 
-  length = (size_t)wai_getExecutablePath(NULL, 0, &dirname_length);
-  if (length > 0) {
-    /* TODO: this is a worst-case allocation */
-    path = malloc(length + strlen(reldir) + 1);
-    if (path) {
-      char *pos;
-      wai_getExecutablePath(path, (int)length, &dirname_length);
-      path[length] = 0;
-      pos = strrchr(path, PATH_SEP);
-      if (pos) {
-        strcpy(pos + 1, reldir);
-        if (0 != fileexists(path)) {
+  setlocale(LC_ALL, "");
+  if (!bindtextdomain("echeck", NULL) && !bindtextdomain("echeck", reldir)) {
+    int dirname_length;
+    size_t length = (size_t)wai_getExecutablePath(NULL, 0, &dirname_length);
+    if (length > 0) {
+      /* TODO: this is a worst-case allocation */
+      char * path = malloc(length + strlen(reldir) + 1);
+      if (path) {
+        char *pos;
+        wai_getExecutablePath(path, (int)length, &dirname_length);
+        path[length] = 0;
+        pos = strrchr(path, PATH_SEP);
+        if (pos) {
+          strcpy(pos + 1, reldir);
+          bindtextdomain("echeck", path);
           free(path);
           path = NULL;
         }
-      } else {
-        free(path);
-        path = NULL;
       }
     }
-  }
-  if (path) {
-    bindtextdomain("echeck", path);
-    free(path);
-  } else if (fileexists(reldir) == 0) {
-    bindtextdomain("echeck", reldir);
-  }
-  else {
-#ifdef WIN32
-    fprintf(stderr, "Cannot find echeck.mo message catalog\n");
-#else
-    bindtextdomain("echeck", "/usr/share/locale");
-#endif
   }
   bind_textdomain_codeset("echeck", "UTF-8");
   textdomain("echeck");

@@ -1,3 +1,8 @@
+echeck (4.6.9-2) stable; urgency=low
+
+  * fix locale support
+
+ -- Enno Rehling <enno@eressea.de>  Sat, 19 Mar 2021 16:10:00 +0200
 echeck (4.6.9-1) stable; urgency=high
 
   * implement support for GIVE SHIP (bug 2830)
