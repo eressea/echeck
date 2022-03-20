@@ -4278,7 +4278,7 @@ void readaunit(void) {
           return;
         }
     }
-    if (order_buf[0])
+    if (order_unit && order_buf[0])
       checkanorder(order_buf);
   }
 }
@@ -4844,7 +4844,7 @@ void process_order_file(int *faction_count, int *unit_count) {
       if (f) {
         scat(order_buf);
         readaunit();
-        if (unit_count)
+        if (order_unit && unit_count)
           ++*unit_count;
       } else
         get_order();
