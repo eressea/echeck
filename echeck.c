@@ -445,12 +445,10 @@ enum {
   PROCESSINGFILE,
   QUITMSG,
   RECRUITCOSTSSET,
-  RESERVE0SENSELESS,
   SCHOOLCHOSEN,
   SORT,
   UNITALREADYHASORDERS,
   UNITMOVESSHIP,
-  UNITONSHIPHASMOVED,
   MAX_ERRORS
 };
 
@@ -494,12 +492,10 @@ static const char *Errors[MAX_ERRORS] = {
   "PROCESSINGFILE",
   "QUITMSG",
   "RECRUITCOSTSSET",
-  "RESERVE0SENSELESS",
   "SCHOOLCHOSEN",
   "SORT",
   "UNITALREADYHASORDERS",
   "UNITMOVESSHIP",
-  "UNITONSHIPHASMOVED",
 };
 
 typedef struct _names {
@@ -1496,7 +1492,6 @@ static const struct warning {
                      "Password missing!  ****\n\n")},
   {"PROCESSINGFILE", t("Processing file '%s'.")},
   {"QUITMSG", t("Attention! QUIT found! Your faction will be cancelled!")},
-  {"RESERVE0SENSELESS", t("RESERVE 0 xxx doesn't make any sense")},
   {"SCHOOLCHOSEN", t("School '%s' chosen.\n")},
   {"SORT", t("SORT BEFORE or BEHIND <unit>")},
   {"TEMPHASNTPERSONS",
@@ -1513,7 +1508,6 @@ static const struct warning {
   {"UNITMUSTBEONSHIP",
    t("Unit must be in a castle, in a building or on a ship")},
   {"UNITNOTONSHIPBUTONSHIP", t("Unit %s may be on ship %s instead of ship %s")},
-  {"UNITONSHIPHASMOVED", t("Unit %s on ship %s has already moved")},
   {NULL, NULL}};
 
 const char *cgettext(const char *token) {
@@ -2105,7 +2099,7 @@ void checkemail(void) {
   checkstring(addr, DESCRIBESIZE, NECESSARY);
 
   if (!addr) {
-    log_warning(2, filename, line_no, order_buf, this_unit_id(),
+    log_warning(1, filename, line_no, order_buf, this_unit_id(),
       _("Please set email with EMAIL"));
     sprintf(bf, "; %s!", _("Please set email with EMAIL"));
     scat(bf);
@@ -2145,15 +2139,11 @@ void orders_for_unit(int i, unit *u) {
   set_order_unit(mother_unit = u);
 
   if (u->start_of_orders_line) {
-    do {
-      i++;
-      if (i < 1)
-        i = 1;
-      u = newunit(i, 0);
-    } while (u->start_of_orders_line);
-    log_warning(1, filename, line_no, order_buf, this_unit_id(),
-      _("Using unit %s"), itob(i));
-    set_order_unit(u);
+    log_error(filename, line_no, order_buf, this_unit_id(),
+      _("Unit %s already appeared in line %d"), itob(i),
+      u->start_of_orders_line);
+    set_order_unit(NULL);
+    return;
   }
 
   u->start_of_orders = STRDUP(order_buf);
@@ -2328,7 +2318,7 @@ void checknaming(void) {
   }
   if (strchr(s, '('))
     log_warning(1, filename, line_no, order_buf, this_unit_id(),
-      _("Names must not contain brackets"));
+      _("Names must not contain parentheses"));
 
   switch (i) {
   case -1:
@@ -2720,9 +2710,10 @@ void checkmake(void) {
 
   if (isdigit(*s)) { /* MACHE anzahl "Gegenstand" */
     j = atoi(s);
-    if (j == 0)
+    if (j == 0) {
       log_warning(2, filename, line_no, order_buf, this_unit_id(),
         _("Number 0 does not make sense here"));
+    }
     s = getstr();
   }
 
@@ -3207,13 +3198,13 @@ void check_money(
           ((!nolost && !u->temp && u->money > 0) || u->temp)) {
         if (u->temp) {
           if (u->money > 0) {
-            log_warning(2, filename, u->line_no, u->order, 0,
-              _("Unit TEMPORARY %s hasn't recruited and hasn't got "
-                "any men! It may lose silver and/or items"), itob(u->no));
+            log_warning(3, filename, u->line_no, u->order, 0,
+              _("Unit TEMPORARY %s has no men and is not recruiting!"
+                " It may lose silver and/or items"), itob(u->no));
           }
           else {
             log_warning(2, filename, u->line_no, u->order, 0,
-              _("Unit TEMP %s has no men and has not recruited any"),
+              _("Unit TEMP %s has no men and is not recruiting"),
               itob(u->no));
           }
         } else if (no_comment <= 0) {
@@ -3289,12 +3280,12 @@ void check_money(
 
         if (u->unterhalt) {
           if (do_move) {
-            log_warning(1, filename, u->line_no, NULL, u->no,
+            log_warning(3, filename, u->line_no, NULL, u->no,
               _("Unit %s needs %d more silver to maintain a building"),
               uid(u), -u->money);
           }
           else {
-            log_warning(1, filename, u->line_no, NULL, u->no,
+            log_warning(3, filename, u->line_no, NULL, u->no,
               _("Unit %s lacks %d silver to maintain a building"),
               uid(u), -u->money);
           }
@@ -3330,7 +3321,7 @@ void check_money(
           if (t->ship == i) {
             if (t->hasmoved > 1) { /* schon bewegt! */
               log_warning(2, filename, u->line_no, NULL, u->no,
-                cgettext(Errors[UNITONSHIPHASMOVED]), uid(t), itob(i));
+                _("Unit %s on ship %s has already moved"), uid(t), itob(i));
             }
             t->hasmoved = 1;
             t->newx = x;
@@ -3363,8 +3354,8 @@ void check_money(
           t = find_unit(u->drive, 1);
         if (t && t->lives) {
           log_error(filename, u->line_no, u->long_order, u->no,
-            _("Unit %s rides with unit %s, but the latter doesn't carry "
-              "the former"),
+            _("Unit %s rides with unit %s, which is not transporting"
+              " it"),
             uid(u), Uid(u->drive));
 
         } else { /* unbekannte Einheit -> unbekanntes Ziel */
@@ -3477,7 +3468,7 @@ void check_teachings(void) {
       /* unbekannte TEMP-Einheit wird eh schon angemeckert */
       if (!t->student->temp) {
         log_warning(2, filename, t->student->line_no, NULL, t->student->no,
-          _("Unit %s is taught by unit %s but doesn't learn"),
+          _("Unit %s is taught by unit %s but does not learn"),
           uid1(t->student), uid2(t->teacher));
         t->student->schueler = 0;
       }
@@ -4279,7 +4270,7 @@ void readaunit(void) {
         case P_NEXT:
         case P_REGION:
           if (from_temp_unit_no != 0) {
-            log_warning(2, filename, line_no, order_buf, this_unit_id(),
+            log_warning(1, filename, line_no, order_buf, this_unit_id(),
               _("%s %s lacks closing %s"), printparam(P_TEMP),
                     itob(from_temp_unit_no), printkeyword(K_END));
             from_temp_unit_no = 0;

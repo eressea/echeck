@@ -124,7 +124,6 @@ PROCESSINGFILE, Processing file '%s'.
 QUITMSG, Attention! QUIT found! Your faction will be cancelled!
 REGIONMISSSILVER, There is not enough silver in %s (%d,%d) for upkeep; %d silver is missing.
 RESEARCHHERBSONLY, There is RESEARCH HERBS
-RESERVE0SENSELESS, RESERVE 0 xxx doesn't make any sense
 RESERVEWHAT, RESERVE what?
 RESTARTMSG, RESTART found!
 RIDESWRONGUNIT, Unit %s is carried by unit %s but rides with 
@@ -167,7 +166,6 @@ UNITMUSTBEONSHIP, Unit must be in a castle, in a building or on a ship
 UNITNEEDSTEACHERS, Unit \nould make use of %d more teachers
 UNITNOTONSHIPBUTONSHIP, Unit %s may be on ship %s instead of ship %s
 UNITNOTPOSSIBLEHERE, Unit "%s" is not possible here
-UNITONSHIPHASMOVED, Unit %s on ship %s has already moved
 UNRECOGNIZEDDIRECTION, Unrecognized direction
 UNRECOGNIZEDOBJECT, Unrecognized object
 UNRECOGNIZEDOPTION, Unrecognized option

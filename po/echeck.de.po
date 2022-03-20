@@ -289,7 +289,7 @@ msgstr "Gebäudeunterhalt von Einheit %s nach Einheit %s verschoben"
 msgid "NUMBER SHIP, NUMBER CASTLE, NUMBER FACTION or NUMBER UNIT"
 msgstr "NUMMER SCHIFF, NUMMER BURG, NUMMER PARTEI oder NUMMER EINHEIT"
 
-msgid "Names must not contain brackets"
+msgid "Names must not contain parentheses"
 msgstr "Namen dürfen keine Klammern enthalten"
 
 msgid "New units cannot GIVE anything"
@@ -368,9 +368,6 @@ msgstr "Positiver Wert erwartet"
 #, c-format
 msgid "Processing file '%s'."
 msgstr "Verarbeite Datei '%s'."
-
-msgid "RESERVE 0 xxx doesn't make any sense"
-msgstr "Nichts zu reservieren ist sinnlos"
 
 msgid "RESERVE what?"
 msgstr "Was soll reserviert werden?"
@@ -512,7 +509,7 @@ msgid "Unit %s is carried by unit %s but rides with %s"
 msgstr "Einheit %s wird von %s transportiert, aber fährt mit %s"
 
 #, c-format
-msgid "Unit %s is taught by unit %s but doesn't learn"
+msgid "Unit %s is taught by unit %s but does not learn"
 msgstr "Einheit %s wird von Einheit %s gelehrt, lernt aber nicht"
 
 #, c-format
@@ -560,7 +557,7 @@ msgid "Unit %s on ship %s has already moved"
 msgstr "Einheit %s auf Schiff %s hat sich schon bewegt"
 
 #, c-format
-msgid "Unit %s rides with unit %s, but the latter doesn't carry the former"
+msgid "Unit %s rides with unit %s, which is not transporting it"
 msgstr "Einheit %s fährt mit Einheit %s, diese transportiert aber nicht"
 
 #, c-format
@@ -571,7 +568,7 @@ msgid "Unit 0/Peasants not possible here"
 msgstr "Einheit 0 bzw. Bauern geht hier nicht"
 
 #, c-format
-msgid "Unit TEMP %s has no men and has not recruited any"
+msgid "Unit TEMP %s has no men and is not recruiting"
 msgstr "Einheit TEMP %s hat nicht rekrutiert und keine Personen bekommen"
 
 #, c-format
@@ -588,8 +585,8 @@ msgstr "Einheit TEMP %s hat nicht rekrutiert und keine Personen bekommen"
 
 #, c-format
 msgid ""
-"Unit TEMPORARY %s hasn't recruited and hasn't got any men! It may lose "
-"silver and/or items"
+"Unit TEMPORARY %s has no men and is not recruiting!"
+" It may lose silver and/or items"
 msgstr "Einheit TEMP %s verliert Silber und evtl. Gegenstände"
 
 msgid "Unit must be in a castle, in a building or on a ship"
@@ -621,8 +618,8 @@ msgid "Unrecognized spell"
 msgstr "Unbekannter Zauber"
 
 #, c-format
-msgid "Using unit %s"
-msgstr "Benutze Einheit %s"
+msgid "Unit %s already appeared in line %d"
+msgstr "Einheit %s bereits in Zeile %d benutzt"
 
 #, c-format
 msgid "Warning in line %d"

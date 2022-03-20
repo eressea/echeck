@@ -103,7 +103,6 @@ QUITMSG, Achtung! STIRB gegeben! Die Partei wird aufgelöst!
 RECRUITCOSTSSET, Rekrutierungskosten auf %d Silber gesetzt, 
 REGIONMISSSILVER, Das Silber in %s (%d,%d) reicht evtl. nicht zum Leben; es fehlen %d Silber.
 RESEARCHHERBSONLY, Es gibt nur FORSCHE KRÄUTER
-RESERVE0SENSELESS, RESERVIERE 0 xxx macht keinen Sinn
 RESERVEWHAT, RESERVIERE was?
 RESTARTMSG, NEUSTART befohlen!
 RIDESWRONGUNIT, Einheit %s wird von Einheit %s transportiert, fährt aber mit 
@@ -144,7 +143,6 @@ UNITMUSTBEONSHIP, Einheit muß in einer Burg, in einem Gebäude oder auf einem S
 UNITNEEDSTEACHERS, Einheit %s kann noch %d Lehrer gebrauchen.
 UNITNOTONSHIPBUTONSHIP, Einheit %s ist evtl. nicht auf Schiff %s sondern auf Schiff %s
 UNITNOTPOSSIBLEHERE, Einheit '%s' geht hier nicht
-UNITONSHIPHASMOVED, Einheit %s auf Schiff %s hat sich schon bewegt
 UNRECOGNIZEDDIRECTION, Richtung nicht erkannt
 UNRECOGNIZEDOBJECT, Objekt nicht erkannt
 UNRECOGNIZEDOPTION, Option unbekannt
