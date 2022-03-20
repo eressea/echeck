@@ -2105,7 +2105,7 @@ void checkemail(void) {
   checkstring(addr, DESCRIBESIZE, NECESSARY);
 
   if (!addr) {
-    log_warning(3, filename, line_no, order_buf, this_unit_id(),
+    log_warning(2, filename, line_no, order_buf, this_unit_id(),
       _("Please set email with EMAIL"));
     sprintf(bf, "; %s!", _("Please set email with EMAIL"));
     scat(bf);
