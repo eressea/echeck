@@ -164,7 +164,7 @@ static int compact = 0;
 #define DESCRIBESIZE 4095
 #define NAMESIZE 127
 
-FILE *ERR, *OUT = 0;
+FILE *ERR, *OUT;
 
 int line_no, /* count line number */
   filesread = 0;
@@ -5037,16 +5037,16 @@ int readfiles(void) { /* liest externen Files */
   return filesread;
 }
 
-int fileexists(const char *name) {
+bool fileexists(const char *name) {
   struct STAT stats;
-  return STAT(name, &stats);
+  return STAT(name, &stats) == 0;
 }
 
 const char *findfiles(const char *dir) {
   char zPath[FILENAME_MAX];
   SNPRINTF(zPath, sizeof(zPath), "%s/%s/%s/%s", dir, echeck_rules,
            echeck_locale, ECheck_Files[0].name);
-  if (0 == fileexists(zPath)) {
+  if (fileexists(zPath)) {
     return dir;
   }
   return NULL;
@@ -5125,30 +5125,38 @@ void echeck_init(void) {
 #else
 #define PATH_SEP '/'
 #endif
+
 void init_intl(void) {
   const char *reldir = "locale";
-
-  setlocale(LC_ALL, "");
-  if (!bindtextdomain("echeck", NULL) && !bindtextdomain("echeck", reldir)) {
-    int dirname_length;
-    size_t length = (size_t)wai_getExecutablePath(NULL, 0, &dirname_length);
-    if (length > 0) {
-      /* TODO: this is a worst-case allocation */
-      char * path = malloc(length + strlen(reldir) + 1);
-      if (path) {
-        char *pos;
-        wai_getExecutablePath(path, (int)length, &dirname_length);
-        path[length] = 0;
-        pos = strrchr(path, PATH_SEP);
-        if (pos) {
-          strcpy(pos + 1, reldir);
-          bindtextdomain("echeck", path);
-          free(path);
-          path = NULL;
-        }
-      }
+  char *path = NULL;
+#ifdef WIN32
+  int length; 
+  char buffer[_MAX_PATH + 1];
+  size_t ssuffix = strlen(reldir) + 1;
+  length = GetCurrentDirectory(sizeof(buffer), buffer);
+  if (length > 0 && length + ssuffix < sizeof(buffer)) {
+    buffer[length] = PATH_SEP;
+    memcpy(buffer + length + 1, reldir, ssuffix);
+    if (fileexists(buffer)) {
+      path = bindtextdomain("echeck", buffer);
     }
   }
+  if (path == NULL) {
+    length = wai_getExecutablePath(buffer, sizeof(buffer), NULL);
+    if (length > 0 && length + ssuffix < sizeof(buffer)) {
+      buffer[length] = PATH_SEP;
+      memcpy(buffer + length + 1, reldir, ssuffix);
+      path = bindtextdomain("echeck", buffer);
+    }
+  }
+#else
+  if (fileexists(reldir)) {
+    path = bindtextdomain("echeck", reldir);
+  } else {
+    setlocale(LC_ALL, "");
+    path = bindtextdomain("echeck", NULL);
+  }
+#endif
   bind_textdomain_codeset("echeck", "UTF-8");
   textdomain("echeck");
 }
@@ -5156,6 +5164,8 @@ void init_intl(void) {
 
 int echeck_main(int argc, char *argv[]) {
   int faction_count = 0, unit_count = 0, nextarg = 1, i;
+
+  ERR = stderr;
 #ifdef HAVE_GETTEXT
   init_intl();
 #endif
@@ -5164,7 +5174,6 @@ int echeck_main(int argc, char *argv[]) {
                              added 15.6.00 chartus */
 #endif
 
-  ERR = stderr;
   echeck_init();
   ERR = stdout;
 
@@ -5281,5 +5290,8 @@ int echeck_main(int argc, char *argv[]) {
             error_count);
   }
   fputc('\n', ERR);
+  if (ERR != stderr && ERR != stdout) {
+    fclose(ERR);
+  }
   return error_count;
 }
