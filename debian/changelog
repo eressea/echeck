@@ -1,21 +1,22 @@
 echeck (4.6.9-3) stable; urgency=low
 
   * adjusted some warning levels
+  * fixed gettext localization on Windows
 
- -- Enno Rehling <enno@eressea.de>  Sun, 20 Mar 2021 17:50:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Mon, 21 Mar 2022 21:10:00 +0200
 echeck (4.6.9-2) stable; urgency=low
 
   * fix locale support
   * avoid empty lines in warnings about a region or unit
 
- -- Enno Rehling <enno@eressea.de>  Sat, 19 Mar 2021 16:10:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Sat, 19 Mar 2022 16:10:00 +0200
 echeck (4.6.9-1) stable; urgency=high
 
   * implement support for GIVE SHIP (bug 2830)
   * implement support for RESERVIERE ALLES (bug 2708)
   * make all output be UTF-8.
 
- -- Enno Rehling <enno@eressea.de>  Fri, 11 Mar 2021 21:00:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Fri, 11 Mar 2022 21:00:00 +0200
 echeck (4.6.8-1) stable; urgency=high
 
   * fix whitespace after backspace break (bug 2788)

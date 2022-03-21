@@ -5053,7 +5053,7 @@ const char *findfiles(const char *dir) {
 }
 
 static const char *findpath(void) {
-  int i;
+  int i, length;
 #ifndef WIN32
   const char *hints[] = {
     "/usr/share/games/echeck",
@@ -5081,10 +5081,10 @@ static const char *findpath(void) {
   i = wai_getExecutablePath(NULL, 0, NULL);
   g_path = malloc(i);
   if (g_path) {
-    wai_getExecutablePath(g_path, i, &i);
+    wai_getExecutablePath(g_path, i, &length);
 
-    if (i > 0) {
-      g_path[i] = '\0';
+    if (length >= 0 && length < i) {
+      g_path[length] = '\0';
       if (findfiles(g_path)) {
         return g_path;
       }
@@ -5119,62 +5119,31 @@ void echeck_init(void) {
 }
 
 #ifdef HAVE_GETTEXT
-#ifdef WIN32
-#include <windows.h>
-#define PATH_SEP '\\'
-#else
-#define PATH_SEP '/'
-#endif
 
-void init_intl(void) {
-  const char *reldir = "locale";
-  char *path = NULL;
-#ifdef WIN32
-  int length; 
-  char buffer[_MAX_PATH + 1];
-  size_t ssuffix = strlen(reldir) + 1;
-  length = GetCurrentDirectory(sizeof(buffer), buffer);
-  if (length > 0 && length + ssuffix < sizeof(buffer)) {
-    buffer[length] = PATH_SEP;
-    memcpy(buffer + length + 1, reldir, ssuffix);
-    if (fileexists(buffer)) {
-      path = bindtextdomain("echeck", buffer);
-    }
-  }
-  if (path == NULL) {
-    length = wai_getExecutablePath(buffer, sizeof(buffer), NULL);
-    if (length > 0 && length + ssuffix < sizeof(buffer)) {
-      buffer[length] = PATH_SEP;
-      memcpy(buffer + length + 1, reldir, ssuffix);
-      path = bindtextdomain("echeck", buffer);
-    }
-  }
-#else
+const char * init_intl(const char *cwd) {
+  const char *path, *reldir = "locale";
+
+  setlocale(LC_ALL, "");
   if (fileexists(reldir)) {
     path = bindtextdomain("echeck", reldir);
   } else {
-    setlocale(LC_ALL, "");
     path = bindtextdomain("echeck", NULL);
   }
-#endif
   bind_textdomain_codeset("echeck", "UTF-8");
   textdomain("echeck");
+  return path;
 }
+
 #endif
 
 int echeck_main(int argc, char *argv[]) {
   int faction_count = 0, unit_count = 0, nextarg = 1, i;
 
   ERR = stderr;
-#ifdef HAVE_GETTEXT
-  init_intl();
-#endif
-#if macintosh
-  argc = ccommand(&argv); /* consolenabruf der parameter fuer  macintosh
-                             added 15.6.00 chartus */
-#endif
-
   echeck_init();
+#ifdef HAVE_GETTEXT
+  init_intl(g_path);
+#endif
   ERR = stdout;
 
   if (filename) {
