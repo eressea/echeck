@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.6.9";
+static const char *echeck_version = "4.7.0";
 
 #define DEFAULT_PATH "."
 
@@ -4449,7 +4449,7 @@ void printhelp(int argc, char *argv[], int index) {
             "-q      do not expect hints regarding men/silver within [] after "
             "UNIT\n"
             "-rnnn   set recruit costs to nnn silver\n"
-            "-c      compiler-like output\n"
+            "-c[n]   compiler-like output with optional version n\n"
             "-m      magellan-useable output\n"
             "-e      send checked file to stdout, errors to stderr\n"
             "-E      send checked file to stdout, errors to stdout\n"
