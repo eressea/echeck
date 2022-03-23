@@ -1,3 +1,8 @@
+echeck (4.7.0-1) stable; urgency=low
+
+  * optional new compiler format
+
+ -- Enno Rehling <enno@eressea.de>  Wed, 23 Mar 2022 19:00:00 +0200
 echeck (4.6.9-3) stable; urgency=low
 
   * adjusted some warning levels
