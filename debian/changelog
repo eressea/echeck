@@ -1,3 +1,9 @@
+echeck (4.7.1-1) stable; urgency=low
+
+  * do not crash when spells.txt is invalid
+  * updated spells.tct (contains Gwyrrd) and items.txt [Xolgrim]
+
+ -- Enno Rehling <enno@eressea.de>  Fri, 25 Mar 2022 20:40:00 +0200
 echeck (4.7.0-1) stable; urgency=low
 
   * optional new compiler format
