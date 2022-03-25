@@ -856,7 +856,7 @@ void readspell(char *s) {
         s = eatwhite(x + 1);
         if (isdigit(*s)) {
           int type = (char)Pow(atoi(s));
-          sp = malloc(1, sizeof(t_spell));
+          sp = malloc(sizeof(t_spell));
           if (sp) {
             sp->name = STRDUP(name);
             sp->kosten = cost;

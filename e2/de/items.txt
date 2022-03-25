@@ -20,57 +20,94 @@ Weihrauch; Weihrauch, 4
 
 Eisen; Eisen
 Holz; Holz
+Mallorn; Mallorn
 Stein; Steine
+Katapultmunition; Katapultmunition
+Laen; Laen
+Adamantium; Admantium
 Pferd; Pferde
-Wagen; Wagen
-Katapult; Katapulte
-Schwert; Schwerter
-Speer; Speere
-Armbrust; Armbrüste
-Mallornspeer; Mallornspeere
-Mallornlanze; Mallornlanzen
-Mallornarmbrust; Mallornarmbrüste
-Mallornbogen; Mallornbögen
+Elfenpferd; Elfenpferde
 Samen; Samen
 Mallornsamen; Mallornsamen
-Bogen; Bögen
-Kettenhemd; Kettenhemden
-Plattenpanzer; Plattenpanzer
-Bihänder; Bihänder
-Kriegsaxt; Kriegsäxte
-Elfenbogen; Elfenbögen
-Laenschwert; Laenschwerter
-Laenschild; Laenschilde
-Laenkettenhemd; Laenkettenhemden
-Laen; Laen
-Schild; Schilde
-Hellebarde; Hellebarden
-Lanze; Lanzen
-Mallorn; Mallorn
 Mallornsamen; Mallornsamen
-Katapultmunition; Katapultmunition
-Adamantium; Admantium
-Adamantiumaxt; Admantiumäxte
-Adamantiumrüstung; Adamantiumrüstungen
+Wagen; Wagen
+
+Katapult; Katapulte
+Schwert; Schwerter
 Schartiges Schwert; Schartige Schilde
+Laenschwert; Laenschwerter
+Flammenschwert; Flammenschwerter
+Runenschwert; Runenschwerter
+Speer; Speere
+Mallornspeer; Mallornspeere
+Armbrust; Armbrüste
+Mallornarmbrust; Mallornarmbrüste
+Bogen; Bögen
+Mallornbogen; Mallornbögen
+Elfenbogen; Elfenbögen
+Bihänder; Bihänder
 Rostiger Zweihänder; Rostige Zweihänder
+Kriegsaxt; Kriegsäxte
 Rostige Kriegsaxt; Rostige Kriegsäxte
+Adamantiumaxt; Admantiumäxte
+Hellebarde; Hellebarden
 Rostige Hellebarde; Rostige Hellebarden
-Rostiger Schild; Rostige Schilde
+Lanze; Lanzen
+Mallornlanze; Mallornlanzen
+
+Kettenhemd; Kettenhemden
 Rostiges Kettenhemd; Rostige Kettenhemden
+Laenkettenhemd; Laenkettenhemden
+Adamantiumrüstung; Adamantiumrüstungen
+Plattenpanzer; Plattenpanzer
+Schild; Schilde
+Rostiger Schild; Rostige Schilde
+Laenschild; Laenschilde
+
 Sonnensegel; Sonnensegel
 Schneekugel; Schneekugeln
 Schneemann; Schneemänner
 Weihnachtsbaum; Weihnachtsbäume
 Sternenstaub; Sternenstaub
-Flammenschwert; Flammenschwerter
-Runenschwert; Runenschwerter
+Apfel; Äpfel
+Nuss; Nüsse
+Mandelkern; Mandelkerne
+Keks; Kekse
+Geburtstagstorte; Geburtstagstorten
+Mistelzweig; Mistelzweige
+Schneeball; Schneebälle
+Talenttrunk; Talenttrünke
 Amulett des Wahren Sehens; Amulette des Wahren Sehens
-Ring der Flinken Finger, Ringe der Flinken Finger
-Ring der Macht, Ringe der Macht
+Amulett der Keuschheit; Amulette der Keuschheit
+Amulett der Heilung; Amulette der Heilung
+Amulett des Treffens; Amulette des Treffens
+Ring der Flinken Finger; Ringe der Flinken Finger
+Ring der Macht; Ringe der Macht
 Ring der Unsichtbarkeit; Ringe der Unsichtbarkeit
 Magischer Kräuterbeutel; Magische Kräuterbeutel
 Zauberbeutel; Zauberbeutel
+Gürtel der Trollstärke; Gürtel der Trollstärke
+Sphäre der Unsichtbarkeit; Sphären der Unsichtbarkeit	
+Tiegel mit Krötenschleim; Tiegel mit Krötenschleim
+Antimagiekristall; Antimagiekristalle
+Feenstiefel; Feenstiefel		
+Augen des Drachen; Augen des Drachen
+Ring der Levitation; Ringe der Levitation
+Muschel; Muscheln
+Zwergenbart; Zwergenbärte
+Meermenschenschuppe; Meermenschenschuppen
+Elfenohr; Elfenohren
+Trollhorn; Trollhörner
+Dämonenblut; Dämonenblut
+Goblinkopf; Goblinköpfe
+Menschenskalp; Menschenskalpe
+Insektenfühler; Insektenfühler
+Katzenschwanz; Katzenschwänze
+Halblingsfuß; Halblingsfüße
+Orkhauer; Orkhauer
+Drachenblut; Drachenblut
+Drachenkopf; Drachenköpfe
+Seeschlangenkopf; Seeschlangenköpfe
 
 # So, das waren die offiziellen Items; diese Liste sollte man nicht ändern,
 # wenn man auf das Ergebnis von ECheck Wert legt...

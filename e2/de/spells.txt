@@ -1,7 +1,7 @@
 ###################  zauber.txt      ECheck V4 und höher ###################
 # Diese Datei enthält die Liste aller Zauber
 #
-# Umlaute dürfen nicht umschrieben werden, sondern als ISO-Latin1 benutzt:
+# Umlaute dürfen nicht umschrieben werden, sondern als UTF-8 kodiert:
 # ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist , oder ;
 #
 # Alle Zauber stehen hier mit dem kompletten Namen
@@ -18,13 +18,56 @@
 # Diese Liste enthält absichtlich keine "echten" Zauber.
 # Es sollte jedem leicht fallen, die Liste anzupassen und zu erweitern.
 
-Magische Erbsensuppe; 0; 1	# ein Kampfzauber der stinkenden Art
-Sonnenschein; 50; 0		# braucht man ja immer mal...
-Ferne Investition; 500; 0	# Zinsen: -100%
-Blitzlicht; 0; 1		# Cheese!
-Magisches Lametta; 5; 2		# ja, is' denn scho' wieder Weihnachten?
-Pesthauch; 0; 3			# was man nicht alles mit Knoblauch hinbekommt
-Schattenspiele; 50; 0		# immer wieder unterhaltsam
+Magische Erbsensuppe;						0; 1	# ein Kampfzauber der stinkenden Art
+Blitzlicht;									0; 1	# Cheese!
+Magisches Lametta;							5; 2	# ja, is' denn scho' wieder Weihnachten?
+Pesthauch;									0; 3	# was man nicht alles mit Knoblauch hinbekommt
+Schattenspiele;								50; 0	# immer wieder unterhaltsam
+Sonnenschein;								50; 0	# braucht man ja immer mal...
+Ferne Investition;							500; 0	# Zinsen: -100%
+
+
+
+
+#Gwyrrd
+Erschaffe Steingolems;						0; 0	#Erschafft Golems welche pro Golem 4 Steine verbauen								
+Segen der Erde;								0; 0	#Erhält 50 Silber*Stufe von den Bauern
+Viehheilung;								0; 0	#Magier erhält Stufe*50 Silber				
+Erschaffe Eisengolems;						0; 0	#Erschafft Golems welche pro Golem 4 Eisen verbauen	
+Hainzauber;									0; 0	#Erschafft 4 Schösslinge pro Stufe
+Bergwächter;								0; 0	#Bewacht Berge und Gletscher
+Firuns Fell;								0; 0	#Stufe*10 Insekten können Gletscher betreten								
+Hagel;										0; 1	#Der Gegner wird mit Hagelkörnern und Eisbrocken bombardiert
+Rostregen;									0; 0	#Für jede Stufe werden bis zu 10 Eisenwaffen zerstört
+Magischer Pfad;								0; 0	#Die Zielregion hat Stufe*Wochen eine Straße in jede Richtung
+Segne Mallornstecken;						0; 0	#Erschafft 3 Mallornschösslinge pro Stufe
+Wasserelementar;							0; 0	#+1 Region für Stufe*Wochen
+Windschild;									0; 3	#Wirbelwinde behindern die gegnerischen Schützen
+Astralschutzgeister;						0; 3	#Feindliche Magier werden beim Zaubern während der Schlacht behindert
+Erschaffe einen magischen Kräuterbeutel;	0; 0	#Kräuter zerfallen in diesem Beutel nur halb so schnell 
+Heilung;									0; 2	#Der Magier heilt seine Kampfgefährten nach der Schlacht 
+Wirbelwind;									0; 3	#Stürme behindern alle Schützen der Schlacht
+Erdelementar;								0; 0	#Alle Gebäude der Region werden beschädigt
+Erschaffe ein Amulett des wahren Sehens;	3000; 0 #Erschafft ein AdW mit welchen RdU getarnte Einheiten entdeckt werden
+Erschaffe einen Ring der Unsichtbarkeit;	3000; 0 #Erschafft ein RdU mit welchem man jedweden blicken entschwinden kann
+Meditation;									0; 0	#Übertägt Aura 2 zu 1 auf selbes Magiegebiet								
+Sturmelementar;								0; 0	#Pro Stufe wird ein Schiff in der Geschwindigkeit verdoppelt
+Heimstein;									0; 0	#Das Gebäude ist gegen Waffengewalt und Magie besser geschützt
+Wolfsgeheul;								0; 3	#Der Magier ruft Wölfe herbei die ihm im Kampf unterstützen
+Blick des Basilisken;						0; 1	#Versteinert einige Gegner für die Dauer des Kampfes
+Geister bannen;								0; 0	#Der Magus bannt einen Zauber
+Starkes Tor und feste Mauer;				0; 0	#Anfang der Woche wird das Gebäude gegen Magie und Schwert gesichert
+Heiliger Boden;								0; 0	#Untote schrecken vor dieser Region zurück
+Sog des Lebens;								0; 0	#Der Geode kann Stufe*5 GE aus dem Astralraum zurückholen
+Weg der Bäume;								0; 0	#Der Geode kann Stufe*5 GE in den Astralraum senden
+Erwecke Ents;								0; 0	#Einige Bäume der Region erheben sich zu Ents
+Vertrauten binden;							0; 0	#Ein Vertrautentier schließt sich dem Magier an
+Segne Steinkreis;							0; 0	#Dieses Ritual segnet einen Steinkreis
+Rindenhaut;									0; 0	#Eigene Truppen werden von einer natürlichen Rüstung geschützt
+Hitzeelementar;								0; 0	#Eine ganze Region verdorrt
+Mahlstrom;									0; 0	#Ein gewaltigen Strudel beschädigt jedes Schiff schwer das ihn passiert
+Wurzeln der Magie;							0; 0	#Die Region wird zu einer Mallornregion
+Tor in die Ebene der Hitze;					0; 0	#Die Region wird total verwüstet
 
 # Wir werden keine Fragen zu etwaigen neuen Zaubern beantworten.
 #  - Faroul und das Design-Team
