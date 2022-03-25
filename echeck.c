@@ -834,45 +834,39 @@ char *transliterate(char *out, size_t size, const char *in) {
     }
   }
   *dst = 0;
-  return *src ? 0 : out;
+  return *src ? NULL : out;
 }
 
 /** parsed einen String nach Zaubern */
 void readspell(char *s) {
   char *x;
-  t_spell *sp;
-  char buffer[128];
+  char name[128];
+  int type, cost;
 
   x = strchr(s, ';');
-  if (!x)
-    x = strchr(s, ',');
-  if (x)
-    *x = 0;
-  else {
-    x = strchr(s, '\n');
-    if (x)
-      *x = 0;
-    x = NULL;
-  }
-  sp = (t_spell *)calloc(1, sizeof(t_spell));
-  if (sp) {
-    sp->name = STRDUP(transliterate(buffer, sizeof(buffer), s));
-    if (x) {
-      s = (char *)eatwhite(x + 1);
-      if (*s) {
-        sp->kosten = atoi(s);
-        x = strchr(s, ';');
-        if (!x)
-          x = strchr(s, ',');
-        if (x) {
-          s = (char *)(x + 1);
-          if (*s)
-            sp->typ = (char)Pow(atoi(s));
+  if (!x) return;
+  *x++ = 0;
+  if (transliterate(name, sizeof(name), s)) {
+    t_spell *sp;
+    s = (char *)eatwhite(x);
+    if (isdigit(*s)) {
+      int cost = atoi(s);
+      x = strchr(s, ';');
+      if (x) {
+        s = eatwhite(x + 1);
+        if (isdigit(*s)) {
+          int type = (char)Pow(atoi(s));
+          sp = malloc(1, sizeof(t_spell));
+          if (sp) {
+            sp->name = STRDUP(name);
+            sp->kosten = cost;
+            sp->typ = type;
+            sp->next = spells;
+            spells = sp;
+          }
         }
       }
     }
-    sp->next = spells;
-    spells = sp;
   }
 }
 
@@ -1082,6 +1076,9 @@ int parsefile(char *s, int typ) { /* ruft passende Routine auf */
   char *x, *y;
   int i;
 
+  if (!s) {
+    return 0;
+  }
   ok = 1;
   switch (typ) {
   case UT_PARAM:
@@ -5009,6 +5006,7 @@ void addtoken(tnode *root, const char *str, int id) {
                  {0xfc, "ue"}, {0xdc, "ue"}, {0xdf, "ss"}, {0, 0}};
   if (root->id >= 0 && root->id != id && !root->leaf)
     root->id = -1;
+  assert(str);
   if (!*str) {
     root->id = id;
     root->leaf = 1;
