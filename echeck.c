@@ -2055,7 +2055,9 @@ int getaunit(int type) {
 
   this_unit = i;
 
-  cmd_unit = newunit(i, is_temp); /* Die Unit schon machen, wegen  TEMP-Check */
+  if (is_temp) {
+    cmd_unit = newunit(i, is_temp); /* Die Unit schon machen, wegen  TEMP-Check */
+  }
   bcat(i);
   if (is_temp)
     return 3;
@@ -2566,11 +2568,18 @@ void checkgiving(void) {
         n = 1;
       }
     }
-    if (n > 0)
+    if (n >= 0) {
       icat(n);
+    }
 
     s = getstr();
-    if (!(*s) && n < 0) { /* GIB xx ALLES */
+
+    if (*s) {
+      if (!cmd_unit || cmd_unit->region != order_unit->region) {
+        n = 0;
+      }
+    }
+    else if (n < 0) { /* GIB xx ALLES */
       if (cmd_unit) {
         n = order_unit->money - order_unit->reserviert;
         cmd_unit->money += n;
@@ -2589,7 +2598,7 @@ void checkgiving(void) {
     switch (i) {
     case P_SHIP:
       Scat(printparam(i));
-      if (cmd_unit->ship >= 0) {
+      if (cmd_unit && cmd_unit->ship >= 0) {
         log_warning(4, filename, line_no, order_buf, cmd_unit->no, NULL,
                     _("Unit %s may not be in control of a ship"),
                     uid(cmd_unit));
@@ -3301,11 +3310,14 @@ void check_money(
         }
       }
       if (u->money < 0) {
-        log_warning(3, filename, u->line_no, NULL, u->no, NULL,
-                    do_move ? _("Unit %s has %d silver before income")
-                            : _("Unit %s has %d silver"),
-                    uid(u), u->money);
-
+        if (do_move) {
+          log_warning(4, filename, u->line_no, NULL, u->no, NULL,
+                      _("Unit %s has %d silver before income"),
+                      uid(u), u->money);
+        } else {
+          log_warning(3, filename, u->line_no, NULL, u->no, NULL,
+                      _("Unit %s has %d silver"), uid(u), u->money);
+        }
         if (u->unterhalt) {
           if (do_move) {
             log_warning(
