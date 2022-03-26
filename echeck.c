@@ -558,6 +558,7 @@ typedef struct unit {
   struct unit *next;
   int no;
   int people;
+  int recruits;
   int money;
   int reserviert;
   int unterhalt;
@@ -1619,14 +1620,18 @@ unit *newunit(int n, int t) {
     u = (unit *)calloc(1, sizeof(unit));
     if (!u)
       return NULL;
-    u->people = t ? 0 : 1;
     u->no = n;
     u->line_no = line_no;
     u->order = STRDUP(order_buf);
     u->region = addregion(Rx, Ry, 0);
     u->newx = Rx;
     u->newy = Ry;
-    u->temp = t;
+    if (t) {
+      u->temp = t;
+    }
+    else { 
+      u->people = 1; 
+    }
     if (units) {
       for (c = units; c->next; c = c->next)
         ;          /* letzte unit der Liste */
@@ -2555,7 +2560,7 @@ void checkgiving(void) {
         s = getstr();
         n = atoi(s);
         if (order_unit->people) {
-          n *= order_unit->people;
+          n *= (order_unit->people - order_unit->recruits);
         }
         if (n < 1) {
           log_error(filename, line_no, order_buf, this_unit_id(), NULL,
@@ -2613,7 +2618,7 @@ void checkgiving(void) {
     case P_PERSON:
       Scat(printparam(i));
       if (n < 0)
-        n = order_unit->people;
+        n = order_unit->people - order_unit->recruits;
       if (cmd_unit)
         cmd_unit->people += n;
       order_unit->people -= n;
@@ -3991,6 +3996,7 @@ void checkanorder(char *Orders) {
       u->money -= i * rec_cost;
       u->reserviert -= i * rec_cost;
       u->people += i;
+      u->recruits += i;
       addregion(Rx, Ry, i);
     } else
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
