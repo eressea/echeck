@@ -538,8 +538,10 @@ t_liste *potionnames = NULL;
 
 t_liste *buildingtypes = NULL;
 
-enum { POSSIBLE, NECESSARY };
+enum { POSSIBLE, NECESSARY, REQUIRED };
 
+#define VALID_UID 42
+#define TEMP_MADE INT_MAX
 /*
  * ---------------------------------------------------------------------
  */
@@ -1511,7 +1513,7 @@ void checkstring(char *s, size_t l, int type) {
     log_warning(2, filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Text too long (max. %d characters)"), (int)l);
   }
-  if (s[0] == 0 && type == NECESSARY) {
+  if (s[0] == 0 && type >= NECESSARY) {
     log_warning(1, filename, line_no, order_buf, this_unit_id(), NULL,
                 _("No text"));
   }
@@ -1645,7 +1647,7 @@ unit *newunit(int n, int t) {
               itob(u->no), Rx, Ry, u->newx, u->newy, u->start_of_orders_line);
     u->long_order_line = 0;
   }
-  if (u->temp < 42)
+  if (u->temp != TEMP_MADE)
     u->temp = t;
   return u;
 }
@@ -2026,7 +2028,7 @@ int getaunit(int type) {
 
   s = getstr();
   if (s[0] == 0) {
-    if (type == NECESSARY) {
+    if (type >= NECESSARY) {
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Missing unit"));
       return 0;
@@ -2051,16 +2053,13 @@ int getaunit(int type) {
     break;
   }
 
-  if (type ==
-      42) { /* Nur Test, ob eine Einheit kommt, weil  das ein Fehler ist */
-    if (i)
-      return 42;
-    return 0;
+  if (type == POSSIBLE) { /* Nur Test, ob eine Einheit kommt, weil  das ein Fehler ist */
+    return i ? VALID_UID : 0;
   }
 
   this_unit = i;
 
-  if (is_temp || type == NECESSARY) {
+  if (is_temp || type == REQUIRED) {
     cmd_unit = newunit(i, is_temp); /* Die Unit schon machen, wegen  TEMP-Check */
   }
   bcat(i);
@@ -2632,14 +2631,16 @@ void checkgiving(void) {
       Scat(printparam(i));
       if (n < 0)
         n = order_unit->money - order_unit->reserviert;
-      if (cmd_unit) {
-        cmd_unit->money += n;
-        cmd_unit->reserviert += n;
-      }
-      order_unit->money -= n;
-      if (order_unit->money < 0 && no_comment < 1 && !does_default) {
-        log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
-                    _("Unit %s may have not enough silver"), uid(order_unit));
+      if (!cmd_unit || cmd_unit->region == order_unit->region) {
+        if (cmd_unit) {
+          cmd_unit->money += n;
+          cmd_unit->reserviert += n;
+        }
+        order_unit->money -= n;
+        if (order_unit->money < 0 && no_comment < 1 && !does_default) {
+          log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+                      _("Unit %s may have not enough silver"), uid(order_unit));
+        }
       }
       break;
 
@@ -2770,7 +2771,7 @@ void checkmake(void) {
       if (*s)
         qcat(s);
       from_temp_unit_no = j;
-      u = newunit(j, 42);
+      u = newunit(j, TEMP_MADE);
       if (u->ship == 0)
         u->ship = abs(order_unit->ship);
       orders_for_temp_unit(u);
@@ -3225,7 +3226,7 @@ void check_money(
       if (u->lives < 1)               /* fremde Einheit oder Untot/Illusion */
         continue; /* auslassen, weil deren Geldbedarf nicht  zählt */
 
-      if (u->temp && abs(u->temp) != 42) {
+      if (u->temp && abs(u->temp) != TEMP_MADE) {
         log_error(filename, u->line_no, u->order, 0, u->region,
                   _("Unit TEMP %s was never created with MAKE TEMP"),
                   itob(u->no));
@@ -3674,7 +3675,7 @@ void checkanorder(char *Orders) {
                   _("Longer combats exclude long orders"));
       attack_warning = 1;
     }
-    if (getaunit(42) == 42) {
+    if (getaunit(POSSIBLE) == VALID_UID) {
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                 _("There must be one ATTACK-order per unit"));
     }
@@ -4135,7 +4136,7 @@ void checkanorder(char *Orders) {
 
   case K_RIDE:
     scat(printkeyword(K_RIDE));
-    if (getaunit(NECESSARY) == 2)
+    if (getaunit(REQUIRED) == 2)
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Unit 0/Peasants not possible here"));
     else {
@@ -4155,7 +4156,7 @@ void checkanorder(char *Orders) {
 
   case K_CARRY:
     scat(printkeyword(K_CARRY));
-    getaunit(NECESSARY);
+    getaunit(REQUIRED);
     if (!does_default) {
       if (cmd_unit) {
         if (cmd_unit->region != order_unit->region) {
@@ -4171,7 +4172,7 @@ void checkanorder(char *Orders) {
         log_warning(3, filename, line_no, order_buf, this_unit_id(), NULL,
                     _("Can't find unit to carry"));
     }
-    if (getaunit(42) == 42)
+    if (getaunit(POSSIBLE) == VALID_UID)
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                 _("There must be one CARRY-order per unit"));
     break;
@@ -5350,7 +5351,7 @@ int echeck_main(int argc, char *argv[]) {
             "that orders must not be sent as HTML or word-documents."),
           ERR);
     fputc('\n', ERR);
-    return -42;
+    return -1;
   }
 
   if (!error_count && !warning_count && faction_count && unit_count) {
