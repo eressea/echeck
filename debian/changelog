@@ -5,6 +5,7 @@ echeck (4.7.2-1) stable; urgency=low
   * be more conservative when guessing unknown units
   * stop complaining about duplicate TEMP numbers
   * order of REKRUTIERE und GIB ALLES was significant
+  * create missing units for FAHRE/TRSNPORTIERE matchups
 
  -- Enno Rehling <enno@eressea.de>  Sat, 26 Mar 2022 19:00:00 +0200
 echeck (4.7.1-1) stable; urgency=low

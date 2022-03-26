@@ -2060,7 +2060,7 @@ int getaunit(int type) {
 
   this_unit = i;
 
-  if (is_temp) {
+  if (is_temp || type == NECESSARY) {
     cmd_unit = newunit(i, is_temp); /* Die Unit schon machen, wegen  TEMP-Check */
   }
   bcat(i);
