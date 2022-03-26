@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.1";
+static const char *echeck_version = "4.7.2";
 
 #define DEFAULT_PATH "."
 
@@ -3272,7 +3272,7 @@ void check_money(
       for (r = Regionen; r; r = r->next) {
         if (r->reserviert > 0 &&
             r->reserviert > r->geld) { /* nur  explizit   mit  RESERVIERE  */
-          log_warning(3, filename, r->line_no, NULL, 0, r,
+          log_warning(4, filename, r->line_no, NULL, 0, r,
                       _("Units in %s (%d,%d) reserved more silver (%d) than "
                         "available (%d)"),
                       r->name, r->x, r->y, r->reserviert, r->geld);
@@ -4289,7 +4289,7 @@ void checkanorder(char *Orders) {
   }
 }
 
-void readaunit(void) {
+void readaunit(t_region *r) {
   int i;
   unit *u;
 
@@ -4301,6 +4301,16 @@ void readaunit(void) {
     return;
   }
   u = newunit(i, 0);
+  if (u->region != r) {
+    u->region = r;
+    u->line_no = line_no;
+    u->newx = r->x;
+    u->newy = r->y;
+    free(u->order);
+    u->order = STRDUP(order_buf);
+    u->money = 0;
+    u->reserviert = 0;
+  }
   u->line_no = line_no;
   /*
    * Sonst ist die Zeilennummer die Zeile, wo die Einheit zuerst von
@@ -4917,7 +4927,7 @@ void process_order_file(int *faction_count, int *unit_count) {
     case P_UNIT:
       if (f) {
         scat(order_buf);
-        readaunit();
+        readaunit(r);
         if (order_unit && unit_count)
           ++*unit_count;
       } else
