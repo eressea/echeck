@@ -3384,8 +3384,8 @@ void check_money(
 
     if (u->transport && u->drive && u->drive != u->transport) {
       log_warning(1, filename, u->line_no, u->long_order, this_unit_id(), NULL,
-                  _("Unit %s is carried by unit %s but rides with %s"), uid(u),
-                  Uid(u->transport), Uid(u->drive));
+        _("Unit %s is carried by unit %s but rides with %s"),
+        uid(u), Uid(u->transport), Uid(u->drive));
       continue;
     }
     if (u->drive) { /* FAHRE; in u->transport steht die  transportierende
@@ -3400,10 +3400,8 @@ void check_money(
           t = find_unit(u->drive, 1);
         if (t && t->lives) {
           log_error(filename, u->line_no, u->long_order, u->no, NULL,
-                    _("Unit %s rides with unit %s, which is not transporting"
-                      " it"),
-                    uid(u), Uid(u->drive));
-
+            _("Unit %s rides with unit %s, which is not transporting it"),
+            uid(u), Uid(u->drive));
         } else { /* unbekannte Einheit -> unbekanntes Ziel */
           u->hasmoved = 1;
           u->newx = -9999;
@@ -3413,10 +3411,11 @@ void check_money(
         t = find_unit(u->transport, 0);
         if (!t)
           t = find_unit(u->transport, 1);
-        assert(t);
         /*
          * muß es geben, hat ja schließlich u->transport gesetzt
          */
+        assert(t);
+
         u->hasmoved = 1;
         u->newx = t->newx;
         u->newy = t->newy;
@@ -4139,8 +4138,18 @@ void checkanorder(char *Orders) {
     if (getaunit(NECESSARY) == 2)
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Unit 0/Peasants not possible here"));
-    else if (!does_default)
-      order_unit->drive = this_unit;
+    else {
+      if (!does_default) {
+        if (cmd_unit && cmd_unit->region != order_unit->region) {
+          log_error(
+            filename, cmd_unit->line_no, cmd_unit->long_order, cmd_unit->no,
+            NULL,
+            _("Unit %s rides with unit %s, which is in a different region"),
+            uid(order_unit), uid(cmd_unit));
+        }
+        order_unit->drive = this_unit;
+      }
+    }
     long_order();
     break;
 
@@ -4149,6 +4158,13 @@ void checkanorder(char *Orders) {
     getaunit(NECESSARY);
     if (!does_default) {
       if (cmd_unit) {
+        if (cmd_unit->region != order_unit->region) {
+          log_error(
+            filename, cmd_unit->line_no, cmd_unit->long_order, cmd_unit->no,
+            NULL,
+            _("Unit %s rides with unit %s, which is in a different region"),
+            uid(cmd_unit), uid(order_unit));
+        }
         cmd_unit->transport = order_unit->no;
         cmd_unit->hasmoved = -1;
       } else

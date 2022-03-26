@@ -561,6 +561,10 @@ msgid "Unit %s rides with unit %s, which is not transporting it"
 msgstr "Einheit %s fährt mit Einheit %s, diese transportiert aber nicht"
 
 #, c-format
+msgid "Unit %s rides with unit %s, which is in a different region"
+msgstr "Einheit %s fährt mit Einheit %s, die in einer anderen Region ist"
+
+#, c-format
 msgid "Unit '%s' is not possible here"
 msgstr "Einheit '%s' geht hier nicht"
 
