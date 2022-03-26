@@ -1543,10 +1543,14 @@ int from_temp_unit_no;
 unit *find_unit(int i, int t) {
   unit *u;
 
-  for (u = units; u; u = u->next)
-    if ((i < 0 && u->no < 0) || (u->no == i && val(u->temp) == val(t)))
-      break;
-  return u;
+  for (u = units; u; u = u->next) {
+    if ((i < 0 && u->no < 0) || (u->no == i && val(u->temp) == val(t))) {
+      if (!u->temp || u->region->x == Rx && u->region->y == Ry) {
+        return u;
+      }
+    }
+  }
+  return NULL;
 }
 
 t_region *addregion(int x, int y, int pers) {
@@ -1568,12 +1572,8 @@ t_region *addregion(int x, int y, int pers) {
       r->reserviert = 0;
       r->name = STRDUP("Region");
       r->line_no = line_no;
-      if (Regionen) {
-        for (R = Regionen; R->next; R = R->next)
-          ;          /* letzte Region der Liste  */
-        R->next = r; /* Region hinten dranklemmen */
-      } else
-        Regionen = r;
+      r->next = Regionen;
+      Regionen = r;
     }
   }
   return r;
