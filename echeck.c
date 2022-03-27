@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.4";
+static const char *echeck_version = "4.7.5";
 
 #define DEFAULT_PATH "."
 
@@ -2154,7 +2154,7 @@ void orders_for_unit(int i, unit *u) {
 
   k = strchr(order_buf, '[');
   if (!k) {
-    log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+    log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Cannot parse this unit's comment"));
     no_comment++;
     return;
@@ -2164,7 +2164,7 @@ void orders_for_unit(int i, unit *u) {
                         Zugvorlage */
     k = strchr(k, '[');
     if (!k) {
-      log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+      log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                   _("Cannot parse this unit's comment"));
       no_comment++;
       return;
@@ -2177,7 +2177,7 @@ void orders_for_unit(int i, unit *u) {
   if (!j)
     j = strchr(k, ';');
   if (!j || j > e) {
-    log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+    log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Cannot parse this unit's comment"));
     no_comment++;
     return;
@@ -2616,12 +2616,12 @@ void checkgiving(void) {
     case P_SHIP:
       Scat(printparam(i));
       if (cmd_unit && cmd_unit->ship >= 0) {
-        log_warning(4, filename, line_no, order_buf, cmd_unit->no, NULL,
+        log_warning(5, filename, line_no, order_buf, cmd_unit->no, NULL,
                     _("Unit %s may not be in control of a ship"),
                     uid(cmd_unit));
       }
       if (order_unit->ship >= 0) {
-        log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+        log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                     _("Unit %s may not be in control of a ship"),
                     uid(order_unit));
       }
@@ -2635,7 +2635,7 @@ void checkgiving(void) {
         cmd_unit->people += n;
       order_unit->people -= n;
       if (order_unit->people < 0 && no_comment < 1 && !does_default) {
-        log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+        log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                     _("Unit %s may have not enough men"), uid(order_unit));
       }
       break;
@@ -2651,7 +2651,7 @@ void checkgiving(void) {
         }
         order_unit->money -= n;
         if (order_unit->money < 0 && no_comment < 1 && !does_default) {
-          log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+          log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                       _("Unit %s may have not enough silver"), uid(order_unit));
         }
       }
@@ -2680,12 +2680,12 @@ void checkgiving(void) {
   } else if (findparam(s) == P_CONTROL) {
     if (order_unit->ship && !does_default) {
       if (order_unit->ship > 0) {
-        log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+        log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                     _("Unit %s may lack control over ship %s"), uid(order_unit),
                     itob(order_unit->ship));
       } else if (cmd_unit) {
         if (cmd_unit->ship != 0 && abs(cmd_unit->ship) != -order_unit->ship) {
-          log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+          log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                       _("Unit %s may be on ship %s instead of ship %s"),
                       uid(cmd_unit), itob(-order_unit->ship),
                       itob(abs(cmd_unit->ship)));
@@ -2862,7 +2862,7 @@ void checkmake(void) {
     log_error(filename, line_no, order_buf, this_unit_id(), NULL,
               _("This cannot be made"));
   else
-    log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+    log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Unit must be in a castle, in a building or on a ship"));
   long_order();
   /*
@@ -2897,7 +2897,7 @@ void checkdirections(int key) {
         Scat(printdirection(i));
         count++;
         if (!noship && order_unit->ship == 0 && key != K_ROUTE && count == 4) {
-          log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
+          log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                       _("Unit %s may be moving too far"), uid(order_unit));
         }
         switch (i) {
@@ -3300,7 +3300,7 @@ void check_money(
       for (r = Regionen; r; r = r->next) {
         if (r->reserviert > 0 &&
             r->reserviert > r->geld) { /* nur  explizit   mit  RESERVIERE  */
-          log_warning(4, filename, r->line_no, NULL, 0, r,
+          log_warning(5, filename, r->line_no, NULL, 0, r,
                       _("Units in %s (%d,%d) reserved more silver (%d) than "
                         "available (%d)"),
                       r->name, r->x, r->y, r->reserviert, r->geld);
@@ -3330,7 +3330,7 @@ void check_money(
       }
       if (u->money < 0) {
         if (do_move) {
-          log_warning(4, filename, u->line_no, NULL, u->no, NULL,
+          log_warning(5, filename, u->line_no, NULL, u->no, NULL,
                       _("Unit %s has %d silver before income"),
                       uid(u), u->money);
         } else {
@@ -3368,7 +3368,7 @@ void check_money(
       continue;
     if (u->hasmoved > 1) {
       if (!noship && u->ship > 0) {
-        log_warning(4, filename, u->line_no, NULL, u->no, NULL,
+        log_warning(5, filename, u->line_no, NULL, u->no, NULL,
                     cgettext(Errors[UNITMOVESSHIP]), uid(u), itob(u->ship));
       }
       i = -u->ship;
@@ -3478,7 +3478,7 @@ void check_living(void) {
       if (u->region == r && u->lives > 0)
         r->geld -= u->people * 10;
     if (r->geld < 0) {
-      log_warning(4, filename, r->line_no, NULL, 0, r,
+      log_warning(5, filename, r->line_no, NULL, 0, r,
                   _("There is not enough silver in %s (%d,%d) for upkeep; %d "
                     "silver is missing"),
                   r->name, r->x, r->y, -(r->geld));
@@ -3507,12 +3507,12 @@ void check_teachings(void) {
     if (t->teacher) {
       t->teacher->lehrer = t->teacher->people * 10;
       if (t->teacher->lehrer == 0) {
-        log_warning(4, filename, t->student->line_no, NULL, t->student->no,
+        log_warning(5, filename, t->student->line_no, NULL, t->student->no,
                     NULL, _("Unit %s has 0 men and is taught by unit %s"),
                     uid1(t->student), uid2(t->teacher));
       }
       if (t->student->schueler == 0 && t->student->lives > 0) {
-        log_warning(4, filename, t->teacher->line_no, NULL, t->teacher->no,
+        log_warning(5, filename, t->teacher->line_no, NULL, t->teacher->no,
                     NULL, _("Unit %s has 0 men and teaches unit %s"),
                     uid1(t->teacher), uid2(t->student));
       }
