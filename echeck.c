@@ -2132,7 +2132,6 @@ void orders_for_unit(int i, unit *u) {
   char *k, *j, *e;
   int s;
 
-  end_unit_orders();
   set_order_unit(mother_unit = u);
 
   if (u->start_of_orders_line) {
@@ -4869,6 +4868,7 @@ void process_order_file(int *faction_count, int *unit_count) {
       break;
 
     case P_REGION:
+      end_unit_orders();
       if (Regionen)
         remove_temp();
       attack_warning = 0;
@@ -4925,6 +4925,7 @@ void process_order_file(int *faction_count, int *unit_count) {
       break;
 
     case P_FACTION:
+      end_unit_orders();
       if (f && !next) {
         log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                   _("Missing %s"), printparam(P_NEXT));
@@ -4960,6 +4961,7 @@ void process_order_file(int *faction_count, int *unit_count) {
       break;
 
     case P_UNIT:
+      end_unit_orders();
       if (f) {
         scat(order_buf);
         readaunit(r);
@@ -4981,6 +4983,7 @@ void process_order_file(int *faction_count, int *unit_count) {
        */
 
     case P_NEXT:
+      end_unit_orders();
       f = 0;
       scat(printparam(P_NEXT));
       indent = next_indent = INDENT_FACTION;
