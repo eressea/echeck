@@ -1,3 +1,8 @@
+echeck (4.7.4-3) stable; urgency=low
+
+  * replace broken message catalog
+
+ -- Enno Rehling <enno@eressea.de>  Sun, 27 Mar 2022 17:45:00 +0200
 echeck (4.7.4-2) stable; urgency=low
 
   * fix warning spam for !@GIVE orders
