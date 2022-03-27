@@ -2073,6 +2073,7 @@ int getaunit(int type) {
 
 void copy_unit(unit *from, unit *to) {
   to->no = from->no;
+  to->region = from->region;
   to->people = from->people;
   to->money = from->money;
   to->line_no = from->line_no;
@@ -2148,7 +2149,6 @@ void orders_for_unit(int i, unit *u) {
   u->start_of_orders = STRDUP(order_buf);
   u->start_of_orders_line = line_no;
   u->lives = 1;
-
   if (no_comment > 0)
     return;
 
@@ -2547,7 +2547,7 @@ void checkgiving(void) {
     return;
   }
   scat(printkeyword(K_GIVE));
-  getaunit(NECESSARY);
+  getaunit(REQUIRED);
   if (this_unit) {
     if (cmd_unit && cmd_unit->region != order_unit->region) {
       // GIB an Einheit, die nachweislich nicht in der gleichen Region ist.
@@ -4350,6 +4350,7 @@ void readaunit(t_region *r) {
   }
   u = newunit(i, 0);
   if (u->region != r) {
+    /* we previously guessed this unit would be somewhere else */
     u->region = r;
     u->line_no = line_no;
     u->newx = r->x;
@@ -4358,6 +4359,7 @@ void readaunit(t_region *r) {
     u->order = STRDUP(order_buf);
     u->money = 0;
     u->reserviert = 0;
+    u->people = 0;
   }
   u->line_no = line_no;
   /*
