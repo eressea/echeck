@@ -2551,7 +2551,7 @@ void checkgiving(void) {
   if (this_unit) {
     if (cmd_unit && cmd_unit->region != order_unit->region) {
       // GIB an Einheit, die nachweislich nicht in der gleichen Region ist.
-      log_error(filename, line_no, order_buf, this_unit_id(), NULL,
+      log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Unit %s is in a different region"), itob(this_unit));
       cmd_unit = NULL;
     }
