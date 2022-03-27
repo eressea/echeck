@@ -2578,7 +2578,7 @@ void checkgiving(void) {
 
     s = getstr();
 
-    if (*s) {
+    if (*s && this_unit) {
       if (!cmd_unit || cmd_unit->region != order_unit->region) {
         n = 0;
       }
