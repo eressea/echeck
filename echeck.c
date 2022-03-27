@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.3";
+static const char *echeck_version = "4.7.4";
 
 #define DEFAULT_PATH "."
 
@@ -2025,6 +2025,7 @@ int getaunit(int type) {
 
   current_temp_no = 0;
   cmd_unit = NULL;
+  this_unit = 0;
 
   s = getstr();
   if (s[0] == 0) {
@@ -2061,6 +2062,8 @@ int getaunit(int type) {
 
   if (is_temp || type == REQUIRED) {
     cmd_unit = newunit(i, is_temp); /* Die Unit schon machen, wegen  TEMP-Check */
+  } else {
+    cmd_unit = find_unit(i, 0);
   }
   bcat(i);
   if (is_temp)
@@ -2536,7 +2539,7 @@ int getaspell(char *s, char spell_typ, unit *u, int reallycast) {
 
 void checkgiving(void) {
   char *s;
-  int i, n;
+  int i, n = -1;
 
   if (from_temp_unit_no) {
     log_error(filename, line_no, order_buf, this_unit_id(), NULL,
@@ -2545,16 +2548,23 @@ void checkgiving(void) {
   }
   scat(printkeyword(K_GIVE));
   getaunit(NECESSARY);
+  if (this_unit) {
+    if (cmd_unit && cmd_unit->region != order_unit->region) {
+      // GIB an Einheit, die nachweislich nicht in der gleichen Region ist.
+      log_error(filename, line_no, order_buf, this_unit_id(), NULL,
+                _("Unit %s is in a different region"), itob(this_unit));
+      cmd_unit = NULL;
+    }
+  }
   s = getstr();
   if (!getaspell(s, SP_ALL, NULL, 0) && !isparam(s, P_CONTROL, 1) &&
       !isparam(s, P_HERBS, 1) && !isparam(s, P_UNIT, 1)) {
     n = atoi(s);
     if (n < 1) {
-      if (findparam(s) == P_ALLES) { /* GIB xx ALLES wasauchimmer */
+      if (isparam(s, P_ALLES, 1))
+      { /* GIB xx ALLES [wasauchimmer] */
         n = -1;
-        Scat(printparam(P_ALLES));
-      } else if (findparam(s) == P_EACH) {
-        Scat(printparam(P_EACH));
+      } else if (isparam(s, P_EACH, 1)) {
         s = getstr();
         n = atoi(s);
         if (order_unit->people) {
@@ -2577,26 +2587,30 @@ void checkgiving(void) {
 
     s = getstr();
 
-    if (*s) {
-      if (this_unit && (!cmd_unit || cmd_unit->region != order_unit->region)) {
-        n = 0;
+    if (*s == '\0') {
+      if (n >= 0) {
+        log_error(filename, line_no, order_buf, this_unit_id(), NULL,
+                  _("Give what?"));
+        return;
       }
-    }
-    else if (n < 0) { /* GIB xx ALLES */
-      if (cmd_unit) {
-        n = order_unit->money - order_unit->reserviert;
-        cmd_unit->money += n;
-        cmd_unit->reserviert += n;
+      else {
+        /* GIB xx ALLES */
+        if (cmd_unit) {
+          if (*s == '\0') {
+            n = order_unit->money - order_unit->reserviert;
+            cmd_unit->money += n;
+            cmd_unit->reserviert += n;
+          }
+        }
+        order_unit->money = order_unit->reserviert;
+        return;
       }
-      order_unit->money = order_unit->reserviert;
-      return;
     }
 
-    if (!(*s)) {
-      log_error(filename, line_no, order_buf, this_unit_id(), NULL,
-                _("Give what?"));
-      return;
+    if (this_unit && !cmd_unit) {
+      n = 0;
     }
+
     i = findparam(s);
     switch (i) {
     case P_SHIP:
@@ -5023,7 +5037,6 @@ void process_order_file(int *faction_count, int *unit_count) {
       units = NULL;
       order_unit = NULL;
       cmd_unit = NULL;
-      order_unit = NULL;
 
     default:
       if (order_buf[0] == ';') {
