@@ -540,7 +540,9 @@ t_liste *buildingtypes = NULL;
 
 enum { POSSIBLE, NECESSARY, REQUIRED };
 
-#define VALID_UID 42
+#define TEMP_UID 3
+#define NORMAL_UID 1
+#define VALID_UID 4
 #define TEMP_MADE INT_MAX
 /*
  * ---------------------------------------------------------------------
@@ -1233,7 +1235,7 @@ void readafile(const char *fn, int typ) {
   FILE *F;
   char *s, *x;
 
-  F = path_fopen(g_basedir, fn, "rt");
+  F = path_fopen(g_basedir, fn, "rt+");
   if (!F)
     return;
   for (line = 1;; line++) {
@@ -2034,7 +2036,7 @@ int getaunit(int type) {
                 _("Missing unit"));
       return 0;
     }
-    return 1;
+    return NORMAL_UID;
   }
   switch (findparam(s)) {
   case P_PEASANT:
@@ -2055,7 +2057,12 @@ int getaunit(int type) {
   }
 
   if (type == POSSIBLE) { /* Nur Test, ob eine Einheit kommt, weil  das ein Fehler ist */
-    return i ? VALID_UID : 0;
+    this_unit = i;
+    if (i) {
+      bcat(i);
+      return is_temp ? TEMP_UID : VALID_UID;
+    }
+    return 0;
   }
 
   this_unit = i;
@@ -2067,8 +2074,8 @@ int getaunit(int type) {
   }
   bcat(i);
   if (is_temp)
-    return 3;
-  return 1;
+    return TEMP_UID;
+  return NORMAL_UID;
 }
 
 void copy_unit(unit *from, unit *to) {
@@ -3592,7 +3599,8 @@ void checkanorder(char *Orders) {
       break;
     }
     Scat(printparam(i));
-    if (getaunit(POSSIBLE) != 1) /* "TEMP xx" oder "0" geht nicht */
+    if (getaunit(POSSIBLE) == TEMP_UID ||
+        this_unit == 0) /* "TEMP xx" oder "0" geht nicht */
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Wrong number"));
     break;
@@ -3676,7 +3684,7 @@ void checkanorder(char *Orders) {
 
   case K_ATTACK:
     scat(printkeyword(K_ATTACK));
-    if (getaunit(NECESSARY) == 3) {
+    if (getaunit(NECESSARY) == TEMP_UID || this_unit == 0) {
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Cannot attack a newly formed unit"));
     }
@@ -4145,6 +4153,7 @@ void checkanorder(char *Orders) {
 
   case K_DESTROY:
     scat(printkeyword(K_DESTROY));
+    long_order();
     break;
 
   case K_RIDE:
@@ -4267,7 +4276,7 @@ void checkanorder(char *Orders) {
                                    strlen(s)) == 0) {
         Scat(s);
         i = getaunit(NECESSARY);
-        if (i == 1 || i == 3) /* normale oder TEMP-Einheit: ok */
+        if (i == TEMP_UID || i == NORMAL_UID) /* normale oder TEMP-Einheit: ok */
           break;
       }
     }
@@ -5321,7 +5330,7 @@ int echeck_main(int argc, char *argv[]) {
 
   for (i = nextarg; i < argc; i++) {
     int bom;
-    F = fopen(argv[i], "rt");
+    F = fopen(argv[i], "rt+");
     if (!F) {
       fprintf(ERR, _("Cannot read file %s."), argv[i]);
       fputc('\n', ERR);
