@@ -1,3 +1,9 @@
+echeck (4.7.6-1) stable; urgency=low
+
+  * fix NUMMER command regression (bug 2841)
+  * fix ZERSTOERE command regression (bug 2840)
+
+ -- Enno Rehling <enno@eressea.de>  Sun, 27 Mar 2022 18:30:00 +0200
 echeck (4.7.5-2) stable; urgency=low
 
   * fix accounting when giving to units we have not seen yet.

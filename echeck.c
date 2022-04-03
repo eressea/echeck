@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.5";
+static const char *echeck_version = "4.7.6";
 
 #define DEFAULT_PATH "."
 
@@ -1235,7 +1235,7 @@ void readafile(const char *fn, int typ) {
   FILE *F;
   char *s, *x;
 
-  F = path_fopen(g_basedir, fn, "rt+");
+  F = path_fopen(g_basedir, fn, "rt");
   if (!F)
     return;
   for (line = 1;; line++) {
@@ -5327,7 +5327,6 @@ int echeck_main(int argc, char *argv[]) {
   }
 
   F = stdin;
-
   for (i = nextarg; i < argc; i++) {
     int bom;
     F = fopen(argv[i], "rt+");
