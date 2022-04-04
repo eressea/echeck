@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.6";
+static const char *echeck_version = "4.7.7";
 
 #define DEFAULT_PATH "."
 
@@ -3059,11 +3059,12 @@ void reserve(void) {
       s = getstr();
       n = atoi(s);
       icat(n);
-      n *= order_unit->people;
       if (n < 1) {
         log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                   cgettext(Errors[NUMMISSING]));
         n = 1;
+      } else {
+        n *= order_unit->people;
       }
     } else if (p == P_ALLES) {
       Scat(printparam(p));
@@ -4368,7 +4369,7 @@ void readaunit(t_region *r) {
     u->order = STRDUP(order_buf);
     u->money = 0;
     u->reserviert = 0;
-    u->people = 0;
+    u->people = 1;
   }
   u->line_no = line_no;
   /*
