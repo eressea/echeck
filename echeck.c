@@ -1290,6 +1290,21 @@ int this_unit_id(void) { return order_unit ? order_unit->no : 0; }
 
 #define LOG_ERROR 0
 
+static void print_message_header(int unit_id, const t_region* r, FILE* F)
+{
+  fputc('\n', F);
+  if (unit_id) {
+    fprintf(F, _("Unit %s:"), itob(unit_id));
+  } else if (r) {
+    if (r->name) {
+      fprintf(F, _("Region %s (%d,%d):"), r->name, r->x, r->y);
+    } else {
+      fprintf(F, _("Region %d,%d:"), r->x, r->y);
+    }
+  }
+  fputc('\n', F);
+}
+
 static void log_message_va(int level, const char *file, int line,
                            const char *order, int unit_id, const t_region *r,
                            const char *format, va_list va) {
@@ -1308,6 +1323,7 @@ static void log_message_va(int level, const char *file, int line,
   if (level == LOG_ERROR) {
     ++error_count;
     if (compile == OUT_NORMAL) {
+      print_message_header(unit_id, r, ERR);
       fprintf(ERR, _("Error in line %d"), line);
     }
   } else if (level > show_warnings) {
@@ -1315,6 +1331,7 @@ static void log_message_va(int level, const char *file, int line,
   } else {
     ++warning_count;
     if (compile == OUT_NORMAL) {
+      print_message_header(unit_id, r, ERR);
       fprintf(ERR, _("Warning in line %d"), line);
     }
   }

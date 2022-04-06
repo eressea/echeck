@@ -682,5 +682,11 @@ msgstr "Prä-Kampf"
 msgid "skills"
 msgstr "Talente"
 
-#~ msgid "messages"
-#~ msgstr "Meldungen"
+msgid "Unit %s:"
+msgstr "Einheit %s:"
+
+msgid "Region %d,%d:"
+msgstr "Region %d,%d:"
+
+msgid "Region %s (%d,%d):"
+msgstr "Region %s (%d,%d):"

@@ -1,3 +1,8 @@
+echeck (4.7.7-2) stable; urgency=low
+
+  * print more information about the source of errors
+
+ -- Enno Rehling <enno@eressea.de>  Wed, 6 Apr 2022 19:30:00 +0200
 echeck (4.7.7-1) stable; urgency=low
 
   * do not warn about RESERVIERE JE 1 Armbrust when unit has 0 people
