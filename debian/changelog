@@ -1,3 +1,8 @@
+echeck (4.7.9-1) stable; urgency=low
+
+  * fix unit id parsing for NUMMER EINHEIT
+
+ -- Enno Rehling <enno@eressea.de>  Sat, 9 Apr 2022 23:30:00 +0200
 echeck (4.7.8-1) stable; urgency=low
 
   * fix segmentation faults when orders don't contain REGION

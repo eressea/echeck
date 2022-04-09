@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.8";
+static const char *echeck_version = "4.7.9";
 
 #define DEFAULT_PATH "."
 
@@ -2038,6 +2038,48 @@ int getmoreunits(bool partei) {
   return count;
 }
 
+typedef enum unit_token {
+  UNIT_FOUND,
+  UNIT_TEMP,
+  UNIT_PEASANTS,
+  UNIT_NONE
+} unit_token;
+
+unit_token getaunitid(int *unit_id) 
+{
+  int i, result = UNIT_FOUND;
+  char * s = getstr();
+
+  if (s[0] == '\0') {
+    return UNIT_NONE;
+  }
+  switch (findparam(s)) {
+  case P_PEASANT:
+    i = 0;
+    Scat(printparam(P_PEASANT));
+    return UNIT_PEASANTS;
+    break;
+  case P_TEMP:
+    s = getstr();
+    if (s[0] == '\0') {
+      log_error(filename, line_no, order_buf, this_unit_id(), NULL,
+                cgettext(Errors[NOTEMPNUMBER]));
+      return UNIT_NONE;
+    }
+    Scat(printparam(P_TEMP));
+    result = UNIT_TEMP;
+    break;
+  }
+  i = btoi(s);
+  if (i == 0) {
+    return (result == UNIT_TEMP) ? UNIT_NONE : UNIT_PEASANTS;
+  }
+  if (unit_id) {
+    *unit_id = i;
+  }
+  return result;
+}
+
 int getaunit(int type) {
   char *s, is_temp = 0;
   int i;
@@ -3623,10 +3665,15 @@ void checkanorder(char *Orders) {
       break;
     }
     Scat(printparam(i));
-    if (getaunit(POSSIBLE) == TEMP_UID ||
-        this_unit == 0) /* "TEMP xx" oder "0" geht nicht */
+    i = getaunitid(&this_unit);
+
+    if (i == UNIT_NONE)
+      break;
+    if (i == UNIT_TEMP || i == UNIT_PEASANTS) {
+      /* "TEMP xx" oder "0" geht nicht */
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                 _("Wrong number"));
+    }
     break;
 
   case K_BANNER:
