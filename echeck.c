@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.7";
+static const char *echeck_version = "4.7.8";
 
 #define DEFAULT_PATH "."
 
@@ -1567,7 +1567,7 @@ unit *find_unit(int i, int t) {
 
   for (u = units; u; u = u->next) {
     if ((i < 0 && u->no < 0) || (u->no == i && val(u->temp) == val(t))) {
-      if (!u->temp || u->region->x == Rx && u->region->y == Ry) {
+      if (!u->temp || (u->region && u->region->x == Rx && u->region->y == Ry)) {
         return u;
       }
     }
@@ -3109,7 +3109,9 @@ void reserve(void) {
 
   if (findparam(s) == P_SILVER) {
     Scat(printparam(P_SILVER));
-    order_unit->region->reserviert += n;
+    if (order_unit->region) {
+      order_unit->region->reserviert += n;
+    }
     order_unit->reserviert += n;
     return;
   }
@@ -3298,23 +3300,25 @@ void check_money(
   if (Regionen && no_comment < 1) {
     if (silberpool && do_move) {
       for (u = units; u; u = u->next) {
-        u->region->geld += u->money;
-        /*
-         * Reservierung < Silber der Unit? Silber von anderen
-         * Units holen
-         */
-        if (u->reserviert > u->money) {
-          i = u->reserviert - u->money;
-          for (t = units; t && i > 0; t = t->next) {
-            if (t->region != u->region || t == u)
-              continue;
-            um = t->money - t->reserviert;
-            if (um > i)
-              um = i;
-            if (um > 0) {
-              u->money += um;
-              i -= um;
-              t->money -= um;
+        if (u->region) {
+          u->region->geld += u->money;
+          /*
+           * Reservierung < Silber der Unit? Silber von anderen
+           * Units holen
+           */
+          if (u->reserviert > u->money) {
+            i = u->reserviert - u->money;
+            for (t = units; t && i > 0; t = t->next) {
+              if (t->region != u->region || t == u)
+                continue;
+              um = t->money - t->reserviert;
+              if (um > i)
+                um = i;
+              if (um > 0) {
+                u->money += um;
+                i -= um;
+                t->money -= um;
+              }
             }
           }
         }
@@ -3472,7 +3476,7 @@ void check_money(
       }
     }
 
-    if (u->hasmoved) { /* NACH, gefahren oder auf Schiff */
+    if (u->region && u->hasmoved) { /* NACH, gefahren oder auf Schiff */
       addregion(u->region->x, u->region->y, -(u->people));
       u->region = addregion(u->newx, u->newy, u->people);
       if (u->region->line_no == line_no) /* line_no => NÄCHSTER */
@@ -3494,8 +3498,10 @@ void check_living(void) {
        u = u->next) { /* Silber der Einheiten in den  Silberpool "einzahlen" */
     if (u->lives < 1) /* jetzt nach der Umverteilung von Silber */
       continue;
-    u->region->geld +=
-      u->money; /* jetzt wird reserviertes Silber  nicht festgehalten */
+    if (u->region) {
+      u->region->geld +=
+        u->money; /* jetzt wird reserviertes Silber  nicht festgehalten */
+    }
   }
 
   for (r = Regionen; r; r = r->next) {
@@ -4380,8 +4386,10 @@ void readaunit(t_region *r) {
     /* we previously guessed this unit would be somewhere else */
     u->region = r;
     u->line_no = line_no;
-    u->newx = r->x;
-    u->newy = r->y;
+    if (r) {
+      u->newx = r->x;
+      u->newy = r->y;
+    }
     free(u->order);
     u->order = STRDUP(order_buf);
     u->money = 0;
@@ -4884,7 +4892,7 @@ void check_OPTION(void) {
 
 void process_order_file(int *faction_count, int *unit_count) {
   int f = 0, next = 0;
-  t_region *r;
+  t_region *r = NULL;
   teach *t;
   unit *u;
   char *x;

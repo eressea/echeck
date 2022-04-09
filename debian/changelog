@@ -1,3 +1,8 @@
+echeck (4.7.8-1) stable; urgency=low
+
+  * fix segmentation faults when orders don't contain REGION
+
+ -- Enno Rehling <enno@eressea.de>  Sat, 9 Apr 2022 10:40:00 +0200
 echeck (4.7.7-2) stable; urgency=low
 
   * print more information about the source of errors
