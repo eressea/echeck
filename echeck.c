@@ -1506,7 +1506,6 @@ static const struct warning {
   {"TEMPUNITSCANTGIVE",
    t("TEMPORARY units can't use GIVE, it happens before MAKE!")},
   {"UNITALREADYHASORDERS", t("Unit %s already has got orders in line %d")},
-  {"UNITCANSTILLTEACH", t("Unit %s can teach %d more students")},
   {"UNITMOVESSHIP", t("Unit %s moves ship %s and may lack control")},
   {"UNITMUSTBEONSHIP",
    t("Unit must be in a castle, in a building or on a ship")},

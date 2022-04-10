@@ -1,0 +1,30 @@
+ERESSEA enno "superduper"
+; This file should create no errors or warnings
+REGION 0,0 ; Xoltormia
+EINHEIT b67w;    Ein Mobbit [1,2702$]
+ARBEITE
+// This is a comment that is very long. The path of the righteous man is beset on all sides by the iniquities \
+of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds \
+the weak through the valley of darkness, for he is truly his brother's keeper and the finder of lost children. \
+And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and \
+destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.
+REGION 1,0 ; Texas
+EINHEIT 1;    Sumpfkatze [1,5830$]
+LEHRE TEMP 1
+MACHE TEMP 1
+REKRUTIERE 10
+LERNE Wahrnehmung
+ENDE
+EINHEIT 2;    Sumpfkatze [1,5830$]
+LERNE Katapult
+EINHEIT 3;    Sumpfkatze [1,5830$]
+GIB TEMP 1 ALLES
+KAUFE 2 Öl
+VERKAUFE ALLES Juwel
+EINHEIT 4;    Sumpfkatze [1,5830$]
+MACHE Schwert
+EINHEIT 5;    Sumpfkatze [1,5830$]
+MACHE 10 Speer
+EINHEIT 6;    Sumpfkatze [1,5830$]
+ROUTE NO NO P SW SW P
+NAECHSTER
