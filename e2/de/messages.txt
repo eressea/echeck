@@ -1,5 +1,10 @@
-#################  meldungen.txt      ECheck V4 und höher ##################
-# Diese Datei enthält die Liste aller Meldungen von ECheck.
+#################  messages.txt         ECheck V4 und höher ################
+# Diese Datei enthält die Liste aller Meldungen
+#
+# Umlaute dürfen nicht umschrieben werden, sondern als UTF-8 kodiert:
+# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist ;
+# 
+# Kommentare mit einem # davor; Leerzeilen sind erlaubt
 #
 # Die Schlüsselworte kann man mit "echeck -hm" erhalten
 #
@@ -7,8 +12,6 @@
 #
 # Bitte auf die Parameter achten. Anzahl und Reihenfolge der "%s" und "%d"
 # ist wichtig! Fehler können zu Abstürzen von ECheck führen.
-# 
-# Kommentare mit einem # davor; Leerzeilen sind erlaubt
 ############################################################################
 # Diese Datei am besten nicht modifizieren
 

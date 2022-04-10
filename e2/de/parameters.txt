@@ -1,56 +1,56 @@
-#################  parameter.txt      ECheck V4 und höher ##################
-# Diese Datei enthält die Liste aller Parameter, die ECheck versteht.
+###################  parameters.txt     ECheck V4 und höher ################
+# Diese Datei enthält die Liste aller Parameter
 #
-# Die Schlüsselworte kann man mit "echeck -hp" erhalten
-# 
-# Umlaute dürfen nicht umschrieben werden, sondern als ISO-Latin1 benutzt:
-# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist , oder ;
+# Umlaute dürfen nicht umschrieben werden, sondern als UTF-8 kodiert:
+# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist ;
 #
 # Kommentare mit einem # davor; Leerzeilen sind erlaubt
+#
+# Die Schlüsselworte kann man mit "echeck -hp" erhalten
 ############################################################################
 
-ALL,         Alles
-EACH, Je
-PEASANTS,    Bauern
-CASTLE,      Burg
-BUILDING,    Gebäude
-UNIT,        Einheit
-FLEE,        Fliehe
-REAR,        Hinten
-FRONT,       Vorne
-AGGRESSIVE,  aggressiv
-DEFENSIVE,   defensiv
-CONTROL,     Kommando
-HERBS,       Kräuter
-TREES,       Bäume
-NOT,         Nicht
+ALL;			Alles
+EACH;			Je
+PEASANTS;		Bauern
+CASTLE;			Burg
+BUILDING;		Gebäude
+UNIT;			Einheit
+FLEE;			Fliehe
+REAR;			Hinten
+FRONT;			Vorne
+AGGRESSIVE;		Aggressiv
+DEFENSIVE;		Defensiv
+CONTROL;		Kommando
+HERBS;			Kräuter
+TREES;			Bäume
+NOT;			Nicht
 
-NEXT,        Nächster
+NEXT;			Nächster
 # ^^ muß hier als Parameter stehen!
 
-FACTION,     Eressea
-FACTION,     Partei
-PERSON,      Personen
-REGION,      Region
-SHIP,        Schiff
-SILVER,      Silber
-ROAD,        Straßen
-TEMP,        Temporär
-PRIVATE,     Privat
-FIGHT,       Kämpfe
-OBSERVE,     Wahrnehmung
-GIVE,        Gib
-GUARD,       Bewache
-FACTIONSTEALTH, Parteitarnung
-WARN,        Warnung
-LEVEL,       Stufe
-HORSES,      Pferde
+FACTION;		Eressea
+FACTION;		Partei
+PERSON;			Personen
+REGION;			Region
+SHIP;			Schiff
+SILVER;			Silber
+ROAD;			Straßen
+TEMP;			Temporär
+PRIVATE;		Privat
+FIGHT;			Kämpfe
+OBSERVE;		Wahrnehmung
+GIVE;			Gib
+GUARD;			Bewache
+FACTIONSTEALTH;	Parteitarnung
+WARN;			Warnung
+LEVEL;			Stufe
+HORSES;			Pferde
 # ^^ ZÜCHTE PFERDE
-FOREIGN,     fremdes
-NUMBER,      Nummer
+FOREIGN;		Fremdes
+NUMBER;			Nummer
 # ^^ TARNE PARTEI NUMMER
-LOCALE, Locale
+LOCALE;			Locale
 
-BEFORE,      vor
-AFTER,       hinter
-AUTO, auto
+BEFORE;			Vor
+AFTER;			Hinter
+AUTO;			Auto

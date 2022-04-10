@@ -1,8 +1,8 @@
-##################  talente.txt      ECheck V4 und höher ###################
+###################  skills.txt      ECheck V4 und höher ###################
 # Diese Datei enthält die Liste aller Talente
 #
-# Umlaute dürfen nicht umschrieben werden, sondern als ISO-Latin1 benutzt:
-# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist , oder ;
+# Umlaute dürfen nicht umschrieben werden, sondern als UTF-8 kodiert:
+# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist ;
 #
 # Kommentare mit einem # davor; Leerzeilen sind erlaubt
 #
@@ -13,20 +13,20 @@
 ############################################################################
 
 Waffenloser Kampf
-Alchemie, 200
+Alchemie;			200
 Armbrustschießen
 Ausdauer
 Bogenschießen
 Katapultbedienung
-Kräuterkunde, 200
+Kräuterkunde;		200
 Reiten
-Taktik, 200
+Taktik;				200
 Bergbau
 Burgenbau
 Handeln
 Holzfällen
 
-Magie, -1
+Magie; -1
 # da die Magie-Lernkosten bei Eressea stufenabhängig sind, kann man bei
 # ECheck "LERNE MAGIE 250" schreiben, wenn es z.Zt. 250 Silber kostet
 # Dazu muß hier dann ein Wert <0 stehen. Für Empiria u.a. hier einfach
@@ -42,7 +42,7 @@ Unterhaltung
 Waffenbau
 Wagenbau
 Wahrnehmung
-Spionage, 100
+Spionage;			100
 Steuereintreiben
 Hiebwaffen
 Stangenwaffen

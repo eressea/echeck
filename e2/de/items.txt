@@ -1,14 +1,18 @@
-# Liste der Items für ECheck V4 und höher - Faroul
-# Alle Items stehen hier mit allen dem Server bekannten Namen.
+#################  items.txt            ECheck V4 und höher ################
+# Diese Datei enthält die Liste aller Items 
+#
+# Umlaute dürfen nicht umschrieben werden, sondern als UTF-8 kodiert:
+# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist ;
+#
+# Kommentare mit einem # davor; Leerzeilen sind erlaubt
+#
 # Pro Zeile gilt:
 #   erster Eintrag: Einzahl;
 #   zweiter Eintrag: Mehrzahl
 #   dritter und weitere Einträge: weitere Alternativen
 #	ist der dritte Eintrag eine Zahl, so ist dies der Einkaufspreis
 #	für ein Luxusgut!
-# Umlaute müssen nicht umschrieben werden, sondern als ISO-Latin1
-# benutzt:	ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß
-# Trennzeichen ist , oder ;
+############################################################################
 
 Balsam; Balsam, 4
 Gewürz; Gewürze; 5

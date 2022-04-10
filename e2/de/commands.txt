@@ -1,71 +1,73 @@
-##################  befehle.txt      ECheck V4 und höher ###################
-# Diese Datei enthält die Liste aller Befehle, die ECheck versteht.
+#################  commands.txt         ECheck V4 und höher ################
+# Diese Datei enthält die Liste aller Befehle
 #
-# Die Schlüsselworte kann man mit "echeck -hb" erhalten
-# Umlaute dürfen nicht umschrieben werden.
+# Umlaute dürfen nicht umschrieben werden, sondern als UTF-8 kodiert:
+# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist ;
 #
 # Kommentare mit einem # davor; Leerzeilen sind erlaubt
+#
+# Die Schlüsselworte kann man mit "echeck -hb" erhalten
 ############################################################################
 
-WORK,         Arbeiten
-ATTACK,       Attackieren
-STEAL,        Beklauen
-NAME,         Benennen
-USE,          Benutzen
-DESCRIBE,     Beschreiben
-ENTER,        Betreten
-GUARD,        Bewachen
-PAY,          Bezahlen
-MESSAGE,      Botschaft
-END,          Ende
-RIDE,         Fahren
-FOLLOW,       Folgen
-RESEARCH,     Forschen
-GIVE,         Gib
-HELP,         Helfen
-FIGHT,        Kämpfen
-COMBATMAGIC,  Kampfzauber
-BUY,          Kaufen
-CONTACT,      Kontaktieren
-TEACH,        Lehren
-STUDY,        Lernen
-MAKE,         Machen
-MOVE,         Nach
-PASSWORD,     Passwort
-PLANT,        Pflanzen
-RECRUIT,      Rekrutieren
-REPORT,       Report
-OPTION,       Option
-SPY,          Spionieren
-SETSTEALTH,   Tarnen
-CARRY,        Transportieren
-QUIT,         Stirb
-TAX,          Treiben
-ENTERTAIN,    Unterhalten
-SELL,         Verkaufen
-LEAVE,        Verlassen
-CAST,         Zaubere
-SHOW,         Zeigen
-DESTROY,      Zerstören
-FORGET,       Vergiss
-DEFAULT,      Default
-COMMENT,      //
-ROUTE,        Route
-SABOTAGE,     Sabotieren
-BREED,        Züchten
-ORIGIN,       Ursprung
-EMAIL,        Email
-RESERVE,      Reservieren
-CLAIM, Beanspruchen
-BANNER,       Banner
-NUMBER,       Nummer
-PIRACY,       Piraterie
-GROUP,        Gruppe
-SORT,         Sortieren
-PREFIX,       Präfix
-PROMOTE,      Befördere
-LANGUAGE,     Sprache
+WORK;         Arbeiten
+ATTACK;       Attackieren
+STEAL;        Beklauen
+NAME;         Benennen
+USE;          Benutzen
+DESCRIBE;     Beschreiben
+ENTER;        Betreten
+GUARD;        Bewachen
+PAY;          Bezahlen
+MESSAGE;      Botschaft
+END;          Ende
+RIDE;         Fahren
+FOLLOW;       Folgen
+RESEARCH;     Forschen
+GIVE;         Gib
+HELP;         Helfen
+FIGHT;        Kämpfen
+COMBATMAGIC;  Kampfzauber
+BUY;          Kaufen
+CONTACT;      Kontaktieren
+TEACH;        Lehren
+STUDY;        Lernen
+MAKE;         Machen
+MOVE;         Nach
+PASSWORD;     Passwort
+PLANT;        Pflanzen
+RECRUIT;      Rekrutieren
+REPORT;       Report
+OPTION;       Option
+SPY;          Spionieren
+SETSTEALTH;   Tarnen
+CARRY;        Transportieren
+QUIT;         Stirb
+TAX;          Treiben
+ENTERTAIN;    Unterhalten
+SELL;         Verkaufen
+LEAVE;        Verlassen
+CAST;         Zaubere
+SHOW;         Zeigen
+DESTROY;      Zerstören
+FORGET;       Vergiss
+DEFAULT;      Default
+COMMENT;      //
+ROUTE;        Route
+SABOTAGE;     Sabotieren
+BREED;        Züchten
+ORIGIN;       Ursprung
+EMAIL;        Email
+RESERVE;      Reservieren
+CLAIM; Beanspruchen
+BANNER;       Banner
+NUMBER;       Nummer
+PIRACY;       Piraterie
+GROUP;        Gruppe
+SORT;         Sortieren
+PREFIX;       Präfix
+PROMOTE;      Befördere
+LANGUAGE;     Sprache
 
-# NEXT, Nächster     ist KEIN BEFEHL für ECheck, sondern ein PARAMETER!
+# NEXT; Nächster     ist KEIN BEFEHL für ECheck, sondern ein PARAMETER!
 # dies ist aus internen Gründen notwendig, also entsprechend dort eintragen
 
