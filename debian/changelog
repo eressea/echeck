@@ -1,3 +1,8 @@
+echeck (4.7.10-1) stable; urgency=low
+
+  * missing long orders were checked twice
+
+ -- Enno Rehling <enno@eressea.de>  Sun, 10 Apr 2022 18:30:00 +0200
 echeck (4.7.9-1) stable; urgency=low
 
   * fix unit id parsing for NUMMER EINHEIT

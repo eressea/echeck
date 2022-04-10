@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.9";
+static const char *echeck_version = "4.7.10";
 
 #define DEFAULT_PATH "."
 
@@ -2204,6 +2204,7 @@ void end_unit_orders(void) {
                 this_unit_id(), NULL, _("Unit %s has no long order"),
                 uid(order_unit));
   }
+  order_unit = NULL;
 }
 
 void orders_for_unit(int i, unit *u) {
