@@ -1,8 +1,10 @@
-###################  zauber.txt      ECheck V4 und höher ###################
+###################  spells.txt      ECheck V4 und höher ###################
 # Diese Datei enthält die Liste aller Zauber
 #
 # Umlaute dürfen nicht umschrieben werden, sondern als UTF-8 kodiert:
-# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist , oder ;
+# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist ;
+#
+# Kommentare mit einem # davor; Leerzeilen sind erlaubt
 #
 # Alle Zauber stehen hier mit dem kompletten Namen
 # Pro Zeile gilt:
@@ -12,62 +14,190 @@
 #					1 = Kampfzauber
 #					2 = Post-Kampfzauber
 #					3 = Prae-Kampfzauber
-# Kommentare mit einem # davor; Leerzeilen sind erlaubt
 ############################################################################
 
 # Diese Liste enthält absichtlich keine "echten" Zauber.
 # Es sollte jedem leicht fallen, die Liste anzupassen und zu erweitern.
 
-Magische Erbsensuppe;						0; 1	# ein Kampfzauber der stinkenden Art
-Blitzlicht;									0; 1	# Cheese!
-Magisches Lametta;							5; 2	# ja, is' denn scho' wieder Weihnachten?
-Pesthauch;									0; 3	# was man nicht alles mit Knoblauch hinbekommt
-Schattenspiele;								50; 0	# immer wieder unterhaltsam
-Sonnenschein;								50; 0	# braucht man ja immer mal...
-Ferne Investition;							500; 0	# Zinsen: -100%
+Magische Erbsensuppe;							0; 1		# ein Kampfzauber der stinkenden Art
+Blitzlicht;										0; 1		# Cheese!
+Magisches Lametta;								5; 2		# ja, is' denn scho' wieder Weihnachten?
+Pesthauch;										0; 3		# was man nicht alles mit Knoblauch hinbekommt
+Schattenspiele;									50; 0		# immer wieder unterhaltsam
+Sonnenschein;									50; 0		# braucht man ja immer mal...
+Ferne Investition;								500; 0		# Zinsen: -100%
 
-
-
+############################################################################
 
 #Gwyrrd
-Erschaffe Steingolems;						0; 0	#Erschafft Golems welche pro Golem 4 Steine verbauen								
-Segen der Erde;								0; 0	#Erhält 50 Silber*Stufe von den Bauern
-Viehheilung;								0; 0	#Magier erhält Stufe*50 Silber				
-Erschaffe Eisengolems;						0; 0	#Erschafft Golems welche pro Golem 4 Eisen verbauen	
-Hainzauber;									0; 0	#Erschafft 4 Schösslinge pro Stufe
-Bergwächter;								0; 0	#Bewacht Berge und Gletscher
-Firuns Fell;								0; 0	#Stufe*10 Insekten können Gletscher betreten								
-Hagel;										0; 1	#Der Gegner wird mit Hagelkörnern und Eisbrocken bombardiert
-Rostregen;									0; 0	#Für jede Stufe werden bis zu 10 Eisenwaffen zerstört
-Magischer Pfad;								0; 0	#Die Zielregion hat Stufe*Wochen eine Straße in jede Richtung
-Segne Mallornstecken;						0; 0	#Erschafft 3 Mallornschösslinge pro Stufe
-Wasserelementar;							0; 0	#+1 Region für Stufe*Wochen
-Windschild;									0; 3	#Wirbelwinde behindern die gegnerischen Schützen
-Astralschutzgeister;						0; 3	#Feindliche Magier werden beim Zaubern während der Schlacht behindert
-Erschaffe einen magischen Kräuterbeutel;	0; 0	#Kräuter zerfallen in diesem Beutel nur halb so schnell 
-Heilung;									0; 2	#Der Magier heilt seine Kampfgefährten nach der Schlacht 
-Wirbelwind;									0; 3	#Stürme behindern alle Schützen der Schlacht
-Erdelementar;								0; 0	#Alle Gebäude der Region werden beschädigt
-Erschaffe ein Amulett des wahren Sehens;	3000; 0 #Erschafft ein AdW mit welchen RdU getarnte Einheiten entdeckt werden
-Erschaffe einen Ring der Unsichtbarkeit;	3000; 0 #Erschafft ein RdU mit welchem man jedweden blicken entschwinden kann
-Meditation;									0; 0	#Übertägt Aura 2 zu 1 auf selbes Magiegebiet								
-Sturmelementar;								0; 0	#Pro Stufe wird ein Schiff in der Geschwindigkeit verdoppelt
-Heimstein;									0; 0	#Das Gebäude ist gegen Waffengewalt und Magie besser geschützt
-Wolfsgeheul;								0; 3	#Der Magier ruft Wölfe herbei die ihm im Kampf unterstützen
-Blick des Basilisken;						0; 1	#Versteinert einige Gegner für die Dauer des Kampfes
-Geister bannen;								0; 0	#Der Magus bannt einen Zauber
-Starkes Tor und feste Mauer;				0; 0	#Anfang der Woche wird das Gebäude gegen Magie und Schwert gesichert
-Heiliger Boden;								0; 0	#Untote schrecken vor dieser Region zurück
-Sog des Lebens;								0; 0	#Der Geode kann Stufe*5 GE aus dem Astralraum zurückholen
-Weg der Bäume;								0; 0	#Der Geode kann Stufe*5 GE in den Astralraum senden
-Erwecke Ents;								0; 0	#Einige Bäume der Region erheben sich zu Ents
-Vertrauten binden;							0; 0	#Ein Vertrautentier schließt sich dem Magier an
-Segne Steinkreis;							0; 0	#Dieses Ritual segnet einen Steinkreis
-Rindenhaut;									0; 0	#Eigene Truppen werden von einer natürlichen Rüstung geschützt
-Hitzeelementar;								0; 0	#Eine ganze Region verdorrt
-Mahlstrom;									0; 0	#Ein gewaltigen Strudel beschädigt jedes Schiff schwer das ihn passiert
-Wurzeln der Magie;							0; 0	#Die Region wird zu einer Mallornregion
-Tor in die Ebene der Hitze;					0; 0	#Die Region wird total verwüstet
+Erschaffe Steingolems;							0; 0		#Erschafft Golems welche pro Golem 4 Steine verbauen								
+Segen der Erde;									0; 0		#Erhält 50 Silber*Stufe von den Bauern
+Viehheilung;									0; 0		#Magier erhält Stufe*50 Silber				
+Erschaffe Eisengolems;							0; 0		#Erschafft Golems welche pro Golem 4 Eisen verbauen	
+Hainzauber;										0; 0		#Erschafft 4 Schösslinge pro Stufe
+Bergwächter;									0; 0		#Bewacht Berge und Gletscher
+Firuns Fell;									0; 0		#Stufe*10 Insekten können Gletscher betreten								
+Hagel;											0; 1		#Der Gegner wird mit Hagelkörnern und Eisbrocken bombardiert
+Rostregen;										0; 0		#Für jede Stufe werden bis zu 10 Eisenwaffen zerstört
+Magischer Pfad;									0; 0		#Die Zielregion hat Stufe*Wochen eine Straße in jede Richtung
+Segne Mallornstecken;							0; 0		#Erschafft 3 Mallornschösslinge pro Stufe
+Wasserelementar;								0; 0		#+1 Region für Stufe*Wochen
+Windschild;										0; 3		#Wirbelwinde behindern die gegnerischen Schützen
+Astralschutzgeister;							0; 3		#Feindliche Magier werden beim Zaubern während der Schlacht behindert
+Erschaffe einen magischen Kräuterbeutel;		0; 0		#Kräuter zerfallen in diesem Beutel nur halb so schnell 
+Heilung;										0; 2		#Der Magier heilt seine Kampfgefährten nach der Schlacht 
+Wirbelwind;										0; 3		#Stürme behindern alle Schützen der Schlacht
+Erdelementar;									0; 0		#Alle Gebäude der Region werden beschädigt
+Erschaffe ein Amulett des wahren Sehens;		3000; 0		#Erschafft ein AdW mit welchen RdU getarnte Einheiten entdeckt werden
+Erschaffe einen Ring der Unsichtbarkeit;		3000; 0		#Erschafft ein RdU mit welchem man jedweden blicken entschwinden kann
+Meditation;										0; 0		#Übertägt Aura 2 zu 1 auf selbes Magiegebiet								
+Sturmelementar;									0; 0		#Pro Stufe wird ein Schiff in der Geschwindigkeit verdoppelt
+Heimstein;										0; 0		#Das Gebäude ist gegen Waffengewalt und Magie besser geschützt
+Wolfsgeheul;									0; 3		#Der Magier ruft Wölfe herbei die ihm im Kampf unterstützen
+Blick des Basilisken;							0; 1		#Versteinert einige Gegner für die Dauer des Kampfes
+Geister bannen;									0; 0		#Der Magus bannt einen Zauber
+Starkes Tor und feste Mauer;					0; 0		#Anfang der Woche wird das Gebäude gegen Magie und Schwert gesichert
+Heiliger Boden;									0; 0		#Untote schrecken vor dieser Region zurück
+Sog des Lebens;									0; 0		#Der Geode kann Stufe*5 GE aus dem Astralraum zurückholen
+Weg der Bäume;									0; 0		#Der Geode kann Stufe*5 GE in den Astralraum senden
+Erwecke Ents;									0; 0		#Einige Bäume der Region erheben sich zu Ents
+Vertrauten binden;								0; 0		#Ein Vertrautentier schließt sich dem Magier an
+Segne Steinkreis;								0; 0		#Dieses Ritual segnet einen Steinkreis
+Rindenhaut;										0; 0		#Eigene Truppen werden von einer natürlichen Rüstung geschützt
+Hitzeelementar;									0; 0		#Eine ganze Region verdorrt
+Mahlstrom;										0; 0		#Ein gewaltigen Strudel beschädigt jedes Schiff schwer das ihn passiert
+Wurzeln der Magie;								0; 0		#Die Region wird zu einer Mallornregion
+Tor in die Ebene der Hitze;						0; 0		#Die Region wird total verwüstet
+
+
+#Cerddor;
+Friedenslied;									0; 0		#Magier kann nicht attackiert werden.
+Gaukeleien;										0; 0		#Erhält 50 Silber*Stufe von den Bauern
+Hohes Lied der Gaukelei;						0; 0		#Erhöht das Unterhaltungs Maximum
+Lied der Heilung;								0; 2		#Heilt nach der Schlacht
+Gesang der Furcht;								0; 1		#Gegner versuchen zu fliehen
+Regentanz;										0; 0		#Lohn +1 Silber für Stufe-Wochen
+Gesang der Verwirrung;							0; 3		#Vertauscht erste und 2. Reihe
+Gesang des Werbens;								0; 0		#Rekrutierungszauber
+Bannlied;										0; 3		#Verhindert gegnerische Zauber
+Gesang des Auratransfers;						0; 0		#Übertägt Aura 2 zu 1 auf selbes Magiegebiet
+Gesang des Lebens analysieren;					0; 0		#Erkennt auf Einheiten liegende Zauber
+Heldengesang;									0; 3		#Einheit flieht nicht und verteidigt besser
+Erschaffe ein Amulett des wahren Sehens;		3000; 0		#Erschafft ein AdW mit welchen RdU getarnte Einheiten entdeckt werden
+Erschaffe einen Ring der Unsichtbarkeit;		3000; 0		#Erschafft ein RdU mit welchem man jedweden blicken entschwinden kann
+Lied der Verfuehrung;							0; 0		#Zieleinheit übergibt dem Magier Gegenstände
+Monster friedlich stimmen;						0; 0		#Reduziert attackiere Wahrscheinlichkeit
+Aushorchen;										100; 0		#Zieleinheit sagt alles was die Partei sieht.
+Kriegsgesang;									0; 3		#Attacke+ Parade- kämpft bis zum Tode
+Schaler Wein;									50;	0		#Zieleinheit vergisst vom besten Talent bis zu 2 Wochen
+Gesang der Angst;								0; 3		#Senkt Kampftalent der Zieleinheit
+Lebenslied festigen;							0; 0		#Entfernt Magier von Ziel Einheit/Region					
+Lies des Ortes analzsieren;						0; 0		#Identifiziert Zauber auf Burg/Schiff/Region
+Ritual der Aufnahme;							0; 0		#Nimmt Immigranten fremder Rassen auf
+Vertrauten rufen;								0; 0		#Ein Vertrautentier schließt sich dem Magier an
+Gesang des wachen Geistes;						0; 0		#15% Magieresistenz für Verbündete (Bewache)
+Mob aufwiegeln;									0; 0		#250& Bauern Pro Stufe erheben sich.
+Gesang der Melancholie;							0; 0		#Bauern werden einige Wochen nicht arbeiten			
+Miriams flinke Finger;							1000; 0		#Erschafft einen FF Ring
+Gesang der Friedfertigkeit;						0; 0		#Keine Attackiere in der Region m;glich
+Gesang des schwachen Geistes;					0; 0		#Magieresistenz -15% für nicht Verbündete
+Gesang der Versklavung;							0; 0		#Übernimmt kurzzeitig Gegnerische Einheit
+Hohe Kunst der Überzeugung;						0; 0		#Massiver Mob erhebt sich oder Rekrutieren?
+Aufruhr beschwichtigen;							0; 0		#Mob wird beschwichtigt
+Aufruhr verursachen;							0; 0		#Mob erhebt sich
+
+#Draig
+Kleine Flüche;									0; 0		#Erhält 50 Silber*Stufe von den Bauern
+Verwünschung;									0; 0		#Das Ziel des Zauberers wird von einer harmlosen Verwünschung heimgesucht
+Feuerball;										0; 1		#Der Klassiker der Kampfmagie
+Gabe des Chaos;									0; 0		#Kurzzeitig mehr max. Aura, danach weniger max. Aura
+Kleines Blutopfer;								0; 0		#Tauscht HP gegen Aura
+Blutrausch;										0; 3		#Blutrausch stärkt eigene Soldaten
+Chaosfluch;										0; 0		#Beeinträchtigt die magischen Fähigkeiten des Opfers erheblich
+Erschaffe ein Amulett des wahren Sehens;		3000; 0		#Erschafft ein AdW mit welchen RdU getarnte Einheiten entdeckt werden
+Erschaffe einen Ring der Unsichtbarkeit;		3000; 0		#Erschafft ein RdU mit welchem man jedweden blicken entschwinden kann
+Mächte des Todes;								0; 0		#Erschafft Untote
+Rosthauch;										0; 1		#Waffen und Rüstungen der Gegner rosten
+Feuerwand;										0; 0		#Erschafft eine Wand aus Feuer in der angegebenen Richtung
+Fluch der Pestilenz;							0; 0		#Löst eine Pest in der Region aus
+Machtübertragung;								0; 0		#Übertägt Aura 2 zu 1 auf selbes Magiegebiet
+Beschwöre Schattendämonen;						0; 0		#Beschwört Schattendämonen
+Wahnsinn des Krieges;							0; 3		#Bringt die Kampfaustellung durcheinander
+Astraler Riss;									0; 0		#Alle Magier der Region werden verlieren einen Großteil ihrer Aura 
+Astrales Chaos;									0; 3		#Behindert feindliche Magier beim Zaubern
+Erschaffe einen Gürtel der Trollstärke;			0; 0		#Artefaktträger erhält Traglast*50 und +1 natürliche Rüstung
+Untote Helden;									0; 2		#In der Schlacht gestorbene erheben sich als Untote wieder
+Feuerteufel;									0; 0		#Setzt viele Bäume einer Region in Flammen
+Pentagramm;										0; 0		#Entzaubert Ziel (Region/Einheit/Schiff/Burg)
+Drachenruf;										0; 0		#Ruft Drachenartige im Umkreis in die Region (Sumpf/Gletscher/Wüste)
+Todeswolke;										0; 0		#Giftgas schädigt jede Einheit in der Region
+Beschwöre Schattenmeister;						0; 0		#Beschwört Schattenmeister
+Erschaffe ein Flammenschwert;					0; 0		#Erschaffe ein Flammenschwert		
+Vertrauten rufen;								0; 0		#Ein Vertrautentier schließt sich dem Magier an
+Chaossog;										0; 0		#Öffnet eine Tor welches mittels NACH WIRBEL in den Astralraum führt
+Unheilige Kraft;								0; 0		#Wandelt eigene Untote in höhere Untote
+	
+#Illaun
+Schattenritter;									0; 3		#Erzeugt Schattenritter die sich nach einem Treffer auflösen
+Traumsenden;									0; 0		#Der Zauberer sendet dem Ziel des Spruches einen Traum
+Wahrsagen;										0; 0		#Erhält 50 Silber*Stufe von den Bauern
+Grauen der Schlacht;							0; 3		#Gegner versuchen zu fliehen
+Seelenfrieden;									0; 0		#Entfernt 50*Stufe Leichen aus dem Untotenpool der Region
+Gestaltwandlung;								0; 0		#Tarnt die Rasse der Zieleinheit
+Traum der Magie;								0; 0		#Übertägt Aura 2 zu 1 auf selbes Magiegebiet
+Traumschlößchen;								0; 0		#Erzeugt die Illusion eines Gebäudes
+Schwere Glieder;								0; 3		#Soldaten attackieren und verteidigen schlechter
+Traumlesen;										0; 0		#Erhält einen Bericht über die Umgebung
+Traumbilder analysieren;						0; 0		#Analysiert den Zauber der auf dem Ziel liegt
+Wiederbelebung;									0; 2		#Belebt gestorbene Einheiten wieder, heilt sie jedoch nicht.
+Erschaffe ein Amulett des wahren Sehens;		3000; 0		#Erschafft ein AdW mit welchen RdU getarnte Einheiten entdeckt werden
+Erschaffe einen Ring der Unsichtbarkeit;		3000; 0		#Erschafft ein RdU mit welchem man jedweden blicken entschwinden kann
+Schlechter Schlaf;								0; 0		#Erschwert das Lernen in der Region
+Schlaf;											0; 1		#Kämpfer attackieren nicht und verteidigen sich schlechter bis sie getroffen werden
+Traumdeuten;									0; 0		#Ziel verrät Besitz, Parteizugehörigkeit und Fähigkeiten
+Schöne Träume;									0; 0		#Verbündete erhalten einen Bonus auf alle Talente; Verhindert Lehre
+Traumbilder entwirren;							0; 0		#Enttarnt Verzauberungen
+Vertrauten rufen;								0; 0		#Ein Vertrautentier schließt sich dem Magier an	
+Schlechte Träume;								0; 0		#Feinde erhalten einen Malus auf alle Talente; Verhindert Lehre
+Tod des Geistes;								0; 3		#Entzieht dem Ziel Lerntage bis zum tode
+Süße Träume;									0; 0		#Zieleinheit vermehrt sich, dadurch verwässern sich Talentwerte.
+Erschaffe eine Sphäre der Unsichtbarkeit;		30000; 0	#Erschafft eine SdU mit welchem 100 Personen jedweden blicken entschwinden können	
+Erschaffe ein Traumauge;						0; 0		#Artefakt gewährt Taktikbonus bei Benutze
+
+#Tybied
+Magie analysieren;								0; 0		#Analysiert den Zauber der auf dem Ziel liegt		
+Schleieraura;									0; 0		#Macht jegliche Ausrüstung unsichtbar. Schützt nicht vor Dieben und Spionen
+Wunderdoktor;									0; 0		#Erhält 50 Silber*Stufe von den Bauern
+Schutz vor Magie;								0; 3		#Behindert gegnerische Magier beim Zaubern
+Beute Bewahren;									0; 2		#Beuteverlust reduziert sich um 5% pro Stufe (max 75%)
+Schutzzauber;									0; 0		#5 Personen*Stufe werden gegen Magie geschützt
+Astraler Ausgang;								0; 0		#(Stufe-3)*15 GE werden in die Realebene teleportiert (Ab T11 auch Gegner)
+Astraler Weg;									0; 0		#(Stufe-3)*15 GE werden in den Astralraum teleportiert (Ab T11 auch Gegner)
+Astrale Schwächezone;							0; 0		#Schwächt oder neutralisiert in der Region gesprochene Zauber
+Auratransfer;									0; 0		#Übertägt Aura 2 zu 1 auf selbes Magiegebiet (3:1 auf anderes)
+Magiefresser;									0; 0		#Entzaubert Ziel (Region/Einheit/Schiff/Burg)
+Schockwelle;									0; 1		#Ziel greift kurzzeitig nicht mehr an
+Astraler Ruf;									0; 0		#Magier im Astralraum kann (Stufe-3)*15 GE zu sich holen (Ab T13 auch Gegner)
+Erschaffe ein Amulett des wahren Sehens;		3000; 0		#Erschafft ein AdW mit welchen RdU getarnte Einheiten entdeckt werden
+Erschaffe einen Ring der Unsichtbarkeit;		3000; 0		#Erschafft ein RdU mit welchem man jedweden blicken entschwinden kann
+Luftschiff;										0; 0		#Boot oder Langboot (max. 100 Ge Beladen) kann für eine WOche fliegen
+Ruf der Realität;								0; 0		#Magier im Realraum kann (Stufe-3)*15 GE zu sich holen (Ab T13 auch Gegner)
+Stehle Aura;									0; 0		#Klaut der Zieleinheit Aura und überträgt sie auf sich selber
+Erschaffe Antimagiekristall;					3000; 0		#Entfernt oder schwächt Regionszauber und gesprochene Zauber
+Fluch brechen;									0; 0		#Entzaubert Ziel (Region/Einheit/Schiff/Burg)
+Mauern der Ewigkeit;							0; 0		#Zielgebäude benötigt keinen Unterhalt mehr
+Runen des Schutzes;								0; 0		#Erhöht die Widerstandskraft von Gebäuden oder Schiffen um 20%
+Schild des Fisches;								0; 0		#Reduziert erlittenen Schaden um die Hälfte bis der Schild aufgebraucht ist
+Beschleunigung;									0; 3		#Zieleinheit attackiert jede Kampfrunde einmal mehr
+Erschaffe einen Ring der Macht;					4000; 0		#Zauber wirken als wären sie eine Stufe höher
+Blick in die Realität;							0; 0		#Blickt aus Astralrauj in Realebene. Erkennt dort Regionen und Einheiten genau
+Erschaffe einen Beutel des Negativen Gewichts;	5000; 0		#Zauberbeutel fassen 200 GE an nicht sperrigen Gegenständen; Wiegen 1 GE
+Zeitdehnung;									0; 0		#Bewegungspunkte und Angriffe pro Runde für einige Wochen verdoppelt
+Rüstschild;										0; 3		#Truppen erhalten Bonus auf Rüstung bis Rüstschild aufgebraucht
+Vertrauten rufen;								0; 0		#Ein Vertrautentier schließt sich dem Magier an
+Belebtes Gestein;								0; 0		#Elementar kann maximal [Stufe-12]*250 großes Gebäude versetzen.
+Störe Astrale Integrität;						0; 0		#Im Radius Stufe/5 Regionen werden Wesen aus dem AR geschleudert. Stört AR für Stufe/3 Wochen
+Opfere Kraft;									0; 0		#Überträgt permanente Aura 2:1 auf eigenes 3:1 auf fremdes Magiegebiet
 
 # Wir werden keine Fragen zu etwaigen neuen Zaubern beantworten.
 #  - Faroul und das Design-Team

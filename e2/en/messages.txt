@@ -130,7 +130,6 @@ UNITALREADYHAS, Unit %s already has a
 UNITALREADYHASLONGORDERS, Unit %s already has a long order in line %d ("%s")
 UNITALREADYHASMOVED, Unit %s already has moved
 UNITALREADYHASORDERS, Unit %s already has got orders in line %d. 
-UNITCANSTILLTEACH, Unit %s can teach %d more trainees.
 UNITHASNTPERSONS, Unit TEMPORARY %s hasn't recruited and hasn't got any men! It may lose silver and/or items
 UNITHASPERSONS, Unit %s has %d men!
 UNITHASSILVER, Unit %s has %s%d silver!

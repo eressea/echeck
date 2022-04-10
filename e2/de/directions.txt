@@ -1,12 +1,12 @@
-#################  richtungen.txt      ECheck V4 und höher #################
-# Diese Datei enthält die Liste aller Richtungen, die ECheck versteht.
-#
-# Die Schlüsselworte kann man mit "echeck -hr" erhalten
+#################  directions.txt       ECheck V4 und höher ################
+# Diese Datei enthält die Liste aller Richtungen
 # 
-# Umlaute dürfen nicht umschrieben werden, sondern als ISO-Latin1 benutzt:
-# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist , oder ;
+# Umlaute dürfen nicht umschrieben werden, sondern als UTF-8 kodiert:
+# ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist ;
 #
 # Kommentare mit einem # davor; Leerzeilen sind erlaubt
+#
+# Die Schlüsselworte kann man mit "echeck -hr" erhalten
 ############################################################################
 
 EAST, Osten

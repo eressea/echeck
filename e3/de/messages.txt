@@ -147,7 +147,6 @@ UNITALREADYHAS, Einheit %s hat schon einen
 UNITALREADYHASLONGORDERS, Einheit %s hat schon einen langen Befehl in Zeile %d ("%s")
 UNITALREADYHASMOVED, Einheit %s hat sich schon bewegt
 UNITALREADYHASORDERS, Einheit %s hat schon in Zeile %d Befehle bekommen. 
-UNITCANSTILLTEACH, Einheit %s kann noch %d Schüler lehren.
 UNITHASNTPERSONS, Einheit TEMP %s hat nicht rekrutiert und keine Personen bekommen! Sie verliert Silber und evtl. Gegenstände
 UNITHASPERSONS, Einheit %s hat %d Personen!
 UNITHASSILVER, Einheit %s hat %s%d Silber!

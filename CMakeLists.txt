@@ -46,3 +46,9 @@ install(TARGETS ${PROJECT_NAME} DESTINATION ${INSTALL_BIN_DIR})
 install(DIRECTORY e2 e3 DESTINATION ${INSTALL_DATA_DIR})
 install(DIRECTORY locale/de  DESTINATION ${INSTALL_LOCALE_DIR})
 
+enable_testing()
+add_test(
+	NAME good-orders
+	COMMAND echeck -Lde -w5 tests/good-orders.txt
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
