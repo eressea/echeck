@@ -1,0 +1,26 @@
+name: continuous-integration
+on: [push, pull_request]
+
+jobs:
+  linux-os:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Update APT
+        run: sudo apt update
+      - name: Install Dependencies
+        run: sudo apt install --assume-yes \
+              git cmake build-essential \
+              gettext
+      - name: Checkout ECheck
+        uses: actions/checkout@v2
+        with:
+          repository: eressea/echeck
+      - name: CI Tests
+        uses: actions/ctest@1.1
+        with:
+          sourcedir: '.'
+          builddir: build
+          cmakeoptions: '--config Release'
+          ctestoptions: '--debug --extra-verbose'
+
+                        
