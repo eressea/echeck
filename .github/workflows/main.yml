@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   linux-os:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Update APT
         run: sudo apt update
