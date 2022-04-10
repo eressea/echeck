@@ -8,9 +8,7 @@ jobs:
       - name: Update APT
         run: sudo apt update
       - name: Install Dependencies
-        run: sudo apt install --assume-yes \
-              git cmake build-essential \
-              gettext
+        run: sudo apt install --assume-yes git cmake build-essential gettext
       - name: Checkout ECheck
         uses: actions/checkout@v2
         with:
