@@ -4,5 +4,5 @@ set -ex
 mkdir -p out
 cd out
 cmake -DCMAKE_BUILD_TYPE=Debug ..
-make
+make && make test
 cd ..
