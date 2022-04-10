@@ -16,7 +16,7 @@ jobs:
         with:
           repository: eressea/echeck
       - name: CI Tests
-        uses: actions/ctest@1.1
+        uses: HorstBaerbel/action-ctest@1.1
         with:
           sourcedir: '.'
           builddir: build
