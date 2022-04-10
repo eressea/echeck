@@ -1893,26 +1893,36 @@ char *getbuf(void) {
   do {
     bool start = true;
     char *end;
-    char *bp = fgetbuffer(lbuf, MAXLINE, F);
+    char *bp = fgetbuffer(lbuf, sizeof(lbuf), F);
 
     if (!bp) {
       return NULL;
     }
     end = bp + strlen(bp);
+    line_no++;
     if (end == bp || *(end - 1) == '\n') {
-      line_no++;
       *(--end) = 0;
     } else {
       /*
        * wenn die Zeile länger als erlaubt war, wird der Rest
        * weggeworfen:
        */
-      while (bp && !lbuf[MAXLINE - 1] && lbuf[MAXLINE - 2] != '\n') {
-        bp = fgetbuffer(warn_buf, 1024, F);
+      if (!lbuf[MAXLINE - 1] && lbuf[MAXLINE - 2] != '\n') {
+        do {
+          int lastc;
+          warn_buf[BUFSIZE - 1] = '@';
+          bp = fgetbuffer(warn_buf, sizeof(warn_buf), F);
+          if (warn_buf[BUFSIZE - 1] == '@' || warn_buf[BUFSIZE - 2] == '\n') {
+            break;
+          }
+        } while (bp);
       }
       lbuf[MAXLINE - 1] = 0;
-      log_warning(1, filename, line_no, lbuf, this_unit_id(), NULL,
-                  _("Line too long"));
+
+      if (!feof(F)) {
+        log_warning(1, filename, line_no, lbuf, this_unit_id(), NULL,
+                    _("Line too long"));
+      }
       bp = lbuf;
     }
     while (cp != warn_buf + MAXLINE && bp != lbuf + MAXLINE && *bp) {
