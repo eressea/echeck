@@ -1,3 +1,8 @@
+echeck (4.7.11-1) stable; urgency=low
+
+  * fix a crash when using an unknown item
+
+ -- Enno Rehling <enno@eressea.de>  Tue, 12 Apr 2022 17:20:00 +0200
 echeck (4.7.10-1) stable; urgency=low
 
   * missing long orders were checked twice

@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.10";
+static const char *echeck_version = "4.7.11";
 
 #define DEFAULT_PATH "."
 
@@ -3739,7 +3739,7 @@ void checkanorder(char *Orders) {
         log_error(filename, line_no, order_buf, this_unit_id(), NULL,
                   _("Unrecognized object"));
       } else {
-        log_warning(1, filename, line_no, order_buf, this_unit_id(), NULL, NULL,
+        log_warning(1, filename, line_no, order_buf, this_unit_id(), NULL,
                     _("Unrecognized object"));
       }
     }
