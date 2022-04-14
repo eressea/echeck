@@ -1,3 +1,9 @@
+echeck (4.7.12-1) stable; urgency=low
+
+  * deal with orders that have no REGION information
+  * print unit ids if errors in temp units
+
+ -- Enno Rehling <enno@eressea.de>  Thu, 14 Apr 2022 20:15:00 +0200
 echeck (4.7.11-1) stable; urgency=low
 
   * fix a crash when using an unknown item

@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.11";
+static const char *echeck_version = "4.7.12";
 
 #define DEFAULT_PATH "."
 
@@ -597,8 +597,8 @@ typedef struct teach {
 
 teach *teachings = NULL;
 
+static struct t_region *order_region = NULL;
 static unit *units = NULL;
-
 static unit *order_unit, /* Die Einheit, die gerade dran ist */
   *mother_unit,          /* Die Einheit, die MACHE TEMP macht */
   *cmd_unit; /* Die Einheit, die gerade angesprochen  wird, z.B. mit GIB */
@@ -1286,7 +1286,15 @@ void porder(void) {
     indent = next_indent;
 }
 
-int this_unit_id(void) { return order_unit ? order_unit->no : 0; }
+int this_unit_id(void) {
+  if (order_unit) {
+    if (order_unit->temp && mother_unit) {
+      return mother_unit->no;
+    }
+    return order_unit->no;
+  }
+  return 0;
+}
 
 #define LOG_ERROR 0
 
@@ -1643,7 +1651,7 @@ unit *newunit(int n, int t) {
     u->no = n;
     u->line_no = line_no;
     u->order = STRDUP(order_buf);
-    u->region = addregion(Rx, Ry, 0);
+    u->region = order_region;
     u->newx = Rx;
     u->newy = Ry;
     if (t) {
@@ -1959,7 +1967,7 @@ char *getbuf(void) {
       }
     }
     if (cp) {
-      *cp = 0;
+      *cp = '\0';
     }
   } while (cont || cp == warn_buf);
 
@@ -4961,6 +4969,7 @@ void process_order_file(int *faction_count, int *unit_count) {
   if (befehle_ende) /* dies war wohl eine Datei ohne Befehle */
     return;
 
+  order_region = NULL;
   Rx = Ry = -10000;
 
   /*
@@ -4976,6 +4985,7 @@ void process_order_file(int *faction_count, int *unit_count) {
       break;
 
     case P_REGION:
+      order_region = NULL;
       end_unit_orders();
       if (Regionen)
         remove_temp();
@@ -5029,10 +5039,12 @@ void process_order_file(int *faction_count, int *unit_count) {
           free(r->name);
         r->name = STRDUP("");
       }
+      order_region = addregion(Rx, Ry, 0);
       get_order();
       break;
 
     case P_FACTION:
+      order_region = NULL;
       end_unit_orders();
       if (f && !next) {
         log_error(filename, line_no, order_buf, this_unit_id(), NULL,
