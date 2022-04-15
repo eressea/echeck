@@ -4,10 +4,10 @@ echeck (4.7.13-3) stable; urgency=low
 
  -- Enno Rehling <enno@eressea.de>  Mon, 09 May 2022 22:30:00 +0200
 echeck (4.7.13-2) stable; urgency=low
-
+  * fix a segfault
   * remove an assert that failed because of the TRANSPORT changes
 
- -- Enno Rehling <enno@eressea.de>  Sat, 16 Apr 2022 17:30:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Fri, 15 Apr 2022 22:30:00 +0200
 echeck (4.7.13-1) stable; urgency=low
 
   * remove TRANSPORT warnings that relied on unsafe unit location
