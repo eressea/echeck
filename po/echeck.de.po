@@ -296,7 +296,7 @@ msgid "New units cannot GIVE anything"
 msgstr "Neue Einheiten können nichts übergeben"
 
 msgid "New units cannot use RESERVE, try using GIVE instead"
-msgstr "Neue Einheiten könenn nichts reservieren"
+msgstr "Neue Einheiten können nichts reservieren"
 
 msgid "No TEMPORARY number"
 msgstr "Keine TEMP-Nummer"
@@ -505,10 +505,6 @@ msgid "Unit %s has no long order"
 msgstr "Einheit %s hat keinen langen Befehl"
 
 #, c-format
-msgid "Unit %s is carried by unit %s but rides with %s"
-msgstr "Einheit %s wird von %s transportiert, aber fährt mit %s"
-
-#, c-format
 msgid "Unit %s is taught by unit %s but does not learn"
 msgstr "Einheit %s wird von Einheit %s gelehrt, lernt aber nicht"
 
@@ -555,18 +551,6 @@ msgstr "Einheit %s braucht noch %d Silber für den Gebäudeunterhalt"
 #, c-format
 msgid "Unit %s on ship %s has already moved"
 msgstr "Einheit %s auf Schiff %s hat sich schon bewegt"
-
-#, c-format
-msgid "Unit %s rides with unit %s, which is not transporting it"
-msgstr "Einheit %s fährt mit Einheit %s, diese transportiert aber nicht"
-
-#, c-format
-msgid "Unit %s rides with unit %s, which is in a different region"
-msgstr "Einheit %s fährt mit Einheit %s, die in einer anderen Region ist"
-
-#, c-format
-msgid "Unit %s is in a different region"
-msgstr "Einheit %s ist nicht in der Region"
 
 #, c-format
 msgid "Unit '%s' is not possible here"

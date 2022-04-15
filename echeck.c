@@ -2632,14 +2632,6 @@ void checkgiving(void) {
   }
   scat(printkeyword(K_GIVE));
   getaunit(REQUIRED);
-  if (this_unit) {
-    if (cmd_unit && cmd_unit->region != order_unit->region) {
-      // GIB an Einheit, die nachweislich nicht in der gleichen Region ist.
-      log_warning(4, filename, line_no, order_buf, this_unit_id(), NULL,
-                _("Unit %s is in a different region"), itob(this_unit));
-      cmd_unit = NULL;
-    }
-  }
   s = getstr();
   if (!getaspell(s, SP_ALL, NULL, 0) && !isparam(s, P_CONTROL, 1) &&
       !isparam(s, P_HERBS, 1) && !isparam(s, P_UNIT, 1)) {
@@ -3487,8 +3479,8 @@ void check_money(
 
     if (u->transport && u->drive && u->drive != u->transport) {
       log_warning(1, filename, u->line_no, u->long_order, this_unit_id(), NULL,
-        _("Unit %s is carried by unit %s but rides with %s"),
-        uid(u), Uid(u->transport), Uid(u->drive));
+                  _("Unit %s is carried by unit %s but rides with %s"), uid(u),
+                  Uid(u->transport), Uid(u->drive));
       continue;
     }
     if (u->drive) { /* FAHRE; in u->transport steht die  transportierende
@@ -3502,7 +3494,8 @@ void check_money(
         if (!t)
           t = find_unit(u->drive, 1);
         if (t && t->lives) {
-          log_error(filename, u->line_no, u->long_order, u->no, NULL,
+          log_error(
+            filename, u->line_no, u->long_order, u->no, NULL,
             _("Unit %s rides with unit %s, which is not transporting it"),
             uid(u), Uid(u->drive));
         } else { /* unbekannte Einheit -> unbekanntes Ziel */
@@ -4252,13 +4245,6 @@ void checkanorder(char *Orders) {
                 _("Unit 0/Peasants not possible here"));
     else {
       if (!does_default) {
-        if (cmd_unit && cmd_unit->region != order_unit->region) {
-          log_error(
-            filename, cmd_unit->line_no, cmd_unit->long_order, cmd_unit->no,
-            NULL,
-            _("Unit %s rides with unit %s, which is in a different region"),
-            uid(order_unit), uid(cmd_unit));
-        }
         order_unit->drive = this_unit;
       }
     }
@@ -4270,13 +4256,6 @@ void checkanorder(char *Orders) {
     getaunit(REQUIRED);
     if (!does_default) {
       if (cmd_unit) {
-        if (cmd_unit->region != order_unit->region) {
-          log_error(
-            filename, cmd_unit->line_no, cmd_unit->long_order, cmd_unit->no,
-            NULL,
-            _("Unit %s rides with unit %s, which is in a different region"),
-            uid(cmd_unit), uid(order_unit));
-        }
         cmd_unit->transport = order_unit->no;
         cmd_unit->hasmoved = -1;
       } else
