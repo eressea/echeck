@@ -1838,11 +1838,13 @@ int isparam(char *s, int i, char print) {
   return 1;
 }
 
-t_spell *findspell(char *s) {
+t_spell *findspell(const char *in) {
   t_spell *sp;
+  char buf[64], *s;
 
   if (!s[0] || !spells)
     return NULL;
+  s = transliterate(buf, sizeof(buf), in);
   for (sp = spells; sp; sp = sp->next)
     if (sp->name &&
         !unicode_utf8_strncasecmp((utf8_t *)sp->name, (utf8_t *)s, strlen(s)))
