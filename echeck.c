@@ -1842,7 +1842,7 @@ t_spell *findspell(const char *in) {
   t_spell *sp;
   char buf[64], *s;
 
-  if (!s[0] || !spells)
+  if (!in[0] || !spells)
     return NULL;
   s = transliterate(buf, sizeof(buf), in);
   for (sp = spells; sp; sp = sp->next)
