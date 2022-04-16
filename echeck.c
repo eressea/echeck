@@ -3512,11 +3512,11 @@ void check_money(
         /*
          * muß es geben, hat ja schließlich u->transport gesetzt
          */
-        assert(t);
-
-        u->hasmoved = 1;
-        u->newx = t->newx;
-        u->newy = t->newy;
+        if (t) {
+          u->hasmoved = 1;
+          u->newx = t->newx;
+          u->newy = t->newy;
+        }
       }
     } else if (u->transport) {
       t = find_unit(u->transport, 0);
