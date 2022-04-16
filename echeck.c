@@ -3379,7 +3379,7 @@ void check_money(
       }
     }
 
-    if (do_move)
+    if (do_move && show_warnings >= 5)
       for (r = Regionen; r; r = r->next) {
         if (r->reserviert > 0 &&
             r->reserviert > r->geld) { /* nur  explizit   mit  RESERVIERE  */
@@ -3389,47 +3389,47 @@ void check_money(
                       r->name, r->x, r->y, r->reserviert, r->geld);
         }
       }
-
-    for (u = units; u;
-         u = u->next) { /* fehlendes Silber aus dem  Silberpool nehmen */
-      if (do_move && u->unterhalt) {
-        u->money -= u->unterhalt;
-        u->reserviert -= u->unterhalt;
-      }
-      if (u->money < 0 && silberpool) {
-        for (t = units; t && u->money < 0; t = t->next) {
-          if (t->region != u->region || t == u)
-            continue;
-          um = t->money - t->reserviert;
-          if (um < -u->money)
-            um = -u->money;
-          if (um > 0) {
-            u->money += um;
-            u->reserviert +=
-              um; /* das so erworbene Silber muß  auch reserviert sein */
-            t->money -= um;
+    if (show_warnings >= 3) {
+      for (u = units; u;
+           u = u->next) { /* fehlendes Silber aus dem  Silberpool nehmen */
+        if (do_move && u->unterhalt) {
+          u->money -= u->unterhalt;
+          u->reserviert -= u->unterhalt;
+        }
+        if (u->money < 0 && silberpool) {
+          for (t = units; t && u->money < 0; t = t->next) {
+            if (t->region != u->region || t == u)
+              continue;
+            um = t->money - t->reserviert;
+            if (um < -u->money)
+              um = -u->money;
+            if (um > 0) {
+              u->money += um;
+              u->reserviert +=
+                um; /* das so erworbene Silber muß  auch reserviert sein */
+              t->money -= um;
+            }
           }
         }
-      }
-      if (u->money < 0) {
-        if (do_move) {
-          log_warning(5, filename, u->line_no, NULL, u->no, NULL,
-                      _("Unit %s has %d silver before income"),
-                      uid(u), u->money);
-        } else {
-          log_warning(3, filename, u->line_no, NULL, u->no, NULL,
-                      _("Unit %s has %d silver"), uid(u), u->money);
-        }
-        if (u->unterhalt) {
+        if (u->money < 0) {
           if (do_move) {
-            log_warning(
-              3, filename, u->line_no, NULL, u->no, NULL,
-              _("Unit %s needs %d more silver to maintain a building"), uid(u),
-              -u->money);
+            log_warning(5, filename, u->line_no, NULL, u->no, NULL,
+                        _("Unit %s has %d silver before income"), uid(u),
+                        u->money);
           } else {
             log_warning(3, filename, u->line_no, NULL, u->no, NULL,
-                        _("Unit %s lacks %d silver to maintain a building"),
-                        uid(u), -u->money);
+                        _("Unit %s has %d silver"), uid(u), u->money);
+          }
+          if (u->unterhalt) {
+            if (do_move) {
+              log_warning(3, filename, u->line_no, NULL, u->no, NULL,
+                _("Unit %s needs %d more silver to maintain a building"),
+                uid(u), -u->money);
+            } else {
+              log_warning(3, filename, u->line_no, NULL, u->no, NULL,
+                          _("Unit %s lacks %d silver to maintain a building"),
+                          uid(u), -u->money);
+            }
           }
         }
       }
