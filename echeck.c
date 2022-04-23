@@ -3303,153 +3303,58 @@ void check_comment(void) {
   }
 }
 
-void check_money(
-  bool do_move) { /* do_move=true: vor der Bewegung,  anschließend */
-  unit *u, *t;    /* Bewegung ausführen, damit das Silber  bewegt wird */
+static void check_empty_units(void)
+{
+  unit *u;
+  for (u = units; u; u = u->next) { /* Check TEMP und leere Einheiten */
+    if (u->lives < 1)               /* fremde Einheit oder Untot/Illusion */
+      continue; /* auslassen, weil deren Geldbedarf nicht  zählt */
+
+    if (u->temp && abs(u->temp) != TEMP_MADE) {
+      log_error(filename, u->line_no, u->order, 0, u->region,
+                _("Unit TEMP %s was never created with MAKE TEMP"),
+                itob(u->no));
+    }
+    if (u->people < 0) {
+      log_warning(3, filename, u->line_no, NULL, u->no, NULL,
+                  _("Unit %s has %d men"), uid(u), u->people);
+    }
+
+    if (u->people == 0 &&
+        ((!nolost && !u->temp && u->money > 0) || u->temp)) {
+      if (u->temp) {
+        if (u->money > 0) {
+          log_warning(3, filename, u->line_no, u->order, 0, u->region,
+                      _("Unit TEMPORARY %s has no men and is not recruiting!"
+                        " It may lose silver and/or items"),
+                      itob(u->no));
+        } else {
+          log_warning(2, filename, u->line_no, u->order, 0, u->region,
+                      _("Unit TEMP %s has no men and is not recruiting"),
+                      itob(u->no));
+        }
+      } else if (no_comment <= 0) {
+        log_warning(3, filename, u->line_no, u->order, u->no, NULL,
+                    _("Unit %s may lose silver and/or items"), itob(u->no));
+      }
+    }
+  }
+}
+
+static void move_units(void)
+{
+  unit *u, *t;
   t_region *r;
-  int i, x, y, um;
-
-  u = find_unit(-1, 0);
-  if (u) { /* Unit -1 leeren */
-    u->people = u->money = u->unterhalt = u->reserviert = 0;
-    u->lives = -1;
-  }
-
-  if (do_move) {
-    for (u = units; u; u = u->next) { /* Check TEMP und leere Einheiten */
-      if (u->lives < 1)               /* fremde Einheit oder Untot/Illusion */
-        continue; /* auslassen, weil deren Geldbedarf nicht  zählt */
-
-      if (u->temp && abs(u->temp) != TEMP_MADE) {
-        log_error(filename, u->line_no, u->order, 0, u->region,
-                  _("Unit TEMP %s was never created with MAKE TEMP"),
-                  itob(u->no));
-      }
-      if (u->people < 0) {
-        log_warning(3, filename, u->line_no, NULL, u->no, NULL,
-                    _("Unit %s has %d men"), uid(u), u->people);
-      }
-
-      if (u->people == 0 &&
-          ((!nolost && !u->temp && u->money > 0) || u->temp)) {
-        if (u->temp) {
-          if (u->money > 0) {
-            log_warning(3, filename, u->line_no, u->order, 0, u->region,
-                        _("Unit TEMPORARY %s has no men and is not recruiting!"
-                          " It may lose silver and/or items"),
-                        itob(u->no));
-          } else {
-            log_warning(2, filename, u->line_no, u->order, 0, u->region,
-                        _("Unit TEMP %s has no men and is not recruiting"),
-                        itob(u->no));
-          }
-        } else if (no_comment <= 0) {
-          log_warning(3, filename, u->line_no, u->order, u->no, NULL,
-                      _("Unit %s may lose silver and/or items"), itob(u->no));
-        }
-      }
-    }
-  }
-
-  if (Regionen && no_comment < 1) {
-    if (silberpool && do_move) {
-      for (u = units; u; u = u->next) {
-        if (u->region) {
-          u->region->geld += u->money;
-          /*
-           * Reservierung < Silber der Unit? Silber von anderen
-           * Units holen
-           */
-          if (u->reserviert > u->money) {
-            i = u->reserviert - u->money;
-            for (t = units; t && i > 0; t = t->next) {
-              if (t->region != u->region || t == u)
-                continue;
-              um = t->money - t->reserviert;
-              if (um > i)
-                um = i;
-              if (um > 0) {
-                u->money += um;
-                i -= um;
-                t->money -= um;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    if (do_move && show_warnings >= 5)
-      for (r = Regionen; r; r = r->next) {
-        if (r->reserviert > 0 &&
-            r->reserviert > r->geld) { /* nur  explizit   mit  RESERVIERE  */
-          log_warning(5, filename, r->line_no, NULL, 0, r,
-                      _("Units in %s (%d,%d) reserved more silver (%d) than "
-                        "available (%d)"),
-                      r->name, r->x, r->y, r->reserviert, r->geld);
-        }
-      }
-    if (show_warnings >= 3) {
-      for (u = units; u;
-           u = u->next) { /* fehlendes Silber aus dem  Silberpool nehmen */
-        if (do_move && u->unterhalt) {
-          u->money -= u->unterhalt;
-          u->reserviert -= u->unterhalt;
-        }
-        if (u->money < 0 && silberpool) {
-          for (t = units; t && u->money < 0; t = t->next) {
-            if (t->region != u->region || t == u)
-              continue;
-            um = t->money - t->reserviert;
-            if (um < -u->money)
-              um = -u->money;
-            if (um > 0) {
-              u->money += um;
-              u->reserviert +=
-                um; /* das so erworbene Silber muß  auch reserviert sein */
-              t->money -= um;
-            }
-          }
-        }
-        if (u->money < 0) {
-          if (do_move) {
-            log_warning(5, filename, u->line_no, NULL, u->no, NULL,
-                        _("Unit %s has %d silver before income"), uid(u),
-                        u->money);
-          } else {
-            log_warning(3, filename, u->line_no, NULL, u->no, NULL,
-                        _("Unit %s has %d silver"), uid(u), u->money);
-          }
-          if (u->unterhalt) {
-            if (do_move) {
-              log_warning(3, filename, u->line_no, NULL, u->no, NULL,
-                _("Unit %s needs %d more silver to maintain a building"),
-                uid(u), -u->money);
-            } else {
-              log_warning(3, filename, u->line_no, NULL, u->no, NULL,
-                          _("Unit %s lacks %d silver to maintain a building"),
-                          uid(u), -u->money);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  if (Regionen)
-    for (r = Regionen; r; r = r->next)
+  assert(Regionen);
+  for (r = Regionen; r; r = r->next)
       r->geld = 0; /* gleich wird Geld bei den Einheiten  bewegt, darum den Pool
                       leeren und nach  der Bewegung nochmal füllen */
-  if (!do_move)    /* Ebenso wird es in check_living nochmal  neu eingezahlt */
-    return;
-
-  if (!Regionen) /* ohne Regionen Bewegungs-Check nicht *  sinnvoll */
-    return;
 
   for (u = units; u; u = u->next) { /* Bewegen vormerken */
     if (u->lives < 1)               /* fremde Einheit oder Untot/Illusion */
       continue;
     if (u->hasmoved > 1) {
+      int i;
       if (!noship && u->ship > 0) {
         log_warning(5, filename, u->line_no, NULL, u->no, NULL,
                     cgettext(Errors[UNITMOVESSHIP]), uid(u), itob(u->ship));
@@ -3457,8 +3362,8 @@ void check_money(
       i = -u->ship;
       if (i > 0) { /* wir sind Kapitän; alle Einheiten auf  dem Schiff auch
                       bewegen */
-        x = u->newx;
-        y = u->newy;
+        int x = u->newx;
+        int y = u->newy;
         for (t = units; t; t = t->next) {
           if (t->ship == i) {
             if (t->hasmoved > 1) { /* schon bewegt! */
@@ -3536,6 +3441,112 @@ void check_money(
       u->region = addregion(u->newx, u->newy, u->people);
       if (u->region->line_no == line_no) /* line_no => NÄCHSTER */
         u->region->line_no = u->line_no;
+    }
+  }
+}
+
+static void reservations(void) {
+  unit *u = find_unit(-1, 0);
+  if (u) { /* Unit -1 leeren */
+    u->people = u->money = u->unterhalt = u->reserviert = 0;
+    u->lives = -1;
+  }
+
+  if (silberpool) {
+    for (u = units; u; u = u->next) {
+      if (u->region) {
+        u->region->geld += u->money;
+        /*
+        * Reservierung < Silber der Unit? Silber von anderen
+        * Units holen
+        */
+        if (u->reserviert > u->money) {
+          int i = u->reserviert - u->money;
+          unit *t;
+          for (t = units; t && i > 0; t = t->next) {
+            if (t->region != u->region || t == u)
+              continue;
+            int um = t->money - t->reserviert;
+            if (um > i)
+              um = i;
+            if (um > 0) {
+              u->money += um;
+              i -= um;
+              t->money -= um;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  if (show_warnings >= 5) {
+    t_region *r;
+    for (r = Regionen; r; r = r->next) {
+      if (r->reserviert > 0 &&
+          r->reserviert > r->geld) { /* nur  explizit   mit  RESERVIERE  */
+        log_warning(5, filename, r->line_no, NULL, 0, r,
+                    _("Units in %s (%d,%d) reserved more silver (%d) than "
+                      "available (%d)"),
+                    r->name, r->x, r->y, r->reserviert, r->geld);
+      }
+    }
+  }
+}
+
+/** do_move=true: vor der Bewegung,  anschließend
+ * Bewegung ausführen, damit das Silber  bewegt wird
+ */
+void check_money(bool do_move) {
+  unit *u, *t;    
+  t_region *r;
+
+  if (Regionen && no_comment < 1) {
+    if (show_warnings >= 3) {
+      for (u = units; u; u = u->next)
+      { /* fehlendes Silber aus dem  Silberpool nehmen */
+        unit *t;
+        if (do_move && u->unterhalt) {
+          u->money -= u->unterhalt;
+          u->reserviert -= u->unterhalt;
+        }
+        if (u->money < 0 && silberpool) {
+          for (t = units; t && u->money < 0; t = t->next) {
+            if (t->region == u->region && t != u) {
+              int um = t->money - t->reserviert;
+              if (um < -u->money) {
+                um = -u->money;
+              }
+              if (um > 0) {
+                u->money += um;
+                u->reserviert += um; /* das so erworbene Silber muß  auch reserviert sein */
+                t->money -= um;
+              }
+            }
+          }
+        }
+        if (u->money < 0) {
+          if (do_move) {
+            log_warning(5, filename, u->line_no, NULL, u->no, NULL,
+                        _("Unit %s has %d silver before income"), uid(u),
+                        u->money);
+          } else {
+            log_warning(3, filename, u->line_no, NULL, u->no, NULL,
+                        _("Unit %s has %d silver"), uid(u), u->money);
+          }
+          if (u->unterhalt) {
+            if (do_move) {
+              log_warning(3, filename, u->line_no, NULL, u->no, NULL,
+                _("Unit %s needs %d more silver to maintain a building"),
+                uid(u), -u->money);
+            } else {
+              log_warning(3, filename, u->line_no, NULL, u->no, NULL,
+                          _("Unit %s lacks %d silver to maintain a building"),
+                          uid(u), -u->money);
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -5095,9 +5106,14 @@ void process_order_file(int *faction_count, int *unit_count) {
       porder();
       next = 1;
 
+      check_empty_units();
+      if (Regionen && no_comment < 1) {
+        reservations();
+      }
       check_money(true); /* Check für Lerngeld, Handel usw.; true:   dann
                             Bewegung ausführen */
       if (Regionen) {
+        move_units();
         check_money(
           false);       /* Silber nochmal in den Pool, fehlendes  aus Pool */
         check_living(); /* Ernährung mit allem Silber der Region */
