@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.13";
+static const char *echeck_version = "4.7.14";
 
 #define DEFAULT_PATH "."
 
@@ -4688,15 +4688,19 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
         break;
 
       case 'c':
-        compile = OUT_COMPILE;
-        compile_version = argv[i][2];
-        if (compile_version && isdigit(compile_version)) {
-          compile_version -= '0';
+        if (dostop) {
+          compile = OUT_COMPILE;
+          compile_version = argv[i][2];
+          if (compile_version && isdigit(compile_version)) {
+            compile_version -= '0';
+          }
         }
         break;
 
       case 'm':
-        compile = OUT_MAGELLAN;
+        if (dostop) {
+          compile = OUT_MAGELLAN;
+        }
         break;
 
       case 'E':

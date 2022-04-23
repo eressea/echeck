@@ -1,8 +1,14 @@
-echeck (4.7.13-3) stable; urgency=low
+echeck (4.7.14-2) stable; urgency=low
 
   * add a missing translation
 
  -- Enno Rehling <enno@eressea.de>  Mon, 09 May 2022 22:30:00 +0200
+echeck (4.7.14-1) stable; urgency=low
+
+  * fix a segfault
+  * ignore -c and -m in orders
+
+ -- Enno Rehling <enno@eressea.de>  Mon, 16 Apr 2022 17:30:00 +0200
 echeck (4.7.13-2) stable; urgency=low
   * fix a segfault
   * remove an assert that failed because of the TRANSPORT changes
