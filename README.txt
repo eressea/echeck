@@ -7,7 +7,6 @@ The are are the following files:
   - directions.txt
   - herbs.txt
   - items.txt
-  - messages.txt
   - options.txt
   - params.txt
   - potions.txt
