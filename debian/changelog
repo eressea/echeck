@@ -1,3 +1,8 @@
+echeck (4.7.13-3) stable; urgency=low
+
+  * add a missing translation
+
+ -- Enno Rehling <enno@eressea.de>  Mon, 09 May 2022 22:30:00 +0200
 echeck (4.7.13-2) stable; urgency=low
 
   * remove an assert that failed because of the TRANSPORT changes

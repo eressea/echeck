@@ -481,6 +481,10 @@ msgid "Unit %s carries unit %s, but the latter does not ride with the former"
 msgstr "Einheit %s transportiert Einheit %s, diese fährt aber nicht"
 
 #, c-format
+msgid "Unit %s rides with unit %s, which is not transporting it"
+msgstr "Einheit %s fährt mit Einheit %s, diese transportiert aber nicht"
+
+#, c-format
 msgid "Unit %s has %d men"
 msgstr "Einheit %s hat %d Personen"
 
