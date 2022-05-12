@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.2...3.20)
 project (echeck C)
 
+set(INSTALL_BIN_DIR "bin" CACHE STRING "Install executable in this directory")
+set(INSTALL_DATA_DIR "share/echeck" CACHE STRING "Install data to this directory")
+set(INSTALL_LOCALE_DIR "share/locale" CACHE STRING "Install the .mo files to this directory")
+
 add_executable(echeck main.c echeck.c unicode.c whereami.c)
 add_executable(tests tests.c echeck.c unicode.c whereami.c CuTest.c)
 target_compile_definitions (tests PRIVATE TESTING=1)
@@ -36,11 +40,6 @@ target_link_libraries(echeckw ${Intl_LIBRARIES})
 endif (Intl_FOUND)
 
 endif(WIN32)
-
-set(INSTALL_BIN_DIR "bin" CACHE STRING "Install executable in this directory")
-set(INSTALL_DATA_DIR "share/echeck" CACHE STRING "Install data to this directory")
-set(INSTALL_LOCALE_DIR "share/locale" CACHE STRING "Install the .mo files to this directory")
-
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${INSTALL_BIN_DIR})
 install(DIRECTORY e2 e3 DESTINATION ${INSTALL_DATA_DIR})

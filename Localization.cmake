@@ -54,12 +54,6 @@ FUNCTION(PROGRAM_LOCALIZATION)
 		 COMMENT "${I18N_NAME}-i18n [${_poBasename}]: Created mo file."
 	      )
 
-	IF(APPLE)
-		INSTALL(FILES ${_gmoFile} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/ECheck.app/Contents/Resources/${_poBasename}.lproj RENAME ${PACKAGE_NAME}.mo )
-	ELSE(APPLE)
-	      INSTALL(FILES ${_gmoFile} DESTINATION ${PREFIX_DATA}/po/${_poBasename}/LC_MESSAGES RENAME ${PACKAGE_NAME}.mo )
-	ENDIF(APPLE)
-
 	      SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
 	   ENDFOREACH (_poFile )
 	ENDMACRO(GETTEXT_BUILD_MO)
