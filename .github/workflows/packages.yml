@@ -1,25 +1,28 @@
-name: build-packages
-on: [push]
-
+# Taken from https://github.com/lpenz/ogle/blob/main/.github/workflows/ci.yml
+# See also https://github.com/lpenz/execpermfix/blob/main/.github/workflows/ci.yml
+---
+name: publish
+on: [ push ]
 jobs:
-  bullseye-package-amd64:
+  packagecloud:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout ECheck
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      - id: version
+        uses: docker://lpenz/ghaction-version-gen:0.8.0
+      - uses: actions/download-artifact@v2
+        if: steps.version.outputs.version_tagged != ''
+      - uses: docker://lpenz/ghaction-packagecloud:v0.3
+        if: steps.version.outputs.version_tagged != ''
         with:
-          repository: eressea/echeck
-      - name: Build Package
-        uses: dawidd6/action-debian-package@v1
-        with:
-           #source_direcory: .
-           artifacts_directory: dist/bullseye
-           os_distribution: bullseye
-           cpu_architecture: amd64
-      - name: Deploy to packagecloud.io
-        uses: lpenz/ghaction-packagecloud@v0.4
-        with:
-          repository: enno/eressea/debian/bullseye
-          directory: dist/bullseye
+          repository: debian/debian/bullseye
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
+      - uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        if: steps.version.outputs.version_tagged != ''
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            artifact/debian/*.deb
+            artifact/release/echeck
