@@ -29,9 +29,10 @@ jobs:
            os_distribution: bullseye
            cpu_architecture: ${{ matrix.arch }}
       - name: Upload to Packagecloud
-        uses: TykTechnologies/packagecloud-action@v1
+        uses: TykTechnologies/packagecloud-action@latest
         with:
           repo: enno/eressea
           dir: dist/${{ matrix.dist }}
+          debvers: debian/${{ matrix.dist }}
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
