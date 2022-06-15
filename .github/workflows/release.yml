@@ -30,8 +30,7 @@ jobs:
            cpu_architecture: ${{ matrix.arch }}
       - name: Upload to Packagecloud
         uses: danielmundi/upload-packagecloud@v1
-        run:
-          working-directory: dist/${{ matrix.dist }}
+        working-directory: dist/${{ matrix.dist }}
         with:
           PACKAGE-NAME: echeck
           PACKAGECLOUD-REPO: enno/eressea
