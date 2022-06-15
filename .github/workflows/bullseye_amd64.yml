@@ -1,0 +1,22 @@
+name: continuous-integration
+on: [push]
+
+jobs:
+  linux-os:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Package
+        uses: dawidd6/action-debian-package@v1
+        with:
+           #source_direcory: .
+           artifacts_directory: dist/bullseye
+           os_distribution: bullseye
+           cpu_architecture: amd64
+      - name: Upload to Packagecloud
+        uses: TykTechnologies/packagecloud-action@v1
+        with:
+          repo: enno/eressea
+          dir: dist/bullseye
+          debvers: bullseye
+        env:
+          PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
