@@ -25,13 +25,13 @@ jobs:
       - name: Build Debian Package
         uses: dawidd6/action-debian-package@v1
         with:
-           artifacts_directory: dist/${{ matrix.dist }}
+           #artifacts_directory: dist/${{ matrix.dist }}
            os_distribution: bullseye
            cpu_architecture: ${{ matrix.arch }}
       - name: Upload to Packagecloud
         uses: danielmundi/upload-packagecloud@v1
         with:
-          package-name: echeck
+          package-name: echeck*.deb
           packagecloud-username: enno
           packagecloud-repo: eressea
           packagecloud-distrib: debian/${{ matrix.dist }}
