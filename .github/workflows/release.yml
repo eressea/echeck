@@ -1,11 +1,8 @@
 name: release
 on:
   push:
-    branch:
-      - pkgcloud
-#  push:
-#    tags:
-#      - 'v*'
+    tags:
+      - 'v*'
 jobs:
   build-deb:
     runs-on: ubuntu-latest
@@ -31,7 +28,7 @@ jobs:
       - name: Upload to Packagecloud
         uses: danielmundi/upload-packagecloud@v1
         with:
-          package-name: echeck*.deb
+          package-name: echeck_*.deb
           packagecloud-username: enno
           packagecloud-repo: eressea
           packagecloud-distrib: debian/${{ matrix.dist }}
