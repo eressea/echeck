@@ -22,4 +22,25 @@ jobs:
           build-type: Release
           run-test: true
           ctest-options: --output-on-failure
-
+      - name: Build Package
+        uses: dawidd6/action-debian-package@v1
+        with:
+           #source_direcory: .
+           artifacts_directory: dist/bullseye
+           os_distribution: bullseye
+           cpu_architecture: amd64
+      - name: Build Package
+        uses: dawidd6/action-debian-package@v1
+        with:
+           #source_direcory: .
+           artifacts_directory: dist/bullseye
+           os_distribution: bullseye
+           cpu_architecture: i386
+      - name: Upload to Packagecloud
+        uses: TykTechnologies/packagecloud-action
+        with:
+          repo: enno/eressea
+          dir: dist/bullseye
+          debvers: bullseye
+        env:
+          PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
