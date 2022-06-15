@@ -1,3 +1,8 @@
+echeck (4.7.14-3) stable; urgency=low
+
+  * automated package builds
+
+ -- Enno Rehling <enno@eressea.de>  Mon, 09 May 2022 22:30:00 +0200
 echeck (4.7.14-2) stable; urgency=low
 
   * add a missing translation
