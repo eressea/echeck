@@ -5,6 +5,10 @@ jobs:
   linux-os:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout ECheck
+        uses: actions/checkout@v2
+        with:
+          repository: eressea/echeck
       - name: Build Package
         uses: dawidd6/action-debian-package@v1
         with:
@@ -12,11 +16,10 @@ jobs:
            artifacts_directory: dist/bullseye
            os_distribution: bullseye
            cpu_architecture: amd64
-      - name: Upload to Packagecloud
-        uses: TykTechnologies/packagecloud-action@v1
+      - name: Deploy to packagecloud.io
+        uses: lpenz/ghaction-packagecloud@v0.4
         with:
-          repo: enno/eressea
-          dir: dist/bullseye
-          debvers: bullseye
+          repository: enno/eressea/bullseye
+          directory: dist/bullseye
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
