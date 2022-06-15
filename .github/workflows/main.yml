@@ -37,7 +37,7 @@ jobs:
            os_distribution: bullseye
            cpu_architecture: i386
       - name: Upload to Packagecloud
-        uses: TykTechnologies/packagecloud-action
+        uses: TykTechnologies/packagecloud-action@v1
         with:
           repo: enno/eressea
           dir: dist/bullseye
