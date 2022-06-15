@@ -30,9 +30,10 @@ jobs:
            cpu_architecture: ${{ matrix.arch }}
       - name: Upload to Packagecloud
         uses: danielmundi/upload-packagecloud@v1
-        working-directory: dist/${{ matrix.dist }}
         with:
-          PACKAGE-NAME: echeck
-          PACKAGECLOUD-REPO: enno/eressea
-          PACKAGECLOUD-DISTRIB: debian/${{ matrix.dist }}
-          PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
+          packagecloud-username: eressea
+          packagecloud-repo: echeck
+          packagecloud-distrib: debian/${{ matrix.dist }}
+          packagecloud-token: ${{ secrets.PACKAGECLOUD_TOKEN }}
+        env:
+          UPLOAD_PATH: dist/${{ matrix.dist }}
