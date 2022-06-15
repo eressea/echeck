@@ -2,7 +2,10 @@
 # See also https://github.com/lpenz/execpermfix/blob/main/.github/workflows/ci.yml
 ---
 name: publish
-on: [ push ]
+on:
+  push:
+    tags:
+      - 'v*'
 jobs:
   packagecloud:
     runs-on: ubuntu-latest
