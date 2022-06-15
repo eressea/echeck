@@ -2,7 +2,7 @@ name: continuous-integration
 on: [push, pull_request]
 
 jobs:
-  linux-os:
+  ci-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Get latest CMake and ninja

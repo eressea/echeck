@@ -2,11 +2,11 @@ name: continuous-integration
 on: [push]
 
 jobs:
-  linux-os:
+  bullseye-package-amd64:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ECheck
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: eressea/echeck
       - name: Build Package
@@ -19,7 +19,7 @@ jobs:
       - name: Deploy to packagecloud.io
         uses: lpenz/ghaction-packagecloud@v0.4
         with:
-          repository: enno/eressea/bullseye
+          repository: enno/eressea/debian/bullseye
           directory: dist/bullseye
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
