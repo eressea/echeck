@@ -1,3 +1,8 @@
+echeck (4.7.15-1) stable; urgency=low
+
+  * use of DEFAULT order was causing lost silver/items reports.
+
+ -- Enno Rehling <enno@eressea.de>  Wed, 7 Jul 2022 21:15:00 +0200
 echeck (4.7.14-5) stable; urgency=low
 
   * use correct distribution to build packages (gh action bug) 

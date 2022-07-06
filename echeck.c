@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.14";
+static const char *echeck_version = "4.7.15";
 
 #define DEFAULT_PATH "."
 
@@ -1664,8 +1664,9 @@ unit *newunit(int n, int t) {
       for (c = units; c->next; c = c->next)
         ;          /* letzte unit der Liste */
       c->next = u; /* unit hinten dranklemmen */
-    } else
+    } else {
       units = u;
+    }
   }
   if (u->temp < 0) {
     log_error(filename, line_no, order_buf, this_unit_id(), NULL,
@@ -3320,7 +3321,7 @@ static void check_empty_units(void)
                   _("Unit %s has %d men"), uid(u), u->people);
     }
 
-    if (u->people == 0 &&
+    if (u->no > 0 && u->people == 0 &&
         ((!nolost && !u->temp && u->money > 0) || u->temp)) {
       if (u->temp) {
         if (u->money > 0) {
