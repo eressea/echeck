@@ -3810,7 +3810,7 @@ void checkanorder(char *Orders) {
       /*
        * damit laengere Angriffe nicht in Warnungs-Tiraden ausarten
        */
-      log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL, NULL,
+      log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
                   _("Longer combats exclude long orders"));
       attack_warning = 1;
     }

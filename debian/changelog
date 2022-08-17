@@ -1,7 +1,12 @@
-echeck (4.7.17-1) stable; urgency=low
+echeck (4.7.17-2) stable; urgency=low
 
   * do not complain about mismatched quotes in comments
   * print version info when not in compiler mode
+
+ -- Enno Rehling <enno@eressea.de>  Wed, 26 Oct 2022 21:00:00 +0200
+echeck (4.7.17-1) stable; urgency=low
+
+  * fix missing level 5 warning 
 
  -- Enno Rehling <enno@eressea.de>  Wed, 26 Oct 2022 21:00:00 +0200
 echeck (4.7.16-3) stable; urgency=low
@@ -18,8 +23,9 @@ echeck (4.7.16-1) stable; urgency=low
 
   * TEMP units can give @ orders for RESERVE and GIVE
   * TEMP units can use DEFAULT with GIVE or RESERVE
+  * fix level 5 warning about attacks.
 
- -- Enno Rehling <enno@eressea.de>  Wed, 2 Sep 2022 23:50:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Wed, 17 Aug 2022 23:30:00 +0200
 echeck (4.7.15-1) stable; urgency=low
 
   * use of DEFAULT order was causing lost silver/items reports.
