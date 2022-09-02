@@ -64,3 +64,4 @@ debian/*.substvars
 debian/debhelper-build-stamp
 debian/files
 /enc_temp_folder
+/vcpkg_installed

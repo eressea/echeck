@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.15";
+static const char *echeck_version = "4.7.16";
 
 #define DEFAULT_PATH "."
 
@@ -647,26 +647,30 @@ char *eatwhite(char *ptr) {
   return ptr;
 }
 
-static char nulls[] = "\0\0\0\0\0\0\0\0";
-
-const char *itob(int i) {
-  char *dst;
+const char *itobuf(int i, char *dst) {
   int b = i, x;
 
   if (i == 0)
     return "0";
+  dst = dst + 6;
+  *dst = 0;
 
-  dst = nulls + 6;
   do {
     x = b % 36;
     b /= 36;
-    dst--;
+    --dst;
     if (x < 10)
       *dst = (char)('0' + x);
     else
       *dst = (char)('a' + (x - 10));
   } while (b > 0);
   return dst;
+}
+
+const char *itob(int i)
+{
+  static char nulls[] = "\0\0\0\0\0\0\0\0";
+  return itobuf(i, nulls);
 }
 
 #define scat(X) strcat(checked_buf, X)
@@ -1300,9 +1304,10 @@ int this_unit_id(void) {
 
 static void print_message_header(int unit_id, const t_region* r, FILE* F)
 {
+  char buf[7];
   fputc('\n', F);
   if (unit_id) {
-    fprintf(F, _("Unit %s:"), itob(unit_id));
+    fprintf(F, _("Unit %s:"), itobuf(unit_id, buf));
   } else if (r) {
     if (r->name) {
       fprintf(F, _("Region %s (%d,%d):"), r->name, r->x, r->y);
@@ -2628,10 +2633,15 @@ void checkgiving(void) {
   char *s;
   int i, n = -1;
 
-  if (from_temp_unit_no) {
-    log_error(filename, line_no, order_buf, this_unit_id(), NULL,
-              _("New units cannot GIVE anything"));
-    return;
+  if (!does_default && from_temp_unit_no) {
+    if (at_cmd) {
+      log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
+                _("New units cannot GIVE anything"));
+    } else {
+      log_error(filename, line_no, order_buf, this_unit_id(), NULL,
+                _("New units cannot GIVE anything"));
+      return;
+    }
   }
   scat(printkeyword(K_GIVE));
   getaunit(REQUIRED);
@@ -3116,10 +3126,15 @@ void reserve(void) {
 
   scat(printkeyword(K_RESERVE));
 
-  if (from_temp_unit_no) {
-    log_error(filename, line_no, order_buf, this_unit_id(), NULL,
-              _("New units cannot use RESERVE, try using GIVE instead"));
-    return;
+  if (!does_default && from_temp_unit_no) {
+    if (at_cmd) {
+      log_warning(5, filename, line_no, order_buf, this_unit_id(), NULL,
+                  _("New units cannot use RESERVE, try using GIVE instead"));
+    } else {
+      log_error(filename, line_no, order_buf, this_unit_id(), NULL,
+                _("New units cannot use RESERVE, try using GIVE instead"));
+      return;
+    }
   }
 
   s = getstr();
@@ -3361,7 +3376,7 @@ static void move_units(void)
                     cgettext(Errors[UNITMOVESSHIP]), uid(u), itob(u->ship));
       }
       i = -u->ship;
-      if (i > 0) { /* wir sind Kapitän; alle Einheiten auf  dem Schiff auch
+      if (i > 0) { /* wir sind Kapitän; alle Einheiten auf dem Schiff auch
                       bewegen */
         int x = u->newx;
         int y = u->newy;
@@ -3369,7 +3384,7 @@ static void move_units(void)
           if (t->ship == i) {
             if (t->hasmoved > 1) { /* schon bewegt! */
               log_warning(2, filename, u->line_no, NULL, u->no, NULL,
-                          _("Unit %s on ship %s has already moved"), uid(t),
+                          _("Unit %s on ship %s has already moved"), uid1(t),
                           itob(i));
             }
             t->hasmoved = 1;

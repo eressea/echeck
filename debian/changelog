@@ -1,3 +1,9 @@
+echeck (4.7.16-1) stable; urgency=low
+
+  * TEMP units can give @ orders for RESERVE and GIVE
+  * TEMP units can use DEFAULT with GIVE or RESERVE
+
+ -- Enno Rehling <enno@eressea.de>  Wed, 2 Sep 2022 23:50:00 +0200
 echeck (4.7.15-1) stable; urgency=low
 
   * use of DEFAULT order was causing lost silver/items reports.
