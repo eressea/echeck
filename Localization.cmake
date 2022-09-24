@@ -53,7 +53,7 @@ FUNCTION(PROGRAM_LOCALIZATION)
 		 DEPENDS ${_absFile}
 		 COMMENT "${I18N_NAME}-i18n [${_poBasename}]: Created mo file."
 	      )
-
+              INSTALL(FILES ${_gmoFile} DESTINATION ${INSTALL_LOCALE_DIR}/po/${_poBasename}/LC_MESSAGES RENAME ${PACKAGE_NAME}.mo )
 	      SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
 	   ENDFOREACH (_poFile )
 	ENDMACRO(GETTEXT_BUILD_MO)
