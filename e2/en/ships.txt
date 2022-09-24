@@ -6,7 +6,7 @@
 
 Boat
 Longboat
-Longship
+Dragonship
 Caravel
 Trireme
 Galleon

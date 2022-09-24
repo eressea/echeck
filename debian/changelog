@@ -1,3 +1,8 @@
+echeck (4.7.16-2) stable; urgency=low
+
+  * english ships.txt was missing dragonship
+
+ -- Enno Rehling <enno@eressea.de>  Sat, 24 Sep 2022 22:15:00 +0200
 echeck (4.7.16-1) stable; urgency=low
 
   * TEMP units can give @ orders for RESERVE and GIVE
