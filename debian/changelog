@@ -2,7 +2,7 @@ echeck (4.7.16-3) stable; urgency=low
 
   * fix mo file installation again (bug 2895)
 
- -- Enno Rehling <enno@eressea.de>  Sat, 24 Sep 2022 22:25:00 +0200
+ -- Enno Rehling <enno@eressea.de>  Sun, 25 Sep 2022 08:30:00 +0200
 echeck (4.7.16-2) stable; urgency=low
 
   * english ships.txt was missing dragonship

@@ -20,15 +20,16 @@ jobs:
         with:
           repository: eressea/echeck
       - name: Build Debian Package
-        uses: dawidd6/action-debian-package@v1
+        uses: ennorehling/action-debian-package@v1.1
         with:
-           #artifacts_directory: dist/${{ matrix.dist }}
-           os_distribution: bullseye
+           os_distribution: ${{ matrix.dist }}
            cpu_architecture: ${{ matrix.arch }}
+           artifacts_directory: artifacts
       - name: Upload to Packagecloud
+        continue-on-error: true
         uses: danielmundi/upload-packagecloud@v1
         with:
-          package-name: echeck_*.deb
+          package-name: artifacts/echeck_*.deb
           packagecloud-username: enno
           packagecloud-repo: eressea
           packagecloud-distrib: debian/${{ matrix.dist }}
