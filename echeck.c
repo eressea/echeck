@@ -3381,7 +3381,7 @@ static void move_units(void)
         int x = u->newx;
         int y = u->newy;
         for (t = units; t; t = t->next) {
-          if (t->ship == i) {
+          if (t->ship == i && t->region->x == x && t->region->y == y) {
             if (t->hasmoved > 1) { /* schon bewegt! */
               log_warning(2, filename, u->line_no, NULL, u->no, NULL,
                           _("Unit %s on ship %s has already moved"), uid1(t),
