@@ -1,3 +1,8 @@
+echeck (4.7.17-2) stable; urgency=low
+
+  * version number increase
+
+ -- Enno Rehling <enno@eressea.de>  Sat, 1 Oct 2022 18:07:00 +0200
 echeck (4.7.17-1) stable; urgency=low
 
   * ship checks ignore units that are in other regions (bug 2899)
