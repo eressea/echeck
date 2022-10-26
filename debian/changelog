@@ -1,4 +1,4 @@
-echeck (4.7.17-2) stable; urgency=low
+echeck (4.7.18-1) stable; urgency=low
 
   * do not complain about mismatched quotes in comments
   * print version info when not in compiler mode
