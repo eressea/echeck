@@ -36,4 +36,8 @@ MACHE 10 Schwert
 DEFAULT "VERKAUFE ALLES Juwel"
 KONTAKTIERE EINHEIT you
 KONTAKTIERE PARTEI orks
+ ; > Bergwächter (fqqy) in OBerg (0,-3): 'LERNE "Waffenloser
+ ;   Kampf"' - Bergwächter können nichts lernen.
+ ; Bergwächter \
+ ist ein Idiot
 NAECHSTER

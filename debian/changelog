@@ -1,3 +1,9 @@
+echeck (4.7.17-1) stable; urgency=low
+
+  * do not comlain about mismatched quotes in comments
+  * print version info when not in compiler mode
+
+ -- Enno Rehling <enno@eressea.de>  MWed, 26 Oct 2022 21:00:00 +0200
 echeck (4.7.16-3) stable; urgency=low
 
   * fix mo file installation again (bug 2895)

@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.16";
+static const char *echeck_version = "4.7.17";
 
 #define DEFAULT_PATH "."
 
@@ -185,6 +185,7 @@ int echo_it = 0,     /* option: echo input lines */
     compile = 0;     /* option: compiler-/magellan-style  warnings */
 int error_count = 0, /* counter: errors */
   warning_count = 0; /* counter: warnings */
+int print_version = 1;
 
 const char *echeck_locale = "de", *echeck_rules = "e2";
 char *filename;
@@ -1907,6 +1908,7 @@ char *getbuf(void) {
 
   do {
     bool start = true;
+    bool comment = false;
     char *end;
     char *bp = fgetbuffer(lbuf, sizeof(lbuf), F);
 
@@ -1947,14 +1949,19 @@ char *getbuf(void) {
         /* replace this whitespace with a single space */
         if (quote) {
           *(cp++) = SPACE_REPLACEMENT;
-        } else if (cont || !start) {
-          *(cp++) = ' ';
+        } else {
+          if (start && *skip == ';') {
+            comment = true;
+          }
+          else if (cont || !start) {
+            *(cp++) = ' ';
+          }
         }
         bp = skip;
         continue;
       }
       cont = false;
-      if (c == '"') {
+      if (!comment && c == '"') {
         quote = !quote;
       } else {
         if (c == '\\')
@@ -1968,7 +1975,7 @@ char *getbuf(void) {
     }
     if (cp == warn_buf + MAXLINE) {
       --cp;
-      if (!report) {
+      if (!report && !comment) {
         report = true;
         log_error(filename, line_no, lbuf, this_unit_id(), NULL,
                   _("Line too long"));
@@ -4715,6 +4722,7 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
         break;
 
       case 'c':
+        print_version = 0;
         if (dostop) {
           compile = OUT_COMPILE;
           compile_version = argv[i][2];
@@ -4888,7 +4896,7 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
         }
         break;
       case 'V':
-        printversion();
+        print_version = 1;
         exit(0);
         break;
       case 'L':
@@ -5407,6 +5415,9 @@ int echeck_main(int argc, char *argv[]) {
 
   if (argc > 1) {
     nextarg = check_options(argc, argv, 1, 1);
+  }
+  if (print_version) {
+    printversion();
   }
   if (argc <= 1)
     printhelp(argc, argv, 0);
