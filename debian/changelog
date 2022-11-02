@@ -1,3 +1,8 @@
+echeck (4.7.19-1) stable; urgency=low
+
+  * exit after printing version with -V
+
+ -- Enno Rehling <enno@eressea.de>  Wed, 02 Nov 2022 17:20:00 +0200
 echeck (4.7.18-1) stable; urgency=low
 
   * do not complain about mismatched quotes in comments

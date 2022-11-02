@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.18";
+static const char *echeck_version = "4.7.19";
 
 #define DEFAULT_PATH "."
 
@@ -4896,8 +4896,7 @@ int check_options(int argc, char *argv[], char dostop, char command_line) {
         }
         break;
       case 'V':
-        print_version = 1;
-        exit(0);
+        print_version = 2;
         break;
       case 'L':
         if (argv[i][2] == 0) { /* -L loc */
@@ -5416,8 +5415,11 @@ int echeck_main(int argc, char *argv[]) {
   if (argc > 1) {
     nextarg = check_options(argc, argv, 1, 1);
   }
-  if (print_version) {
+  if (print_version > 0) {
     printversion();
+    if (print_version > 1) {
+      exit(0);
+    }
   }
   if (argc <= 1)
     printhelp(argc, argv, 0);
