@@ -570,7 +570,7 @@ typedef struct unit {
   int line_no;
   int temp;
   int ship; /* Nummer unseres Schiffes; ship<0: ich  bin owner */
-  char lives, hasmoved;
+  int lives, hasmoved;
   t_region *region;
   int newx, newy;
   int transport; /* hier steht drin, welche Einheit mich  CARRYIEREn wird */
@@ -2147,16 +2147,15 @@ int getaunit(int type) {
     break;
   }
 
-  if (type == POSSIBLE) { /* Nur Test, ob eine Einheit kommt, weil  das ein Fehler ist */
-    this_unit = i;
+  this_unit = i;
+  if (type == POSSIBLE) { /* Nur Test, ob eine Einheit kommt, weil  das ein
+                             Fehler ist */
     if (i) {
       bcat(i);
       return is_temp ? TEMP_UID : VALID_UID;
     }
     return 0;
   }
-
-  this_unit = i;
 
   if (is_temp || type == REQUIRED) {
     cmd_unit = newunit(i, is_temp); /* Die Unit schon machen, wegen  TEMP-Check */
@@ -3038,7 +3037,7 @@ void checkdirections(int key) {
   if (!does_default) {
     if (order_unit->hasmoved) {
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
-                _("Unit %s has already moved (1)"), uid(order_unit));
+                _("Unit %s has already moved"), uid(order_unit));
       return;
     }
     order_unit->hasmoved = 2; /* 2: selber bewegt */
@@ -3417,7 +3416,7 @@ static void move_units(void)
                        Einheit */
       if (u->hasmoved > 0) {
         log_error(filename, u->line_no, u->long_order, u->no, NULL,
-                  _("Unit %s has already moved (2)"), uid(u));
+                  _("Unit %s has already moved"), uid(u));
       }
       if (u->transport == 0) {
         t = find_unit(u->drive, 0);
