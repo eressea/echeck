@@ -19,7 +19,7 @@ EINHEIT 2;    Sumpfkatze [1,5830$]
 LERNE Katapult
 EINHEIT 3;    Sumpfkatze [1,5830$]
 GIB TEMP 1 ALLES
-KAUFE 2 ÷l
+KAUFE 2 √ñl
 VERKAUFE ALLES Juwel
 EINHEIT 4;    Sumpfkatze [1,5830$]
 MACHE Schwert
@@ -36,8 +36,8 @@ MACHE 10 Schwert
 DEFAULT "VERKAUFE ALLES Juwel"
 KONTAKTIERE EINHEIT you
 KONTAKTIERE PARTEI orks
- ; > Bergw‰chter (fqqy) in OBerg (0,-3): 'LERNE "Waffenloser
- ;   Kampf"' - Bergw‰chter kˆnnen nichts lernen.
- ; Bergw‰chter \
+ ; > Bergw√§chter (fqqy) in OBerg (0,-3): 'LERNE "Waffenloser
+ ;   Kampf"' - Bergw√§chter k√∂nnen nichts lernen.
+ ; Bergw√§chter \
  ist ein Idiot
 NAECHSTER
