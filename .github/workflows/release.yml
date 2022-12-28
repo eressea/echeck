@@ -3,8 +3,11 @@ on:
   push:
     tags:
       - 'v*'
+    branches:
+      - gh
 jobs:
   build-deb:
+    if: matrix.build == true
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -14,6 +17,11 @@ jobs:
         arch:
           - i386
           - amd64
+          - arm64
+        include:
+          - build: true
+            dist: bullseye
+            arch: arm64
     steps:
       - name: Checkout
         uses: actions/checkout@v2
