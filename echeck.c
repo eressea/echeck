@@ -3038,7 +3038,7 @@ void checkdirections(int key) {
   if (!does_default) {
     if (order_unit->hasmoved) {
       log_error(filename, line_no, order_buf, this_unit_id(), NULL,
-                _("Unit %s already has moved"), uid(order_unit));
+                _("Unit %s has already moved (1)"), uid(order_unit));
       return;
     }
     order_unit->hasmoved = 2; /* 2: selber bewegt */
@@ -3417,7 +3417,7 @@ static void move_units(void)
                        Einheit */
       if (u->hasmoved > 0) {
         log_error(filename, u->line_no, u->long_order, u->no, NULL,
-                  _("Unit %s already has moved"), uid(u));
+                  _("Unit %s has already moved (2)"), uid(u));
       }
       if (u->transport == 0) {
         t = find_unit(u->drive, 0);

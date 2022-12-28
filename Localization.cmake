@@ -51,7 +51,7 @@ FUNCTION(PROGRAM_LOCALIZATION)
 		 OUTPUT ${_gmoFile}
 		 COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} --check -o ${_gmoFile} ${_absFile}
 		 DEPENDS ${_absFile}
-		 COMMENT "${I18N_NAME}-i18n [${_poBasename}]: Created mo file."
+		 COMMENT "${I18N_NAME}-i18n [${_poBasename}]: Creating mo file."
 	      )
       #              INSTALL(FILES ${_gmoFile} DESTINATION ${INSTALL_LOCALE_DIR}/po/${_poBasename}/LC_MESSAGES RENAME ${PACKAGE_NAME}.mo )
 	      SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
