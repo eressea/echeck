@@ -17,25 +17,19 @@ jobs:
           - i386
           - amd64
           - arm64
-        include:
-          - build: true
-            dist: bullseye
-            arch: arm64
     steps:
       - name: Checkout
-        if: matrix.build == true
         uses: actions/checkout@v2
         with:
           repository: eressea/echeck
       - name: Build Debian Package
-        if: matrix.build == true
-        uses: ennorehling/action-debian-package@v1.2
+        uses: ennorehling/action-debian-package@v2.2
         with:
            os_distribution: ${{ matrix.dist }}
            cpu_architecture: ${{ matrix.arch }}
            artifacts_directory: artifacts
       - name: Upload to Packagecloud
-        if: matrix.build == true
+        if: matrix.dist != 'buster' || matrix.arch != 'arm64'
         continue-on-error: true
         uses: danielmundi/upload-packagecloud@v1
         with:
