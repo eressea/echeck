@@ -7,7 +7,6 @@ on:
       - gh
 jobs:
   build-deb:
-    if: matrix.build == true
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,6 +23,8 @@ jobs:
             arch: arm64
     steps:
       - name: Checkout
+        if: matrix.build == true
+        continue-on-error: false
         uses: actions/checkout@v2
         with:
           repository: eressea/echeck
