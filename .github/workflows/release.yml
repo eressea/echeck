@@ -3,6 +3,8 @@ on:
   push:
     tags:
       - 'v*'
+    branches:
+      - gh
 jobs:
   build-deb:
     runs-on: ubuntu-latest
@@ -14,18 +16,20 @@ jobs:
         arch:
           - i386
           - amd64
+          - arm64
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           repository: eressea/echeck
       - name: Build Debian Package
-        uses: ennorehling/action-debian-package@v1.2
+        uses: ennorehling/action-debian-package@v2.2
         with:
            os_distribution: ${{ matrix.dist }}
            cpu_architecture: ${{ matrix.arch }}
            artifacts_directory: artifacts
       - name: Upload to Packagecloud
+        if: matrix.dist != 'buster' || matrix.arch != 'arm64'
         continue-on-error: true
         uses: danielmundi/upload-packagecloud@v1
         with:
