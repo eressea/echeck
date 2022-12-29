@@ -11,12 +11,12 @@ jobs:
     strategy:
       matrix:
         dist:
-          - buster
           - bullseye
         arch:
           - i386
           - amd64
           - arm64
+          - armhf
     steps:
       - name: Checkout
         uses: actions/checkout@v2
