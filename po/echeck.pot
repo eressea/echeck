@@ -433,7 +433,7 @@ msgid "Unit %s already has got orders in line %d"
 msgstr ""
 
 #, c-format
-msgid "Unit %s already has moved"
+msgid "Unit %s has already moved"
 msgstr ""
 
 #, c-format

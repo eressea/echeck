@@ -469,7 +469,7 @@ msgid "Unit %s already has got orders in line %d"
 msgstr "Einheit %s hat bereits in Zeile %d Befehle bekommen"
 
 #, c-format
-msgid "Unit %s already has moved"
+msgid "Unit %s has already moved"
 msgstr "Einheit %s hat sich bereits bewegt"
 
 #, c-format
