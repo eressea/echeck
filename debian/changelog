@@ -1,3 +1,8 @@
+echeck (4.7.19-2) stable; urgency=low
+
+  * new github packaging script
+
+ -- Enno Rehling <enno@eressea.de>  Wed, 13 Mar 2023 11:00:00 +0200
 echeck (4.7.19-1) stable; urgency=low
 
   * exit after printing version with -V
@@ -8,6 +13,7 @@ echeck (4.7.18-1) stable; urgency=low
   * do not complain about mismatched quotes in comments
   * print version info when not in compiler mode
 
+ -- Enno Rehling <enno@eressea.de>  Wed, 02 Nov 2022 17:10:00 +0200
 echeck (4.7.17-2) stable; urgency=low
 
   * version number increase
