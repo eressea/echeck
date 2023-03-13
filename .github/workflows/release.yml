@@ -3,8 +3,6 @@ on:
   push:
     tags:
       - 'v*'
-    branches:
-      - gh
 jobs:
   build-deb:
     runs-on: ubuntu-latest
@@ -23,7 +21,7 @@ jobs:
         with:
           repository: eressea/echeck
       - name: Build Debian Package
-        uses: ennorehling/action-debian-package@v2.2
+        uses: dawidd6/action-debian-package@v1.5.0
         with:
            os_distribution: ${{ matrix.dist }}
            cpu_architecture: ${{ matrix.arch }}
