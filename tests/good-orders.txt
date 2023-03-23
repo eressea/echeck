@@ -13,7 +13,7 @@ EINHEIT 1;    Sumpfkatze [1,5830$]
 LEHRE TEMP 1
 MACHE TEMP 1
 REKRUTIERE 10
-LERNE Wahrnehmung
+LERNE Bogenschießen 
 ENDE
 EINHEIT 2;    Sumpfkatze [1,5830$]
 LERNE Katapult

@@ -1966,7 +1966,7 @@ char *getbuf(void) {
       } else {
         if (c == '\\')
           cont = true;
-        else if (c < 0 || !iscntrl(c)) {
+        else {
           *(cp++) = c;
         }
       }
