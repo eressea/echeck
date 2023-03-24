@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.19";
+static const char *echeck_version = "4.7.20";
 
 #define DEFAULT_PATH "."
 
@@ -1963,12 +1963,11 @@ char *getbuf(void) {
       cont = false;
       if (!comment && c == '"') {
         quote = !quote;
-      } else {
-        if (c == '\\')
+      } else if (c == '\\') {
           cont = true;
-        else {
-          *(cp++) = c;
-        }
+      }
+      else {
+        *(cp++) = c;
       }
       ++bp;
       start = false;
