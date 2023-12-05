@@ -45,8 +45,11 @@ Section "ECheck (required)"
   File out\build\x86-Release\echeck.exe
   File out\build\x86-Release\echeckw.exe
   File out\build\x86-Release\*.dll
+  SetOutPath $INSTDIR\locale
   File /r locale\*.*
+  SetOutPath $INSTDIR\e2
   File /r e2\*.*
+  SetOutPath $INSTDIR\e3
   File /r e3\*.*
   
   ; Write the installation path into the registry

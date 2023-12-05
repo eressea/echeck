@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.20";
+static const char *echeck_version = "4.7.21";
 
 #define DEFAULT_PATH "."
 
@@ -851,7 +851,6 @@ char *transliterate(char *out, size_t size, const char *in) {
 void readspell(char *s) {
   char *x;
   char name[128];
-  int type, cost;
 
   x = strchr(s, ';');
   if (!x) return;
@@ -1589,7 +1588,7 @@ unit *find_unit(int i, int t) {
 }
 
 t_region *addregion(int x, int y, int pers) {
-  t_region *r, *R;
+  t_region *r;
 
   for (r = Regionen; r; r = r->next)
     if (x == r->x && y == r->y)
@@ -1926,7 +1925,6 @@ char *getbuf(void) {
        */
       if (!lbuf[MAXLINE - 1] && lbuf[MAXLINE - 2] != '\n') {
         do {
-          int lastc;
           warn_buf[BUFSIZE - 1] = '@';
           bp = fgetbuffer(warn_buf, sizeof(warn_buf), F);
           if (warn_buf[BUFSIZE - 1] == '@' || warn_buf[BUFSIZE - 2] == '\n') {
@@ -3519,8 +3517,7 @@ static void reservations(void) {
  * Bewegung ausführen, damit das Silber  bewegt wird
  */
 void check_money(bool do_move) {
-  unit *u, *t;    
-  t_region *r;
+  unit *u;
 
   if (Regionen && no_comment < 1) {
     if (show_warnings >= 3) {
