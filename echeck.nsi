@@ -45,9 +45,9 @@ Section "ECheck (required)"
   File out\build\x86-Release\echeck.exe
   File out\build\x86-Release\echeckw.exe
   File out\build\x86-Release\*.dll
-  File /r locale
-  File /r e2
-  File /r e3
+  File /r locale\*.*
+  File /r e2\*.*
+  File /r e3\*.*
   
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\ECheck "Install_Dir" "$INSTDIR"
