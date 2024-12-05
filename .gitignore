@@ -4,6 +4,7 @@ obj-*/
 *~
 echeck
 tags
+CMakeUserPresets.json
 
 # Compiled Object files
 *.slo
