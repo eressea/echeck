@@ -11,14 +11,15 @@ jobs:
         run: sudo apt update
       - name: Install Dependencies
         run: sudo apt install --assume-yes git build-essential gettext
-      - name: Checkout ECheck
+      - name: Checkout
         uses: actions/checkout@v7.0.1
         with:
           repository: eressea/echeck
-      - name: Build and Test
-        uses: ashutoshvarma/action-cmake-build@v1
+      - name: Build Project
+        uses: threeal/cmake-action@v2.1.0
         with:
           build-dir: ${{ runner.workspace }}/build
           build-type: Release
-          run-test: true
-          ctest-options: --output-on-failure
+          generator: Ninja
+      - name: Test Project
+        uses: threeal/ctest-action@v1.1.0
