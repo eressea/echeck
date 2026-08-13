@@ -16,14 +16,10 @@ jobs:
         with:
           repository: eressea/echeck
       - name: Build Project
-        uses: threeal/cmake-action@master
+        uses: threeal/cmake-action@1.1.0
         with:
           build-dir: ${{ runner.workspace }}/build
           options: |
             CMAKE_BUILD_TYPE=Release
           generator: Ninja
-      - name: Test Project
-        uses: threeal/ctest-action@master
-        with:
-          build-config: Release
-          verbose: true
+          run-test: true
