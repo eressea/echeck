@@ -107,7 +107,7 @@ Goblinkopf; Goblinköpfe
 Menschenskalp; Menschenskalpe
 Insektenfühler; Insektenfühler
 Katzenschwanz; Katzenschwänze
-Halblingsfuß; Halblingsfüße
+Halblingfuß; Halblingfüße
 Orkhauer; Orkhauer
 Drachenblut; Drachenblut
 Drachenkopf; Drachenköpfe
