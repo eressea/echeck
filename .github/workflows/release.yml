@@ -16,7 +16,7 @@ jobs:
           - amd64
     steps:
       - name: Checkout
-        uses: actions/checkout@latest
+        uses: actions/checkout@v7.0.1
         with:
           repository: eressea/echeck
       - name: Build Debian Package
@@ -27,7 +27,7 @@ jobs:
            artifacts_directory: artifacts
       - name: Upload to Packagecloud
         continue-on-error: true
-        uses: danielmundi/upload-packagecloud@latest
+        uses: danielmundi/upload-packagecloud@v1
         with:
           package-name: artifacts/echeck_*_${{ matrix.arch }}.deb
           packagecloud-username: enno
