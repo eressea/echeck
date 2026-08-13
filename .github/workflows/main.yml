@@ -16,7 +16,7 @@ jobs:
         with:
           repository: eressea/echeck
       - name: Build Project
-        uses: threeal/cmake-action@2.1.0
+        uses: threeal/cmake-action@v1.1.0
         with:
           build-dir: ${{ runner.workspace }}/build
           options: |
