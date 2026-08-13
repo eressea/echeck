@@ -19,7 +19,11 @@ jobs:
         uses: threeal/cmake-action@v2.1.0
         with:
           build-dir: ${{ runner.workspace }}/build
-          build-type: Release
+          options: |
+            CMAKE_BUILD_TYPE=Release
           generator: Ninja
       - name: Test Project
         uses: threeal/ctest-action@v1.1.0
+        with:
+          build-config: Release
+          verbose: true
