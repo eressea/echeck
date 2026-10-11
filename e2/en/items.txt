@@ -11,68 +11,158 @@
 # Comments start with a #; empty lines are allowed.
 #############################################################################
 
-balm; balms, 4
-spice; spice; spices, 5
-gem; gems, 7
-myrrh; myrrh, 5
-oil; oil, 3
-silk; silk, 6
-incense; incense, 4
-
-iron; iron
-wood; wood
-stone; stones
-horse; horses
-cart; carts
-catapult; catapults
-sword; swords
-spear; spears
-crossbow; crossbows
-bow; bows
-mallorn spear; mallorn spears
-mallorn lance; mallorn lance
-mallorn crossbow; mallorn crossbows
-mallorn bow; mallorn bows
-seed; seeds
-mallorn seed; mallorn seeds
-chainmail; chainmails
-platemail; platemails
-claymore; claymores
-axe; axes
-elven bow; elven bows
-laen sword; laen swords
-laen shield; laen shields
-laen chainmail; laen chainmails
-laen; laen
-shield; shields
-halberd; halberds
-lance; lances
-mallorn; mallorn
-mallorn seed; mallorn seeds
-ammunition; ammunition
 adamantium; adamantium
 adamantium axe; adamantium axes
 adamantium plate; adamantium plates
-rusty sword; rusty swords
-rusty claymore; rusty claymores
+almond; almonds
+antimagic crystal; antimagic crystals
+amulet of chastity; amulets of chastity
+amulet of healing; amulets of healing
+amulet of the kitten; amulets of the kitten
+amulet of gathering; amulets of gathering
+amulet of true seeing; amulets of true seeing
+apple; apples
+aquarian scale; aquarian scales
+aurafocus; aurafocuses
+aura potion; aura potions
+axe; axes
+bagpipe of fear; bagpipes of fear
+balm; balm; 4
+birthday cake; birthday cakes
+bow; bows
+cart; carts
+catapult; catapults
+ammunition; ammunition
+cat tail; cat tails
+chainmail; chainmails
+cookie; cookies
+crossbow; crossbows
+demon blood; demon blood
+dolphin; dolphins
+dragonblood; dragonblood
+dragonhead; dragonheads
+dreameye; dreameyes
+dwarven beard; dwarven beards
+elven ear; elven ears
+elven horse; elven horses
+eye of dragon; eye of dragons
+fairy boots; fairy boots
+flaming sword; flaming swords
+goblin head; goblinheads
+goliath water; goliath waters
+elven bow; elven bows
+claymore; claymores
+flatroot; flatroots
+tangy temerity; tangy temerities
+peyote; peyote
+sand reeker; sand reekers
+windbag; windbags
+fjord fungus; fjord fungi
+mandrake; mandrakes
+rock weed; rock weed
+gapgrowth; gapgrowths
+cave lichen; cave lichen
+ice begonia; ice begonias
+white hemlock; white hemlocks
+owlsgaze; owlsgazes
+snowcrystal petal; snowcrystal petals
+spider ivy; spider ivies
+cobalt fungus; cobalt fungi
+elvendear; elvendears
+bugleweed; bugleweeds
+knotroot; knotroots
+bubblemorel; bubblemorels
+waterfinder; waterfinders
+halberd; halberds
+halfling foot; halfling feet
+healing potion; healing potions
+horse; horses
+human scalp; human scalps
+incense; incense; 4
+insect antenna; insect antenna
+iron; iron
+wedding dress; wedding dresses
+Jadee's wedding ring; Jadee's wedding rings
+gem; gems; 7
+laen; laen
+laen chainmail; laen chainmails
+laen shield; laen shields
+laen sword; laen swords
+lance; lances
+gingerbread heart; gingerbread hearts
+water of life; waters of life
+Belt of Heroic Legends; Belts of Heroic Legends
+wood; wood
+magic bag; magic bags
+bag of conservation; bags of conservation
+mallorn; mallorn
+mallorn bow; mallorn bows
+mallorn crossbow; mallorn crossbows
+mallorn lance; mallorn lances
+mallorn seed; mallorn seeds
+mallorn spear; mallorn spear
+astralcrystal; astralcrystals
+mistletoe; mistletoes
+silver; silver
+returnticket for the grand museum; returntickets for the grand museum
+ticket to the grand museum; tickets to the grand museum
+myrrh; myrrh; 5
+potion of nest warmth; potions of nest warmth
+nut; nuts
+oil; oil; 3
+ointment; ointments
+orc tusk; orc tusks
+seven mile tea; seven mile teas
+berserkers blood potion; berserkers blood potions
+peasant love potion; peasant love potion
+elixir of power; elixirs of power
+busybeer; busybeers
+brain wax; brain waxes
+duncebun; duncebuns
+horsepower potion; horsepower potions
+peasant blood; peasant bloods
+pegasus; pegasi
+platemail; platemails
+presspass; presspasses
+agate key; agate keys
+sapphire key; sapphire keys
+ring of levitation; rings of levitation
+ring of invisibility; rings of invisibility
+ring of power; rings of power
+ring of quick fingers; rings of quick fingers
+ring of regeneration; rings of regeneration
+runesword; runeswords
 rusty axe; rusty axes
-rusty halberd; rusty halberds
-rusty shield; rusty shields
 rusty chainmail; rusty chainmails
-solar sail; solar sails
+rusty claymore; rusty claymores
+rusty halberd; rusty halberds
+rusty platemail; rusty platemails
+rusty shield; rusty shields
+rusty sword; rusty swords
+seaserpenthead; seaserpentheads
+seashell; seashells
+seed; seeds
+shield; shields
+silk; silk; 6
+potion of skills; potions of skills
+snowball; snowball
 snow globe; snow globes
 snowman; snowmen
-christmas tree; christmas trees
+spear; spears
+solar sail; solar sails
+sphere of invisibility; spheres of invisibility
+spice; spice; 5
 stardust; stardust
-flaming sword; flaming swords
-runesword; runeswords
-amulet of true seeing; amulets of true seeing
-ring of quick fingers; rings of quick fingers
-ring of power; rings of power
-ring of invisibility; rings of invisibility
-bag of conservation; bags of conservation
-magic bag; magic bags
-
+stone; stones
+brain boost; brain boosts
+sword; swords
+pot of toadslime; pots of toadslime
+trollbelt; trollbelts
+troll horn; troll horns
+potion of truth; potions of truth
+tuxedo; tuxedos
+Wildente's wedding ring; Wildente's wedding rings
+christmas tree; christmas trees
 
 # Ok, these were the official items; you shouldn't change this list
 # if you count on the results of ECheck...

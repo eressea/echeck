@@ -1,3 +1,8 @@
+echeck (4.7.21-4) stable; urgency=low
+
+  * English items were missing from last commit
+
+ -- Enno Rehling <enno@eressea.de>  Sun, 11 Oct 2026 21:00:00 +0200
 echeck (4.7.21-3) stable; urgency=low
 
   * English items and spells
