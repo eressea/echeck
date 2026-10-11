@@ -46,14 +46,14 @@ Heimstein;										0; 0		#Das Gebäude ist gegen Waffengewalt und Magie besser 
 Wolfsgeheul;									0; 3		#Der Magier ruft Wölfe herbei die ihm im Kampf unterstützen
 Blick des Basilisken;							0; 1		#Versteinert einige Gegner für die Dauer des Kampfes
 Geister bannen;									0; 0		#Der Magus bannt einen Zauber
-Starkes Tor und feste Mauer;					0; 0		#Anfang der Woche wird das Gebäude gegen Magie und Schwert gesichert
+Starkes Tor und feste Mauer;					0; 3		#Anfang der Woche wird das Gebäude gegen Magie und Schwert gesichert
 Heiliger Boden;									0; 0		#Untote schrecken vor dieser Region zurück
 Sog des Lebens;									0; 0		#Der Geode kann Stufe*5 GE aus dem Astralraum zurückholen
 Weg der Bäume;									0; 0		#Der Geode kann Stufe*5 GE in den Astralraum senden
 Erwecke Ents;									0; 0		#Einige Bäume der Region erheben sich zu Ents
-Vertrauten binden;								0; 0		#Ein Vertrautentier schließt sich dem Magier an
+Vertrauten rufen;								0; 0		#Ein Vertrautentier schließt sich dem Magier an
 Segne Steinkreis;								0; 0		#Dieses Ritual segnet einen Steinkreis
-Rindenhaut;										0; 0		#Eigene Truppen werden von einer natürlichen Rüstung geschützt
+Rindenhaut;										0; 3		#Eigene Truppen werden von einer natürlichen Rüstung geschützt
 Hitzeelementar;									0; 0		#Eine ganze Region verdorrt
 Mahlstrom;										0; 0		#Ein gewaltigen Strudel beschädigt jedes Schiff schwer das ihn passiert
 Wurzeln der Magie;								0; 0		#Die Region wird zu einer Mallornregion
@@ -61,7 +61,7 @@ Tor in die Ebene der Hitze;						0; 0		#Die Region wird total verwüstet
 
 
 #Cerddor;
-Friedenslied;									0; 0		#Magier kann nicht attackiert werden.
+Friedenslied;									0; 3		#Magier kann nicht attackiert werden.
 Gaukeleien;										0; 0		#Erhält 50 Silber*Stufe von den Bauern
 Hohes Lied der Gaukelei;						0; 0		#Erhöht das Unterhaltungs Maximum
 Lied der Heilung;								0; 2		#Heilt nach der Schlacht
@@ -75,14 +75,14 @@ Gesang des Lebens analysieren;					0; 0		#Erkennt auf Einheiten liegende Zauber
 Heldengesang;									0; 3		#Einheit flieht nicht und verteidigt besser
 Erschaffe ein Amulett des wahren Sehens;		3000; 0		#Erschafft ein AdW mit welchen RdU getarnte Einheiten entdeckt werden
 Erschaffe einen Ring der Unsichtbarkeit;		3000; 0		#Erschafft ein RdU mit welchem man jedweden blicken entschwinden kann
-Lied der Verfuehrung;							0; 0		#Zieleinheit übergibt dem Magier Gegenstände
+Lied der Verführung;							0; 0		#Zieleinheit übergibt dem Magier Gegenstände
 Monster friedlich stimmen;						0; 0		#Reduziert attackiere Wahrscheinlichkeit
 Aushorchen;										100; 0		#Zieleinheit sagt alles was die Partei sieht.
 Kriegsgesang;									0; 3		#Attacke+ Parade- kämpft bis zum Tode
 Schaler Wein;									50;	0		#Zieleinheit vergisst vom besten Talent bis zu 2 Wochen
 Gesang der Angst;								0; 3		#Senkt Kampftalent der Zieleinheit
 Lebenslied festigen;							0; 0		#Entfernt Magier von Ziel Einheit/Region					
-Lies des Ortes analzsieren;						0; 0		#Identifiziert Zauber auf Burg/Schiff/Region
+Lied des Ortes analysieren;						0; 0		#Identifiziert Zauber auf Burg/Schiff/Region
 Ritual der Aufnahme;							0; 0		#Nimmt Immigranten fremder Rassen auf
 Vertrauten rufen;								0; 0		#Ein Vertrautentier schließt sich dem Magier an
 Gesang des wachen Geistes;						0; 0		#15% Magieresistenz für Verbündete (Bewache)
@@ -95,6 +95,7 @@ Gesang der Versklavung;							0; 0		#Übernimmt kurzzeitig Gegnerische Einheit
 Hohe Kunst der Überzeugung;						0; 0		#Massiver Mob erhebt sich oder Rekrutieren?
 Aufruhr beschwichtigen;							0; 0		#Mob wird beschwichtigt
 Aufruhr verursachen;							0; 0		#Mob erhebt sich
+Plappermaul;									0; 0		#Zieleinheit verrät alles über sich
 
 #Draig
 Kleine Flüche;									0; 0		#Erhält 50 Silber*Stufe von den Bauern
@@ -177,7 +178,7 @@ Erschaffe Antimagiekristall;					3000; 0		#Entfernt oder schwächt Regionszauber
 Fluch brechen;									0; 0		#Entzaubert Ziel (Region/Einheit/Schiff/Burg)
 Mauern der Ewigkeit;							0; 0		#Zielgebäude benötigt keinen Unterhalt mehr
 Runen des Schutzes;								0; 0		#Erhöht die Widerstandskraft von Gebäuden oder Schiffen um 20%
-Schild des Fisches;								0; 0		#Reduziert erlittenen Schaden um die Hälfte bis der Schild aufgebraucht ist
+Schild des Fisches;								0; 3		#Reduziert erlittenen Schaden um die Hälfte bis der Schild aufgebraucht ist
 Beschleunigung;									0; 3		#Zieleinheit attackiert jede Kampfrunde einmal mehr
 Erschaffe einen Ring der Macht;					4000; 0		#Zauber wirken als wären sie eine Stufe höher
 Blick in die Realität;							0; 0		#Blickt aus Astralrauj in Realebene. Erkennt dort Regionen und Einheiten genau
