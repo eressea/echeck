@@ -83,7 +83,7 @@
 
 #include <string.h>
 
-static const char *echeck_version = "4.7.21";
+static const char *echeck_version = "4.7.22";
 
 #define DEFAULT_PATH "."
 
@@ -447,7 +447,6 @@ enum {
   RECRUITCOSTSSET,
   SCHOOLCHOSEN,
   SORT,
-  UNITALREADYHASORDERS,
   UNITMOVESSHIP,
   MAX_ERRORS
 };
@@ -494,7 +493,6 @@ static const char *Errors[MAX_ERRORS] = {
   "RECRUITCOSTSSET",
   "SCHOOLCHOSEN",
   "SORT",
-  "UNITALREADYHASORDERS",
   "UNITMOVESSHIP",
 };
 
@@ -662,8 +660,12 @@ const char *itobuf(int i, char *dst) {
     --dst;
     if (x < 10)
       *dst = (char)('0' + x);
-    else
+    else {
       *dst = (char)('a' + (x - 10));
+      if (*dst == 'l') {
+        *dst = 'L';
+      }
+    }
   } while (b > 0);
   return dst;
 }
@@ -1518,7 +1520,6 @@ static const struct warning {
    t("TEMPORARY units can't use RESERVE! Use GIVE instead!")},
   {"TEMPUNITSCANTGIVE",
    t("TEMPORARY units can't use GIVE, it happens before MAKE!")},
-  {"UNITALREADYHASORDERS", t("Unit %s already has got orders in line %d")},
   {"UNITMOVESSHIP", t("Unit %s moves ship %s and may lack control")},
   {"UNITMUSTBEONSHIP",
    t("Unit must be in a castle, in a building or on a ship")},

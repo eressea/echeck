@@ -3,7 +3,7 @@
 #
 # Die Schlüsselworte kann man mit "echeck -hp" erhalten
 # 
-# Umlaute dürfen nicht umschrieben werden, sondern als ISO-Latin1 benutzt:
+# Umlaute dürfen nicht umschrieben werden:
 # ae=ä, oe=ö, ue=ü, Ae=Ä, Oe=Ö, Ue=Ü, sz=ß. Trennzeichen ist , oder ;
 #
 # Kommentare mit einem # davor; Leerzeilen sind erlaubt

@@ -42,9 +42,9 @@ Section "ECheck (required)"
   SetOutPath $INSTDIR
   
   ; Put files there
-  File out\build\x86-Release\echeck.exe
-  File out\build\x86-Release\echeckw.exe
-  File out\build\x86-Release\*.dll
+  File build\x86-Release\echeck.exe
+  File build\x86-Release\echeckw.exe
+  File build\x86-Release\*.dll
   SetOutPath $INSTDIR\locale
   File /r locale\*.*
   SetOutPath $INSTDIR\e2
